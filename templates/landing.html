@@ -24,10 +24,12 @@
     .section-head .jls-lead { margin-bottom: 0; }
     .num {
       color: var(--jls-color-text);
-      font-family: var(--jls-font-family-display);
-      font-weight: var(--jls-font-weight-extrabold);
+      font-family: var(--jls-font-family-mono);
+      font-weight: var(--jls-font-weight-semibold);
+      font-variant-numeric: tabular-nums;
+      word-spacing: -0.3em;
       line-height: var(--jls-font-line-height-tight);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
     .nowrap { white-space: nowrap; }
     .grid { display: grid; gap: var(--jls-space-lg); }
@@ -48,7 +50,6 @@
     }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--jls-space-lg); min-height: 80px; }
     .nav-logo { flex: none; padding-block: var(--jls-space-md); }
-    .nav-logo img { width: 150px; height: auto; }
     .nav-links { display: none; gap: var(--jls-space-xl); margin: 0; padding: 0; list-style: none; }
     .nav-links a {
       color: var(--jls-color-text); text-decoration: none;
@@ -56,7 +57,6 @@
     }
     .nav-links a:hover { color: var(--jls-color-accent-text); }
     .nav .jls-btn { flex: none; padding: 12px 20px; }
-    @media (min-width: 720px) { .nav-logo img { width: 250px; } }
     @media (min-width: 1100px) { .nav-links { display: flex; } }
 
     /* ---- hero ---- */
@@ -208,9 +208,11 @@
     /* ---- closing band ---- */
     .cta-band {
       padding: var(--jls-space-4xl) var(--jls-space-2xl); text-align: center;
+      position: relative; isolation: isolate; overflow: hidden;
       background: var(--jls-color-inverse-bg); color: var(--jls-color-inverse-text-soft);
-      border: var(--jls-border-width-thin) solid var(--jls-color-border); border-radius: var(--jls-radius-lg);
+      border: var(--jls-border-width-thin) solid var(--jls-color-border-strong); border-radius: var(--jls-radius-lg);
     }
+    .cta-band .jls-btn--primary { box-shadow: 3px 3px 0 var(--jls-color-highlight); }
     .cta-band h2 { max-width: 760px; margin-inline: auto; color: var(--jls-color-inverse-text); }
     .cta-band .jls-lead { margin-bottom: var(--jls-space-xl); color: var(--jls-color-inverse-text-soft); }
     .cta-band .jls-small { max-width: 480px; margin: var(--jls-space-lg) auto 0; color: var(--jls-color-inverse-text-faint); }
@@ -240,8 +242,8 @@
   <header class="site-header">
     <nav class="jls-container nav" aria-label="Main">
       <a class="nav-logo" href="#top" aria-label="Josh Lamb Systems home">
-        <img class="logo-light" src="../logos/jls-logo.svg" alt="Josh Lamb Systems" width="250" height="46">
-        <img class="logo-dark" src="../logos/jls-logo-reversed.svg" alt="Josh Lamb Systems" width="250" height="46">
+        <img class="jls-logo logo-light" src="../logos/jls-logo.svg" alt="Josh Lamb Systems" width="350" height="64">
+        <img class="jls-logo logo-dark" src="../logos/jls-logo-reversed.svg" alt="Josh Lamb Systems" width="350" height="64">
       </a>
       <ul class="nav-links">
         <li><a href="#sprint">AI Roadmap Sprint</a></li>
@@ -256,10 +258,10 @@
 
   <main id="main">
     <!-- Hero -->
-    <section class="hero" id="top" aria-labelledby="hero-title">
+    <section class="hero jls-grid jls-grid--top-right" id="top" aria-labelledby="hero-title">
       <div class="jls-container">
         <span class="jls-eyebrow">AI Roadmap Sprint for small businesses</span>
-        <h1 id="hero-title">Find out exactly where AI can save your business <span class="jls-gradient-text">10+ hours a week.</span></h1>
+        <h1 id="hero-title">Find out exactly where AI can save your business <span class="jls-mark">10+ hours a week.</span></h1>
         <p class="jls-lead">Josh Lamb Systems is a systems consultancy for small businesses. In a 2-week AI Roadmap Sprint, we map your actual workflows, find the gaps AI can fill, and hand you a prioritized roadmap of what to implement first, with ROI estimates for every recommendation.</p>
         <div class="cta-row">
           <a class="jls-btn jls-btn--primary jls-btn--lg" href="form.html">Book your sprint</a>
@@ -294,7 +296,7 @@
     </section>
 
     <!-- What you get -->
-    <section class="jls-section" id="sprint" aria-labelledby="get-title">
+    <section class="jls-section jls-grid jls-grid--bottom-left" id="sprint" aria-labelledby="get-title">
       <div class="jls-container">
         <div class="section-head">
           <span class="jls-eyebrow">Our solution</span>
@@ -383,7 +385,7 @@
     </section>
 
     <!-- Quick wins -->
-    <section class="jls-section" aria-labelledby="wins-title">
+    <section class="jls-section jls-grid jls-grid--top-right" aria-labelledby="wins-title">
       <div class="jls-container">
         <div class="section-head">
           <span class="jls-eyebrow">Real examples</span>
@@ -445,7 +447,7 @@
     </section>
 
     <!-- Email services -->
-    <section class="jls-section" id="services" aria-labelledby="services-title">
+    <section class="jls-section jls-grid jls-grid--bottom-left" id="services" aria-labelledby="services-title">
       <div class="jls-container">
         <div class="section-head">
           <span class="jls-eyebrow">More from JLS</span>
@@ -511,7 +513,7 @@
     <!-- Closing CTA -->
     <section class="jls-section" id="contact" aria-labelledby="cta-title">
       <div class="jls-container">
-        <div class="cta-band">
+        <div class="cta-band jls-grid jls-grid--right" style="--jls-grid-line-color: var(--jls-color-inverse-grid)">
           <h2 id="cta-title">Stop guessing where AI fits your business.</h2>
           <p class="jls-lead">In two weeks, you'll have a prioritized roadmap, or your money back.</p>
           <a class="jls-btn jls-btn--primary jls-btn--lg" href="form.html">Book a 20-minute intro call</a>

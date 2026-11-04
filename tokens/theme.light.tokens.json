@@ -2,11 +2,11 @@
   "color": {
     "$type": "color",
     "bg": {
-      "$value": "{palette.white}",
-      "$description": "Page background"
+      "$value": "{palette.navy.50}",
+      "$description": "Paper: the page background"
     },
     "bg-alt": {
-      "$value": "{palette.neutral.50}",
+      "$value": "{palette.navy.100}",
       "$description": "Alternating section background"
     },
     "surface": {
@@ -14,24 +14,24 @@
       "$description": "Cards, panels, inputs"
     },
     "text": {
-      "$value": "{palette.black}",
-      "$description": "Headings and primary text"
+      "$value": "{palette.navy.900}",
+      "$description": "Headings and primary text (navy ink)"
     },
     "text-soft": {
-      "$value": "{palette.neutral.600}",
+      "$value": "{palette.navy.600}",
       "$description": "Body copy, descriptions"
     },
     "text-faint": {
-      "$value": "{palette.neutral.500}",
+      "$value": "{palette.navy.500}",
       "$description": "Captions, meta, eyebrows (still AA)"
     },
     "border": {
-      "$value": "{palette.neutral.200}",
-      "$description": "Hairlines, card borders, dividers"
+      "$value": "{palette.navy.200}",
+      "$description": "Hairline rules, dividers, dashed separators"
     },
     "border-strong": {
-      "$value": "{palette.neutral.300}",
-      "$description": "Hovered borders, input outlines"
+      "$value": "{palette.navy.800}",
+      "$description": "Ink outlines: cards, panels, inputs, secondary buttons"
     },
     "accent": {
       "$value": "{palette.blue.500}",
@@ -75,15 +75,15 @@
       "$value": "{palette.red.50}"
     },
     "inverse-bg": {
-      "$value": "{palette.black}",
-      "$description": "Brand black sections: closing CTAs, section-break slides. Stays black in both themes."
+      "$value": "{palette.navy.900}",
+      "$description": "Navy ink sections: closing CTAs, section-break slides."
     },
     "inverse-text": {
       "$value": "{palette.white}",
       "$description": "Headings on inverse-bg"
     },
     "inverse-text-soft": {
-      "$value": "{palette.neutral.300}",
+      "$value": "{palette.navy.300}",
       "$description": "Body copy on inverse-bg"
     },
     "inverse-accent-text": {
@@ -91,12 +91,59 @@
       "$description": "Links and accent text on inverse-bg"
     },
     "inverse-text-faint": {
-      "$value": "{palette.neutral.400}",
+      "$value": "{palette.navy.400}",
       "$description": "Captions and meta on inverse-bg"
     },
     "inverse-border": {
-      "$value": "{palette.neutral.700}",
+      "$value": "{palette.navy.700}",
       "$description": "Hairlines on inverse-bg"
+    },
+    "highlight": {
+      "$value": "{palette.yellow.300}",
+      "$description": "Highlighter: the one key phrase, one plotted cell, the CTA band button shadow"
+    },
+    "highlight-mark": {
+      "$value": "{palette.yellow.300}",
+      "$description": "Highlighter stroke behind text (a translucent stroke in dark mode)"
+    },
+    "grid": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0235,
+          0.3059,
+          0.949
+        ],
+        "hex": "#064ef2",
+        "alpha": 0.14
+      },
+      "$description": "Graph-paper lines on bg"
+    },
+    "plot": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0235,
+          0.3059,
+          0.949
+        ],
+        "hex": "#064ef2",
+        "alpha": 0.12
+      },
+      "$description": "Filled (plotted) grid cells"
+    },
+    "inverse-grid": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5216,
+          0.6706,
+          1
+        ],
+        "hex": "#85abff",
+        "alpha": 0.14
+      },
+      "$description": "Graph-paper lines on inverse-bg"
     }
   },
   "shadow": {
@@ -223,6 +270,96 @@
         }
       },
       "$description": "Primary button glow (site)"
+    },
+    "offset-sm": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1059,
+            0.1647,
+            0.2902
+          ],
+          "hex": "#1b2a4a"
+        },
+        "offsetX": {
+          "value": 3,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 3,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Primary buttons at rest: a hard ink offset"
+    },
+    "offset-md": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8353,
+            0.8627,
+            0.9176
+          ],
+          "hex": "#d5dcea"
+        },
+        "offsetX": {
+          "value": 6,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 6,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Featured panels (scorecards, the hero visual)"
+    },
+    "offset-accent": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0235,
+            0.3059,
+            0.949
+          ],
+          "hex": "#064ef2"
+        },
+        "offsetX": {
+          "value": 4,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 4,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Interactive cards and focused inputs"
     }
   }
 }

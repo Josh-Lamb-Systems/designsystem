@@ -1,6 +1,6 @@
-/* Josh Lamb Systems: base layer.
- * Optional element defaults and a handful of brand components, built only from --jls-* tokens.
- * Everything sits inside :where() so any page's own CSS wins without a specificity fight. */
+/* Josh Lamb Systems: base layer ("Field Notebook").
+ * Optional element defaults and brand components, built only from --jls-* tokens.
+ * Everything sits inside :where() or a single class so any page's own CSS wins without a specificity fight. */
 
 :where(.jls, .jls *, .jls *::before, .jls *::after) {
   box-sizing: border-box;
@@ -70,10 +70,85 @@
   max-width: var(--jls-layout-prose);
 }
 .jls-section {
+  position: relative;
+  isolation: isolate;
   padding-block: var(--jls-space-4xl);
 }
 .jls-section--alt {
   background: var(--jls-color-bg-alt);
+}
+.jls-section--inverse {
+  --jls-grid-line-color: var(--jls-color-inverse-grid);
+  background: var(--jls-color-inverse-bg);
+  color: var(--jls-color-inverse-text-soft);
+}
+.jls-section--inverse :where(h1, h2, h3, h4, strong) {
+  color: var(--jls-color-inverse-text);
+}
+.jls-section--inverse :where(a:not(.jls-btn)) {
+  color: var(--jls-color-inverse-accent-text);
+}
+@media (max-width: 720px) {
+  .jls-section {
+    padding-block: var(--jls-space-3xl);
+  }
+}
+
+/* ---- logo: the brandbook's minimum widths (150px phones, 250px tablets, 350px desktop) ---- */
+
+.jls-logo {
+  display: block;
+  width: 150px;
+  height: auto;
+}
+@media (min-width: 720px) {
+  .jls-logo {
+    width: 250px;
+  }
+}
+@media (min-width: 1120px) {
+  .jls-logo {
+    width: 350px;
+  }
+}
+
+/* ---- graph paper ("Rhythm"): one fade per section, from alternating corners ----
+ * Add .jls-grid plus one direction to any positioned section. The grid sits behind the content,
+ * is 48px cells (6 x the 8px baseline) at 80% strength, and fades into plain paper. */
+
+.jls-grid {
+  position: relative;
+  isolation: isolate;
+}
+.jls-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--jls-grid-strength);
+  background-image:
+    linear-gradient(var(--jls-grid-line-color, var(--jls-color-grid)) var(--jls-grid-line), transparent var(--jls-grid-line)),
+    linear-gradient(90deg, var(--jls-grid-line-color, var(--jls-color-grid)) var(--jls-grid-line), transparent var(--jls-grid-line));
+  background-size: var(--jls-grid-cell) var(--jls-grid-cell);
+  background-position: -1px -1px;
+  -webkit-mask-image: var(--jls-grid-mask);
+  mask-image: var(--jls-grid-mask);
+}
+.jls-grid--top-right {
+  --jls-grid-mask: radial-gradient(ellipse 60% 120% at 100% 0%, #000 10%, transparent 70%);
+}
+.jls-grid--bottom-left {
+  --jls-grid-mask: radial-gradient(ellipse 55% 90% at 0% 100%, #000 15%, transparent 70%);
+}
+.jls-grid--right {
+  --jls-grid-mask: linear-gradient(100deg, transparent 35%, #000 85%);
+}
+.jls-grid--left {
+  --jls-grid-mask: linear-gradient(260deg, transparent 35%, #000 85%);
+}
+.jls-grid--full {
+  --jls-grid-mask: none;
 }
 
 /* ---- type helpers ---- */
@@ -94,6 +169,20 @@
   font: var(--jls-typography-small);
   color: var(--jls-color-text-faint);
 }
+.jls-data {
+  font: var(--jls-typography-data);
+  letter-spacing: var(--jls-typography-data-letter-spacing);
+  color: var(--jls-color-text-faint);
+  font-variant-numeric: tabular-nums;
+}
+/* the highlighter: one phrase per view, never on a whole sentence */
+.jls-mark {
+  padding: 0 0.08em;
+  color: inherit;
+  background: linear-gradient(transparent 52%, var(--jls-color-highlight-mark) 52%, var(--jls-color-highlight-mark) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 .jls-gradient-text {
   background: var(--jls-gradient-brand);
   -webkit-background-clip: text;
@@ -109,7 +198,7 @@
   justify-content: center;
   gap: var(--jls-space-xs);
   padding: 14px 28px;
-  border: var(--jls-border-width-thick) solid transparent;
+  border: var(--jls-border-width-thin) solid transparent;
   border-radius: var(--jls-radius-md);
   font: var(--jls-typography-button);
   line-height: var(--jls-font-line-height-snug);
@@ -118,27 +207,52 @@
   cursor: pointer;
   transition:
     transform var(--jls-duration-fast) var(--jls-easing-standard),
-    background var(--jls-duration-fast) var(--jls-easing-standard),
+    box-shadow var(--jls-duration-fast) var(--jls-easing-standard),
+    background-color var(--jls-duration-fast) var(--jls-easing-standard),
     border-color var(--jls-duration-fast) var(--jls-easing-standard);
 }
-.jls-btn:hover {
-  transform: translateY(-1px);
+.jls-btn svg {
+  width: 1em;
+  height: 1em;
+  flex: none;
 }
 .jls-btn--primary {
-  background: var(--jls-gradient-brand);
+  background: var(--jls-color-accent);
   color: var(--jls-color-on-accent);
-  box-shadow: var(--jls-shadow-accent);
+  box-shadow: var(--jls-shadow-offset-sm);
 }
 .jls-btn--primary:hover {
   background: var(--jls-color-accent-hover);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--jls-color-border-strong);
+}
+.jls-btn--primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--jls-color-border-strong);
+}
+.jls-section--inverse .jls-btn--primary {
+  box-shadow: 3px 3px 0 var(--jls-color-highlight);
+}
+.jls-section--inverse .jls-btn--primary:hover {
+  box-shadow: 4px 4px 0 var(--jls-color-highlight);
 }
 .jls-btn--secondary {
   background: var(--jls-color-surface);
   color: var(--jls-color-text);
-  border-color: var(--jls-color-border);
+  border-color: var(--jls-color-border-strong);
 }
 .jls-btn--secondary:hover {
-  border-color: var(--jls-color-border-strong);
+  background: var(--jls-color-bg-alt);
+}
+.jls-btn--secondary:active {
+  transform: translate(1px, 1px);
+}
+.jls-btn:disabled,
+.jls-btn[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 .jls-btn--sm {
   padding: 10px 20px;
@@ -152,12 +266,12 @@
 /* ---- surfaces ---- */
 
 .jls-card {
-  padding: var(--jls-space-xl);
+  padding: var(--jls-space-lg);
   background: var(--jls-color-surface);
-  border: var(--jls-border-width-thin) solid var(--jls-color-border);
-  border-radius: var(--jls-radius-lg);
+  border: var(--jls-border-width-thin) solid var(--jls-color-border-strong);
+  border-radius: var(--jls-radius-md);
   transition:
-    border-color var(--jls-duration-fast) var(--jls-easing-standard),
+    transform var(--jls-duration-fast) var(--jls-easing-standard),
     box-shadow var(--jls-duration-fast) var(--jls-easing-standard);
 }
 a.jls-card {
@@ -165,21 +279,54 @@ a.jls-card {
   color: inherit;
   text-decoration: none;
 }
-.jls-card--interactive:hover {
-  border-color: var(--jls-color-accent);
-  box-shadow: var(--jls-shadow-md);
+.jls-card--interactive:hover,
+.jls-card--interactive:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--jls-shadow-offset-accent);
 }
+/* featured panels (a scorecard, the hero visual): heavier offset, flush header */
+.jls-card--featured {
+  padding: 0;
+  box-shadow: var(--jls-shadow-offset-md);
+}
+.jls-card__meta {
+  display: flex;
+  gap: var(--jls-space-xs);
+  align-items: baseline;
+  margin-bottom: var(--jls-space-md);
+  padding-bottom: var(--jls-space-sm);
+  border-bottom: var(--jls-border-width-thin) dashed var(--jls-color-border-strong);
+  color: var(--jls-color-text-faint);
+  font: var(--jls-typography-eyebrow);
+  letter-spacing: var(--jls-typography-eyebrow-letter-spacing);
+  text-transform: uppercase;
+}
+.jls-card__meta > :first-child {
+  color: var(--jls-color-accent-text);
+}
+.jls-card__meta > :last-child:not(:first-child) {
+  margin-left: auto;
+}
+.jls-card--featured > .jls-card__meta {
+  margin: 0;
+  padding: 14px var(--jls-space-md);
+}
+
 .jls-tag {
   display: inline-flex;
   align-items: center;
   gap: var(--jls-space-xxs);
-  padding: 4px 10px;
-  border-radius: var(--jls-radius-pill);
+  padding: 4px 6px;
+  border: var(--jls-border-width-thin) solid currentColor;
+  border-radius: var(--jls-radius-sm);
   background: var(--jls-color-accent-soft);
   color: var(--jls-color-accent-text);
   font: var(--jls-typography-eyebrow);
+  font-size: 11px;
+  line-height: 1;
   letter-spacing: var(--jls-typography-eyebrow-letter-spacing);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .jls-tag--success {
   background: var(--jls-color-success-soft);
@@ -188,11 +335,52 @@ a.jls-card {
 .jls-tag--neutral {
   background: var(--jls-color-surface);
   color: var(--jls-color-text-soft);
-  box-shadow: inset 0 0 0 var(--jls-border-width-thin) var(--jls-color-border);
 }
 .jls-tag--warning {
   background: var(--jls-color-warning-soft);
   color: var(--jls-color-warning);
+}
+
+/* ---- data ---- */
+
+/* big numbers: a row of stats on a white band between ink rules */
+.jls-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  background: var(--jls-color-surface);
+  border-block: var(--jls-border-width-thin) solid var(--jls-color-border-strong);
+}
+.jls-stat {
+  padding: var(--jls-space-xl) var(--jls-space-lg);
+  border-right: var(--jls-border-width-thin) solid var(--jls-color-border);
+  color: var(--jls-color-text-soft);
+}
+.jls-stat:last-child {
+  border-right: 0;
+}
+.jls-number {
+  display: block;
+  margin-bottom: var(--jls-space-xs);
+  color: var(--jls-color-text);
+  font: var(--jls-typography-number);
+  letter-spacing: var(--jls-typography-number-letter-spacing);
+  font-variant-numeric: tabular-nums;
+  word-spacing: -0.3em;
+  white-space: nowrap;
+}
+/* segmented meter: a score out of 100, drawn in 8px blocks */
+.jls-meter {
+  --value: 50;
+  position: relative;
+  height: 10px;
+  background: repeating-linear-gradient(90deg, var(--jls-color-border) 0 8px, transparent 8px 10px);
+}
+.jls-meter::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--value) * 1%);
+  background: repeating-linear-gradient(90deg, var(--jls-color-accent) 0 8px, transparent 8px 10px);
 }
 
 /* ---- forms ---- */
@@ -215,11 +403,15 @@ a.jls-card {
   border-radius: var(--jls-radius-md);
   color: var(--jls-color-text);
   font: var(--jls-typography-body);
+  transition: box-shadow var(--jls-duration-fast) var(--jls-easing-standard);
 }
 .jls-input:focus {
   outline: none;
-  border-color: var(--jls-color-accent);
-  box-shadow: 0 0 0 3px var(--jls-color-accent-soft);
+  box-shadow: var(--jls-shadow-offset-accent);
+}
+.jls-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 textarea.jls-input {
   min-height: 136px;
@@ -240,9 +432,7 @@ select.jls-input {
 }
 .jls-input[aria-invalid='true'] {
   border-color: var(--jls-color-danger);
-}
-.jls-input[aria-invalid='true']:focus {
-  box-shadow: 0 0 0 3px var(--jls-color-danger-soft);
+  box-shadow: 3px 3px 0 var(--jls-color-danger);
 }
 .jls-error {
   display: flex;
@@ -275,10 +465,13 @@ select.jls-input {
 
 @media (prefers-reduced-motion: reduce) {
   .jls-btn,
-  .jls-card {
+  .jls-card,
+  .jls-input {
     transition: none;
   }
-  .jls-btn:hover {
+  .jls-btn:hover,
+  .jls-btn:active,
+  .jls-card--interactive:hover {
     transform: none;
   }
 }
