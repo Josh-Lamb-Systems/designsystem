@@ -15,9 +15,6 @@
         padding-block: var(--jls-space-lg);
         border-bottom: var(--jls-border-width-thin) solid var(--jls-color-border);
       }
-      .ds-header img {
-        width: 220px;
-      }
       .ds-hero {
         padding-block: var(--jls-space-3xl) var(--jls-space-2xl);
       }
@@ -29,12 +26,28 @@
       .ds-swatch {
         overflow: hidden;
         border: var(--jls-border-width-thin) solid var(--jls-color-border);
-        border-radius: var(--jls-radius-lg);
+        border-radius: var(--jls-radius-md);
         background: var(--jls-color-surface);
       }
       .ds-swatch__chip {
         height: 96px;
         border-bottom: var(--jls-border-width-thin) solid var(--jls-color-border);
+      }
+      .ds-swatch {
+        border-color: var(--jls-color-border-strong);
+      }
+      .ds-score {
+        display: grid;
+        gap: var(--jls-space-xs);
+        padding: var(--jls-space-sm) var(--jls-space-md);
+        border-top: var(--jls-border-width-thin) solid var(--jls-color-border);
+      }
+      .ds-score div {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--jls-space-md);
+        color: var(--jls-color-text);
+        font-weight: var(--jls-font-weight-semibold);
       }
       .ds-swatch__meta {
         padding: var(--jls-space-sm) var(--jls-space-md);
@@ -63,19 +76,22 @@
         align-items: center;
         gap: var(--jls-space-md);
       }
+      .ds-grid--logos {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
       .ds-logo-tile {
         display: grid;
         place-items: center;
         min-height: 160px;
         padding: var(--jls-space-xl);
-        border: var(--jls-border-width-thin) solid var(--jls-color-border);
-        border-radius: var(--jls-radius-lg);
+        border: var(--jls-border-width-thin) solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
       }
       .ds-logo-tile--light {
         background: var(--jls-palette-white);
       }
       .ds-logo-tile--dark {
-        background: var(--jls-palette-black);
+        background: var(--jls-palette-navy-900);
       }
       .ds-logo-tile--blue {
         background: var(--jls-color-accent);
@@ -86,9 +102,10 @@
       .ds-pre {
         overflow-x: auto;
         padding: var(--jls-space-lg);
-        background: var(--jls-palette-neutral-900);
-        border-radius: var(--jls-radius-lg);
-        color: var(--jls-palette-neutral-100);
+        background: var(--jls-palette-navy-900);
+        border: var(--jls-border-width-thin) solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
+        color: var(--jls-palette-navy-300);
         font-family: var(--jls-font-family-mono);
         font-size: var(--jls-font-size-sm);
         line-height: var(--jls-font-line-height-relaxed);
@@ -98,22 +115,20 @@
           grid-template-columns: 1fr;
           gap: var(--jls-space-xs);
         }
-        .ds-header img {
-          width: 160px;
-        }
       }
     </style>
   </head>
   <body class="jls">
+    <div class="jls-grid jls-grid--top-right">
     <div class="jls-container">
       <header class="ds-header">
-        <img id="header-logo" src="logos/jls-logo.svg" alt="Josh Lamb Systems" />
+        <img class="jls-logo" id="header-logo" src="logos/jls-logo.svg" alt="Josh Lamb Systems" width="350" height="64" />
         <button class="jls-btn jls-btn--secondary" type="button" id="theme-toggle">Dark mode</button>
       </header>
 
       <section class="ds-hero">
         <span class="jls-eyebrow">Design system</span>
-        <h1>One source for every Josh Lamb Systems design.</h1>
+        <h1><span class="jls-mark">One source</span> for every Josh Lamb Systems design.</h1>
         <p class="jls-lead jls-prose">
           Websites, slides, video, email and doop canvases all load the same tokens. Change a value once in
           <code>tokens/</code> and every output follows.
@@ -123,6 +138,7 @@
           <a class="jls-btn jls-btn--secondary" href="#templates">See templates</a>
         </div>
       </section>
+    </div>
     </div>
 
     <section class="jls-section jls-section--alt">
@@ -139,11 +155,11 @@
       </div>
     </section>
 
-    <section class="jls-section">
+    <section class="jls-section jls-grid jls-grid--bottom-left">
       <div class="jls-container">
         <span class="jls-eyebrow">Colors</span>
-        <h2>Black, white, and one strong blue</h2>
-        <p class="jls-prose">Semantic tokens. Values switch automatically in dark mode.</p>
+        <h2>Paper, navy ink, and one strong blue</h2>
+        <p class="jls-prose">Semantic tokens. Values switch automatically in dark mode, which becomes a blueprint.</p>
         <div class="ds-grid" id="swatches"></div>
       </div>
     </section>
@@ -151,7 +167,7 @@
     <section class="jls-section jls-section--alt">
       <div class="jls-container">
         <span class="jls-eyebrow">Typography</span>
-        <h2>Poppins for display, Source Sans 3 for reading</h2>
+        <h2>Poppins for display, Source Sans 3 for reading, Plex Mono for numbers</h2>
         <div class="ds-specimen">
           <div>
             <span class="ds-code">display · Poppins 800</span>
@@ -182,14 +198,22 @@
             </span>
           </div>
           <div>
-            <span class="ds-code">eyebrow · Poppins 700</span>
+            <span class="ds-code">eyebrow · Plex Mono 600</span>
             <span class="jls-eyebrow">Quick wins this week</span>
+          </div>
+          <div>
+            <span class="ds-code">number · Plex Mono 600</span>
+            <span class="jls-number">$1,500</span>
+          </div>
+          <div>
+            <span class="ds-code">data · Plex Mono 500</span>
+            <span class="jls-data">$1,500 flat · 3–5 hours of your team's time · money-back guarantee</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="jls-section">
+    <section class="jls-section jls-grid jls-grid--top-right">
       <div class="jls-container">
         <span class="jls-eyebrow">Components</span>
         <h2>The base layer</h2>
@@ -200,13 +224,25 @@
           <span class="jls-tag">AI Roadmap Sprint</span>
           <span class="jls-tag jls-tag--success">Quick win</span>
           <span class="jls-tag jls-tag--warning">Medium-term</span>
+          <span class="jls-tag jls-tag--neutral">2 weeks</span>
+        </div>
+        <div class="jls-stats" style="margin-bottom: var(--jls-space-xl)">
+          <div class="jls-stat"><span class="jls-number">10+</span>hours a week: what every sprint looks for</div>
+          <div class="jls-stat"><span class="jls-number">2 weeks</span>from kickoff to roadmap</div>
+          <div class="jls-stat"><span class="jls-number">$1,500</span>flat, with a money-back guarantee</div>
         </div>
         <div class="ds-grid">
           <article class="jls-card jls-card--interactive">
-            <span class="jls-tag jls-tag--success">Quick win</span>
-            <h3 style="margin-top: var(--jls-space-md)">Invoice generation from job notes</h3>
-            <p>Turn field notes into ready-to-send invoices without retyping a thing.</p>
+            <div class="jls-card__meta"><span>01</span><span>Map</span><span>Week 1</span></div>
+            <h3>Map every workflow</h3>
+            <p>We interview your team and chart how work actually moves, tool by tool.</p>
           </article>
+          <div class="jls-card jls-card--featured">
+            <div class="jls-card__meta"><span>Opportunity scores · example</span><span>Value</span></div>
+            <div class="ds-score"><div>Auto-draft email replies<span class="jls-data">$1,000/mo</span></div><div class="jls-meter" style="--value: 100" role="img" aria-label="Score 100 of 100"></div></div>
+            <div class="ds-score"><div>Report generation<span class="jls-data">$800/mo</span></div><div class="jls-meter" style="--value: 80" role="img" aria-label="Score 80 of 100"></div></div>
+            <div class="ds-score"><div>CRM data entry<span class="jls-data">$600/mo</span></div><div class="jls-meter" style="--value: 60" role="img" aria-label="Score 60 of 100"></div></div>
+          </div>
           <article class="jls-card jls-card--interactive">
             <span class="jls-tag jls-tag--success">Quick win</span>
             <h3 style="margin-top: var(--jls-space-md)">Lead import + instant first response</h3>
@@ -227,22 +263,25 @@
       <div class="jls-container">
         <span class="jls-eyebrow">Logo</span>
         <h2>Logo files</h2>
-        <div class="ds-grid">
+        <p class="jls-prose">Paper and white take the full logo, navy ink the reversed logo, brand blue the white negative. The full export (PNG 1x–4x, artboards) is in <code>logos/originals/</code>.</p>
+        <div class="ds-grid ds-grid--logos">
           <div class="ds-logo-tile ds-logo-tile--light"><img src="logos/jls-logo.svg" alt="Full logo on white" /></div>
-          <div class="ds-logo-tile ds-logo-tile--dark"><img src="logos/jls-logo-reversed.svg" alt="Reversed logo on black" /></div>
-          <div class="ds-logo-tile ds-logo-tile--blue"><img src="logos/jls-symbol-white.svg" alt="White symbol on brand blue" /></div>
+          <div class="ds-logo-tile ds-logo-tile--dark"><img src="logos/jls-logo-reversed.svg" alt="Reversed logo on navy ink" /></div>
+          <div class="ds-logo-tile ds-logo-tile--blue"><img src="logos/jls-logo-white.svg" alt="White negative logo on brand blue" /></div>
+          <div class="ds-logo-tile ds-logo-tile--light"><img src="logos/jls-logo-black.svg" alt="All-black logo on white" /></div>
           <div class="ds-logo-tile"><img src="logos/jls-symbol.svg" alt="Gradient symbol" /></div>
+          <div class="ds-logo-tile ds-logo-tile--dark"><img src="logos/jls-symbol-white.svg" alt="White symbol on navy ink" /></div>
         </div>
       </div>
     </section>
 
-    <section class="jls-section" id="templates">
+    <section class="jls-section jls-grid jls-grid--bottom-left" id="templates">
       <div class="jls-container">
         <span class="jls-eyebrow">Templates</span>
         <h2>Start from these</h2>
         <div class="ds-grid">
           <a class="jls-card jls-card--interactive" href="templates/landing.html"><h3>Landing page</h3><p>The full AI Roadmap Sprint page.</p></a>
-          <a class="jls-card jls-card--interactive" href="templates/deck.html"><h3>Slide deck</h3><p>16:9 sales deck with keyboard navigation.</p></a>
+          <a class="jls-card jls-card--interactive" href="templates/deck.html"><h3>Slide deck</h3><p>The 17-slide master sales deck: one slide per layout.</p></a>
           <a class="jls-card jls-card--interactive" href="templates/poster.html"><h3>Poster</h3><p>3:4 print poster.</p></a>
           <a class="jls-card jls-card--interactive" href="templates/form.html"><h3>Booking form</h3><p>Split-screen intake page.</p></a>
           <a class="jls-card jls-card--interactive" href="templates/email.html"><h3>Email</h3><p>Single-CTA marketing email.</p></a>
@@ -255,9 +294,9 @@
       const roles = [
         ['bg', 'Page background'], ['bg-alt', 'Alternate sections'], ['surface', 'Cards and panels'],
         ['text', 'Headings'], ['text-soft', 'Body copy'], ['text-faint', 'Captions and meta'],
-        ['border', 'Hairlines'], ['accent', 'Brand blue: actions'], ['accent-text', 'Links'],
+        ['border', 'Hairlines'], ['border-strong', 'Ink outlines'], ['accent', 'Brand blue: actions'], ['accent-text', 'Links'],
         ['accent-soft', 'Tinted backgrounds'], ['success', 'Quick wins'], ['warning', 'Medium-term'],
-        ['danger', 'Errors'],
+        ['danger', 'Errors'], ['highlight', 'Highlighter'], ['inverse-bg', 'Navy sections'],
       ]
       const swatches = document.getElementById('swatches')
       function renderSwatches() {
