@@ -7,19 +7,15 @@
     <link rel="icon" type="image/png" href="../logos/favicon-32.png" />
     <link rel="stylesheet" href="../jls.css" />
     <style>
-      /* Slides are authored at 1920×1080 and scaled to fit the window (see the script below).
-       * Slide type is the web scale doubled, per DESIGN.md "Slides": titles 72–96px, body 32–40px,
-       * nothing under 24px. */
+      /* Master sales deck: the 17-slide AI Roadmap Sprint pitch, one slide per layout in DESIGN.md
+       * "Slides". Slides are authored at 1920×1080 and scaled to fit the window (script below).
+       * Slide type scale (px at 1920 wide): 24 labels · 32 body · 40 lead and card titles ·
+       * 72 titles · 96 display · 120 statements · 240 section numbers · 320 big numbers. */
       .deck-root {
         --slide-w: 1920px;
         --slide-h: 1080px;
-        --slide-margin: var(--jls-space-4xl);
-        --slide-display: calc(var(--jls-font-size-4xl) * 2); /* 96px */
-        --slide-title: calc(var(--jls-font-size-6xl) * 1.125); /* 81px */
-        --slide-body: calc(var(--jls-font-size-md) * 2); /* 34px */
-        --slide-small: calc(var(--jls-font-size-xs) * 2); /* 26px */
-        --slide-number: calc(var(--jls-font-size-6xl) * 3); /* 216px */
-        --slide-tracking: calc(var(--jls-typography-display-letter-spacing) * 1.25);
+        --slide-margin: var(--jls-space-4xl); /* 96px */
+        --slide-cell: calc(var(--jls-grid-cell) * 2); /* 96px graph paper */
         --logo-w: 320px;
       }
 
@@ -29,7 +25,7 @@
       }
       body {
         overflow: hidden;
-        background: var(--jls-palette-neutral-900);
+        background: var(--jls-palette-navy-950);
       }
 
       .deck {
@@ -41,23 +37,97 @@
         transform: translate(-50%, -50%) scale(var(--scale, 0.5));
       }
 
+      /* ---- the frame: fixed on every slide ---- */
+
       .slide {
         position: absolute;
         inset: 0;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: var(--slide-margin);
-        padding-bottom: calc(var(--slide-margin) + var(--jls-space-3xl));
+        gap: 40px;
+        padding: var(--slide-margin) var(--slide-margin) 160px;
         background: var(--jls-color-bg);
         color: var(--jls-color-text-soft);
-        font-size: var(--slide-body);
-        line-height: var(--jls-font-line-height-normal);
+        font: 400 32px/1.4 var(--jls-font-family-body);
         visibility: hidden;
         isolation: isolate;
+        overflow: hidden;
       }
-      /* graph paper (Rhythm): 96px cells at slide scale, fading in from alternating sides */
-      .slide::before {
+      .slide.is-active {
+        visibility: visible;
+      }
+      .slide > * {
+        margin: 0;
+      }
+      .slide--center {
+        justify-content: center;
+      }
+      .slide--end {
+        justify-content: flex-end;
+      }
+      .slide--split {
+        flex-direction: row;
+        gap: var(--slide-margin);
+      }
+      .slide--split.slide--middle {
+        align-items: center;
+      }
+
+      /* footer: mono label bottom left, logo bottom right (320px) */
+      .slide__foot {
+        position: absolute;
+        left: var(--slide-margin);
+        bottom: 64px;
+        margin: 0;
+        font: 500 24px/1 var(--jls-font-family-mono);
+        letter-spacing: 1px;
+        color: var(--jls-color-text-faint);
+      }
+      .slide::after {
+        content: '';
+        position: absolute;
+        right: var(--slide-margin);
+        bottom: 64px;
+        width: var(--logo-w);
+        aspect-ratio: 658 / 120;
+        background: url('../logos/jls-logo.svg') right center / contain no-repeat;
+      }
+
+      /* ---- grounds ---- */
+
+      .slide--white {
+        background: var(--jls-color-surface);
+      }
+      .slide--ink {
+        --slide-grid: var(--jls-color-inverse-grid);
+        background: var(--jls-color-inverse-bg);
+        color: var(--jls-color-inverse-text-soft);
+      }
+      .slide--ink::after {
+        background-image: url('../logos/jls-logo-reversed.svg');
+      }
+      .slide--ink .slide__foot {
+        color: var(--jls-color-inverse-text-faint);
+      }
+      /* brand blue: the peak moment, once per deck; always the white negative logo */
+      .slide--blue {
+        --slide-grid: rgba(255, 255, 255, 0.2);
+        background: var(--jls-color-accent);
+        color: var(--jls-palette-blue-100);
+      }
+      .slide--blue::after {
+        aspect-ratio: 1340.74 / 223.62;
+        background-image: url('../logos/jls-logo-white.svg');
+      }
+      .slide--blue .slide__foot {
+        color: var(--jls-palette-blue-100);
+      }
+
+      /* ---- graph paper: fades in from the side away from the text ---- */
+
+      .grid-right::before,
+      .grid-left::before,
+      .grid-rise::before {
         content: '';
         position: absolute;
         inset: 0;
@@ -67,369 +137,445 @@
         background-image:
           linear-gradient(var(--slide-grid, var(--jls-color-grid)) 1px, transparent 1px),
           linear-gradient(90deg, var(--slide-grid, var(--jls-color-grid)) 1px, transparent 1px);
-        background-size: calc(var(--jls-grid-cell) * 2) calc(var(--jls-grid-cell) * 2);
-        -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 90%);
-        mask-image: linear-gradient(100deg, transparent 40%, #000 90%);
+        background-size: var(--slide-cell) var(--slide-cell);
+        background-position: -1px -1px;
       }
-      .slide:nth-of-type(even)::before {
-        -webkit-mask-image: linear-gradient(260deg, transparent 40%, #000 90%);
-        mask-image: linear-gradient(260deg, transparent 40%, #000 90%);
+      .grid-right::before {
+        -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 92%);
+        mask-image: linear-gradient(90deg, transparent 40%, #000 92%);
       }
-      .slide--dark {
-        --slide-grid: var(--jls-color-inverse-grid);
+      .grid-left::before {
+        -webkit-mask-image: linear-gradient(270deg, transparent 40%, #000 92%);
+        mask-image: linear-gradient(270deg, transparent 40%, #000 92%);
       }
-      .slide.is-active {
-        visibility: visible;
+      .grid-rise::before {
+        -webkit-mask-image: linear-gradient(225deg, transparent 50%, #000 100%);
+        mask-image: linear-gradient(225deg, transparent 50%, #000 100%);
       }
-      .slide::after {
-        content: '';
+      /* plotted cells: a small rising bar chart on the grid, topped with the highlighter */
+      .plot {
         position: absolute;
-        right: var(--slide-margin);
-        bottom: var(--slide-margin);
-        width: var(--logo-w);
-        aspect-ratio: 658 / 120;
-        background: url('../logos/jls-logo.svg') center / contain no-repeat;
+        width: var(--slide-cell);
+        height: var(--slide-cell);
+        border-radius: var(--jls-radius-sm);
+        background: var(--jls-color-plot);
       }
-      .slide--dark {
-        background: var(--jls-color-inverse-bg);
-        color: var(--jls-color-inverse-text-soft);
-      }
-      .slide--dark::after {
-        background-image: url('../logos/jls-logo-reversed.svg');
+      .plot--hi {
+        background: var(--jls-color-highlight);
       }
 
       /* ---- type ---- */
 
-      .slide h1,
-      .slide h2 {
-        max-width: 1440px;
-        margin: 0 0 var(--jls-space-xl);
-        color: var(--jls-color-text);
-        font-family: var(--jls-font-family-display);
-        font-weight: var(--jls-font-weight-extrabold);
-        line-height: var(--jls-font-line-height-tight);
-        letter-spacing: var(--slide-tracking);
-      }
-      .slide h1 {
-        font-size: var(--slide-display);
-      }
-      .slide h2 {
-        font-size: var(--slide-title);
-      }
-      .slide--dark h2 {
-        color: var(--jls-color-inverse-text);
-      }
-      .slide h3 {
-        margin: 0 0 var(--jls-space-sm);
-        color: var(--jls-color-text);
-        font-family: var(--jls-font-family-display);
-        font-size: calc(var(--jls-font-size-xl) * 1.5); /* 36px */
-        font-weight: var(--jls-font-weight-bold);
-        line-height: var(--jls-font-line-height-snug);
-      }
-      .slide p {
-        max-width: 1280px;
-        margin: 0;
-      }
-      .slide .eyebrow {
-        margin-bottom: var(--jls-space-lg);
-        color: var(--jls-color-accent-text);
-        font-family: var(--jls-font-family-display);
-        font-size: var(--slide-small);
-        font-weight: var(--jls-font-weight-bold);
-        letter-spacing: calc(var(--jls-typography-eyebrow-letter-spacing) * 2);
+      .s-eyebrow {
+        font: 600 24px/1.4 var(--jls-font-family-mono);
+        letter-spacing: 2px;
         text-transform: uppercase;
+        color: var(--jls-color-accent-text);
       }
-      .slide--dark .eyebrow {
+      .slide--ink .s-eyebrow {
         color: var(--jls-color-inverse-accent-text);
       }
-      .lede {
-        font-size: calc(var(--jls-font-size-lg) * 2); /* 40px */
-        line-height: var(--jls-font-line-height-snug);
+      .slide--blue .s-eyebrow {
+        color: var(--jls-palette-blue-100);
       }
-      .big-number {
-        display: block;
-        color: var(--jls-color-accent-text);
-        font-family: var(--jls-font-family-mono);
-        font-size: var(--slide-number);
-        font-weight: var(--jls-font-weight-semibold);
-        font-variant-numeric: tabular-nums;
-        line-height: 1;
-        letter-spacing: -0.04em;
-        word-spacing: -0.3em;
-      }
-
-      /* ---- 1: title ---- */
-
-      .slide--title h1 {
-        font-size: calc(var(--jls-font-size-6xl) * 1.75); /* 126px: the cover can go past 96 */
-        margin-bottom: var(--jls-space-2xl);
-      }
-
-      /* ---- 2: problem ---- */
-
-      .checklist {
-        display: grid;
-        gap: var(--jls-space-lg);
-        margin: var(--jls-space-lg) 0 0;
-        padding: 0;
-        list-style: none;
-      }
-      .checklist li {
+      .s-head {
         display: flex;
-        gap: var(--jls-space-lg);
-        align-items: baseline;
+        flex-direction: column;
+        gap: 24px;
       }
-      .checklist li::before {
-        content: '';
-        flex: none;
-        width: 32px;
-        height: 32px;
-        border: 3px solid var(--jls-color-accent);
-        border-radius: var(--jls-radius-sm);
-        transform: translateY(4px);
+      .s-title,
+      .s-display,
+      .s-statement {
+        margin: 0;
+        font-family: var(--jls-font-family-display);
+        font-weight: var(--jls-font-weight-extrabold);
+        color: var(--jls-color-text);
+        text-wrap: balance;
       }
-
-      /* ---- 3: what the sprint is ---- */
-
-      .split {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: var(--jls-space-4xl);
-        align-items: center;
+      .s-title {
+        font-size: 72px;
+        line-height: 1.1;
+        letter-spacing: -1px;
       }
-      .split .big-number {
+      .s-display {
+        font-size: 96px;
+        line-height: 1.08;
+        letter-spacing: -2px;
+      }
+      .s-statement {
+        font-size: 120px;
+        line-height: 1.05;
+        letter-spacing: -3px;
+      }
+      .slide--ink :is(.s-title, .s-display),
+      .slide--blue :is(.s-title, .s-display) {
+        color: var(--jls-color-inverse-text);
+      }
+      .s-mark {
+        padding: 0 0.1em;
+        background: linear-gradient(transparent 52%, var(--jls-color-highlight-mark) 52%, var(--jls-color-highlight-mark) 92%, transparent 92%);
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+      }
+      .s-lead {
+        max-width: 1100px;
+        font-size: 40px;
+        line-height: 1.4;
+      }
+      .s-num {
+        font: 600 320px/1 var(--jls-font-family-mono);
+        letter-spacing: -12px;
+        word-spacing: -0.3em;
+        color: var(--jls-color-text);
+        font-variant-numeric: tabular-nums;
         white-space: nowrap;
       }
-      .big-number small {
-        display: block;
-        margin-top: var(--jls-space-md);
-        color: var(--jls-color-text);
-        font-size: calc(var(--jls-font-size-xl) * 2);
-        letter-spacing: 0;
+      .s-num--section {
+        font-size: 240px;
+        letter-spacing: -8px;
+        color: var(--jls-color-inverse-accent-text);
       }
-
-      /* ---- 4: deliverables ---- */
-
-      .columns {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--jls-space-2xl);
-        margin: var(--jls-space-2xl) 0 0;
-        padding: 0;
-        list-style: none;
+      .s-num--price {
+        font-size: 220px;
+        letter-spacing: -8px;
+        color: var(--jls-color-inverse-text);
       }
-      .columns li {
-        padding-top: var(--jls-space-xl);
-        border-top: 3px solid var(--jls-color-text);
-      }
-      .columns .step {
-        display: block;
-        margin-bottom: var(--jls-space-lg);
+      .s-unit {
+        font: 600 72px/1 var(--jls-font-family-mono);
         color: var(--jls-color-accent-text);
-        font-family: var(--jls-font-family-display);
-        font-size: var(--jls-font-size-4xl);
-        font-weight: var(--jls-font-weight-extrabold);
-        line-height: 1;
       }
-      .columns p {
-        font-size: var(--slide-small);
-        line-height: var(--jls-font-line-height-normal);
+      .slide--blue .s-unit {
+        color: var(--jls-palette-blue-100);
       }
-
-      /* ---- 5: timeline ---- */
-
-      .timeline {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        margin: var(--jls-space-3xl) 0 0;
-        padding: 0;
-        list-style: none;
-      }
-      .timeline::before {
-        content: '';
-        position: absolute;
-        top: 23px;
-        left: 5%;
-        right: 5%;
-        height: 3px;
-        background: var(--jls-color-border-strong);
-      }
-      .timeline li {
-        position: relative;
-        display: grid;
-        justify-items: center;
-        gap: var(--jls-space-md);
-        text-align: center;
-        font-size: var(--slide-small);
-      }
-      .timeline .dot {
-        display: grid;
-        place-items: center;
-        width: 48px;
-        height: 48px;
-        border: 3px solid var(--jls-color-border-strong);
-        border-radius: var(--jls-radius-pill);
-        background: var(--jls-color-bg);
-        color: var(--jls-color-text-faint);
-        font-family: var(--jls-font-family-display);
-        font-size: var(--jls-font-size-xl);
-        font-weight: var(--jls-font-weight-bold);
-      }
-      .timeline .is-you .dot {
-        border-color: var(--jls-color-accent);
-        background: var(--jls-color-accent);
-        color: var(--jls-color-on-accent);
-      }
-      .timeline .label {
-        color: var(--jls-color-text);
-        font-family: var(--jls-font-family-display);
-        font-weight: var(--jls-font-weight-semibold);
-        line-height: var(--jls-font-line-height-snug);
-      }
-      .weeks {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--jls-space-xl);
-        margin-top: var(--jls-space-2xl);
-        font-size: var(--slide-small);
-      }
-      .weeks div {
-        padding-top: var(--jls-space-md);
-        border-top: 1px solid var(--jls-color-border);
-      }
-      .weeks strong {
-        font-family: var(--jls-font-family-display);
-      }
-      .slide .legend {
+      .s-figure {
         display: flex;
-        gap: var(--jls-space-md);
-        align-items: center;
+        align-items: baseline;
+        gap: 24px;
       }
-      .legend::before {
-        content: '';
+
+      /* ---- parts ---- */
+
+      .s-col {
         flex: none;
-        width: 32px;
-        height: 32px;
-        border-radius: var(--jls-radius-pill);
-        background: var(--jls-color-accent);
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
       }
-
-      /* ---- 6: quick wins ---- */
-
-      .wins {
+      .s-fill {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .s-cards {
         display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 32px;
+      }
+      .s-cards--2x2 {
+        grid-auto-flow: row;
         grid-template-columns: 1fr 1fr;
-        gap: var(--jls-space-xl) var(--jls-space-2xl);
-        margin: var(--jls-space-xl) 0 0;
-        padding: 0;
-        list-style: none;
+        gap: 24px;
       }
-      .wins li {
-        display: grid;
-        grid-template-columns: 200px 1fr;
-        align-items: center;
-        gap: var(--jls-space-xl);
-        padding: var(--jls-space-xl);
-        border: 1px solid var(--jls-color-border);
-        border-radius: var(--jls-radius-lg);
+      .s-card {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 36px 40px;
+        background: var(--jls-color-surface);
+        border: 1px solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
       }
-      .wins .hours {
-        color: var(--jls-color-accent-text);
-        font-family: var(--jls-font-family-display);
-        font-size: var(--jls-font-size-6xl);
-        font-weight: var(--jls-font-weight-extrabold);
-        line-height: 1;
-        letter-spacing: var(--jls-typography-display-letter-spacing);
+      .s-card--paper {
+        background: var(--jls-color-bg);
       }
-      .wins .hours small {
-        display: block;
-        margin-top: var(--jls-space-xs);
-        color: var(--jls-color-text-faint);
-        font-size: var(--slide-small);
-        font-weight: var(--jls-font-weight-semibold);
-        letter-spacing: 0;
+      .s-card--answer {
+        border: 2px solid var(--jls-color-accent);
+        box-shadow: 8px 8px 0 var(--jls-color-accent);
       }
-      .wins h3 {
+      .s-card h3,
+      .s-card__title {
+        margin: 0;
+        font: 700 40px/1.2 var(--jls-font-family-display);
+        color: var(--jls-color-text);
+      }
+      .s-card p {
         margin: 0;
       }
-      .slide .note {
-        margin-top: var(--jls-space-xl);
-        color: var(--jls-color-text-faint);
-        font-size: var(--slide-small);
-      }
-
-      /* ---- 7: price ---- */
-
-      .price {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: var(--jls-space-4xl);
+      .s-meta {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        gap: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px dashed var(--jls-color-border-strong);
+        font: 600 24px/1.2 var(--jls-font-family-mono);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--jls-color-text-faint);
       }
-      .price .big-number {
-        font-size: calc(var(--jls-font-size-6xl) * 4);
+      .s-meta > :first-child {
+        color: var(--jls-color-accent-text);
       }
-      .price .big-number small {
-        margin-top: var(--jls-space-lg);
-        color: var(--jls-color-text);
+      .s-meta--plain > :first-child {
+        color: var(--jls-color-text-faint);
       }
-      .guarantee {
-        padding: var(--jls-space-2xl);
-        border: 3px solid var(--jls-color-accent);
-        border-radius: var(--jls-radius-lg);
-        background: var(--jls-color-accent-soft);
+      .s-tag {
+        padding: 4px 10px;
+        border: 1px solid currentColor;
+        border-radius: var(--jls-radius-sm);
+        font: 600 24px/1.2 var(--jls-font-family-mono);
+        letter-spacing: 1px;
+        text-transform: uppercase;
       }
-      .guarantee h3 {
-        margin-bottom: var(--jls-space-md);
-        font-size: calc(var(--jls-font-size-xl) * 2);
+      .s-tag--ok {
+        color: var(--jls-color-success);
+        background: var(--jls-color-success-soft);
       }
-      .guarantee p {
-        color: var(--jls-color-text);
+      .s-tag--warn {
+        color: var(--jls-color-warning);
+        background: var(--jls-color-warning-soft);
+      }
+      .s-data {
+        font: 600 40px/1.2 var(--jls-font-family-mono);
+        color: var(--jls-color-accent-text);
+        white-space: nowrap;
       }
 
-      /* ---- 9: closing CTA (section-break style, black) ---- */
-
-      .slide--cta h2 {
-        font-size: var(--slide-display);
-        margin-bottom: var(--jls-space-2xl);
+      /* agenda rows */
+      .s-agenda {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px dashed var(--jls-color-border-strong);
       }
-      .slide--cta .cta {
-        display: inline-flex;
+      .s-agenda div {
+        display: flex;
+        align-items: baseline;
+        gap: 40px;
+        padding: 32px 0;
+        border-top: 1px dashed var(--jls-color-border-strong);
+        font: 700 40px/1.2 var(--jls-font-family-display);
+        color: var(--jls-color-text);
+      }
+      .s-agenda span {
+        width: 96px;
+        font: 600 40px/1.2 var(--jls-font-family-mono);
+        color: var(--jls-color-accent-text);
+      }
+
+      /* checklist rows */
+      .s-checks {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .s-check {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 24px 32px;
+        background: var(--jls-color-surface);
+        border: 1px solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
+        line-height: 1.3;
+        color: var(--jls-color-text);
+      }
+      .s-check::before {
+        content: '';
+        flex: none;
+        width: 48px;
+        height: 48px;
+        border: 2px solid var(--jls-color-accent);
+        border-radius: var(--jls-radius-sm);
+        background:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23064ef2' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          center / 32px no-repeat;
+      }
+
+      /* timeline */
+      .s-week {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .s-week > p {
+        margin: 0;
+        font: 600 24px/1.2 var(--jls-font-family-mono);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--jls-color-text-faint);
+      }
+      .s-days {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+      }
+      .s-day {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 20px 24px;
+        background: var(--jls-color-surface);
+        border: 1px solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
+        font: 600 28px/1.25 var(--jls-font-family-display);
+        color: var(--jls-color-text);
+      }
+      .s-day span {
+        font: 600 24px/1.2 var(--jls-font-family-mono);
+        color: var(--jls-color-text-faint);
+      }
+      .s-day--team {
+        background: var(--jls-color-accent);
+        border-color: var(--jls-color-accent);
+        color: var(--jls-color-on-accent);
+      }
+      .s-day--team span {
+        color: var(--jls-palette-blue-100);
+      }
+
+      /* scorecard panel */
+      .s-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--jls-color-surface);
+        border: 1px solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
+        box-shadow: 12px 12px 0 var(--jls-color-border);
+      }
+      .s-panel .s-meta {
+        padding: 24px 40px;
+      }
+      .s-score {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 32px 40px;
+        border-bottom: 1px solid var(--jls-color-border);
+      }
+      .s-score:last-child {
+        border-bottom: 0;
+      }
+      .s-score div {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font: 600 32px/1.2 var(--jls-font-family-display);
+        color: var(--jls-color-text);
+      }
+      .s-score div span {
+        font-family: var(--jls-font-family-mono);
+      }
+      .s-meter {
+        --value: 50;
+        position: relative;
+        height: 16px;
+        background: repeating-linear-gradient(90deg, var(--jls-color-border) 0 16px, transparent 16px 20px);
+      }
+      .s-meter::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: calc(var(--value) * 1%);
+        background: repeating-linear-gradient(90deg, var(--jls-color-accent) 0 16px, transparent 16px 20px);
+      }
+
+      /* quote */
+      .s-quote {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding-left: calc(var(--slide-cell) * 3);
+      }
+      .s-quote__mark {
+        font: 800 240px/0.6 var(--jls-font-family-display);
+        color: var(--jls-color-accent);
+      }
+      .s-quote blockquote {
+        max-width: 1300px;
+        margin: 0;
+        font: 700 72px/1.15 var(--jls-font-family-display);
+        letter-spacing: -1px;
+        color: var(--jls-color-text);
+      }
+      .s-quote figcaption {
+        width: 800px;
+        padding-top: 24px;
+        border-top: 1px dashed var(--jls-color-border-strong);
+        font: 600 24px/1.2 var(--jls-font-family-mono);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--jls-color-text-faint);
+      }
+
+      /* pricing guarantee box */
+      .s-guarantee {
+        flex: none;
+        width: 560px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 44px;
+        border: 2px solid var(--jls-color-inverse-text);
+        border-radius: var(--jls-radius-md);
+        box-shadow: 8px 8px 0 var(--jls-color-highlight);
+        color: var(--jls-color-inverse-text);
+      }
+
+      /* options path */
+      .s-path {
+        display: flex;
+        align-items: stretch;
+        gap: 24px;
+      }
+      .s-path .s-card {
+        flex: 1;
+      }
+      .s-arrow {
+        flex: none;
+        align-self: center;
+        width: 56px;
+        height: 32px;
+        background: var(--jls-color-border-strong);
+        clip-path: polygon(0 35%, 60% 35%, 60% 0, 100% 50%, 60% 100%, 60% 65%, 0 65%);
+      }
+
+      /* closing button: solid blue, highlighter offset */
+      .s-cta {
         align-self: flex-start;
-        margin-top: var(--jls-space-3xl);
-        padding: var(--jls-space-lg) var(--jls-space-2xl);
+        padding: 28px 48px;
         border-radius: var(--jls-radius-md);
         background: var(--jls-color-accent);
-        box-shadow: 6px 6px 0 var(--jls-color-highlight);
+        box-shadow: 8px 8px 0 var(--jls-color-highlight);
         color: var(--jls-color-on-accent);
-        font-family: var(--jls-font-family-display);
-        font-size: var(--slide-body);
-        font-weight: var(--jls-font-weight-semibold);
+        font: 600 40px/1 var(--jls-font-family-display);
         text-decoration: none;
       }
-      .slide--cta .cta:focus-visible {
+      .s-cta:focus-visible {
         outline: 4px solid var(--jls-palette-white);
-        outline-offset: 6px;
+        outline-offset: 8px;
       }
-      .slide--dark p {
+      .s-offer {
+        font: 500 32px/1.4 var(--jls-font-family-mono);
         color: var(--jls-color-inverse-text-soft);
       }
 
-      /* ---- controls: counter and prev/next, inside the 1920×1080 frame ---- */
+      /* ---- controls: counter and prev/next, bottom center inside the frame ---- */
 
       .controls {
         position: absolute;
-        left: var(--slide-margin);
-        bottom: calc(var(--slide-margin) - var(--jls-space-xs));
+        left: 50%;
+        bottom: 52px;
+        transform: translateX(-50%);
         display: flex;
         align-items: center;
         gap: var(--jls-space-md);
         color: var(--jls-color-text-faint);
-        font-family: var(--jls-font-family-display);
-        font-size: var(--slide-small);
-        font-weight: var(--jls-font-weight-semibold);
+        font: 600 24px/1 var(--jls-font-family-mono);
       }
       .controls button {
         display: grid;
@@ -437,11 +583,12 @@
         width: 48px;
         height: 48px;
         padding: 0;
-        border: var(--jls-border-width-thick) solid var(--jls-color-border-strong);
+        border: 1px solid var(--jls-color-border-strong);
         border-radius: var(--jls-radius-md);
         background: transparent;
         color: inherit;
         font: inherit;
+        font-size: 32px;
         cursor: pointer;
       }
       .controls button:hover:not(:disabled) {
@@ -462,10 +609,14 @@
         font-variant-numeric: tabular-nums;
       }
       .deck.on-dark .controls {
-        color: var(--jls-palette-neutral-400);
+        color: var(--jls-palette-blue-100);
       }
       .deck.on-dark .controls button {
-        border-color: var(--jls-palette-neutral-600);
+        border-color: var(--jls-palette-blue-300);
+      }
+      .deck.on-dark .controls button:hover:not(:disabled) {
+        border-color: var(--jls-palette-white);
+        color: var(--jls-palette-white);
       }
 
       /* ---- print: one slide per landscape page ---- */
@@ -508,147 +659,286 @@
   <body class="jls">
     <main class="deck-root">
       <div class="deck" id="deck" aria-roledescription="slide deck" aria-label="AI Roadmap Sprint">
-        <section class="slide slide--title" aria-roledescription="slide" aria-label="1 of 9">
-          <span class="eyebrow">AI Roadmap Sprint · Josh Lamb Systems</span>
-          <h1>Find <span class="jls-mark">10+ hours a week</span> with AI.</h1>
-          <p class="lede">
-            A 2-week sprint that maps your workflows, scores every AI opportunity by ROI, and hands you the order to
-            tackle them.
-          </p>
+
+        <!-- 1 · Title: paper, grid from the right, one highlighted outcome -->
+        <section class="slide slide--center grid-right" aria-roledescription="slide" aria-label="1 of 17">
+          <p class="s-eyebrow">AI Roadmap Sprint · Proposal for [Client name]</p>
+          <h1 class="s-display" style="max-width: 1300px">Find out where AI can save your business <span class="s-mark">10+ hours a week.</span></h1>
+          <p class="s-lead">A two-week sprint that maps your workflows, scores every AI opportunity by ROI, and hands you a roadmap your team can start on.</p>
+          <p class="slide__foot">[Month YYYY] · joshlambsystems.com</p>
         </section>
 
-        <section class="slide" aria-roledescription="slide" aria-label="2 of 9">
-          <span class="eyebrow">The problem</span>
-          <h2>Do you have an AI adoption problem?</h2>
-          <ul class="checklist">
-            <li>You know AI could help, but you have no idea where to start.</li>
-            <li>Your team is buried in data entry, follow-ups and reporting.</li>
-            <li>You bought AI tools that nobody on your team actually uses.</li>
-          </ul>
-        </section>
-
-        <section class="slide" aria-roledescription="slide" aria-label="3 of 9">
-          <div class="split">
-            <p class="big-number">2 weeks <small>3–5 hours of your time</small></p>
-            <div>
-              <span class="eyebrow">What the sprint is</span>
-              <h2>Map first. Then pick tools.</h2>
-              <p>
-                We map 5–7 of your core workflows, find the repetitive, rule-based tasks, and score every one by impact
-                against effort. No vague strategy, no jargon.
-              </p>
+        <!-- 2 · Agenda: title left, numbered rows right; numbers match the section breaks -->
+        <section class="slide slide--split" aria-roledescription="slide" aria-label="2 of 17">
+          <div class="s-col">
+            <p class="s-eyebrow">Today</p>
+            <h2 class="s-title">Four things in twenty minutes.</h2>
+          </div>
+          <div class="s-fill">
+            <div class="s-agenda">
+              <div><span>01</span>The problem</div>
+              <div><span>02</span>The sprint</div>
+              <div><span>03</span>What it finds</div>
+              <div><span>04</span>Price and next steps</div>
             </div>
           </div>
+          <p class="slide__foot">AI Roadmap Sprint · Agenda</p>
         </section>
 
-        <section class="slide" aria-roledescription="slide" aria-label="4 of 9">
-          <span class="eyebrow">What you get</span>
-          <h2>Three things you keep.</h2>
-          <ol class="columns">
-            <li>
-              <span class="step" aria-hidden="true">01</span>
+        <!-- 3 · Section break: navy ink, 240px mono number, grid from the left -->
+        <section class="slide slide--ink slide--end grid-left" aria-roledescription="slide" aria-label="3 of 17">
+          <p class="s-num s-num--section">01</p>
+          <h2 class="s-display">The problem</h2>
+          <p class="s-lead">Why most small teams stall on AI before they start.</p>
+          <p class="slide__foot">AI Roadmap Sprint · The problem</p>
+        </section>
+
+        <!-- 4 · Statement: one sentence at 120px on white, no grid -->
+        <section class="slide slide--white slide--center" aria-roledescription="slide" aria-label="4 of 17">
+          <h2 class="s-statement">Do you have an <span class="s-mark">AI adoption problem?</span></h2>
+          <p class="s-lead" style="max-width: 1000px">Most small businesses do. The way out starts with a map of your workflows, before any tool.</p>
+          <p class="slide__foot">AI Roadmap Sprint · The problem</p>
+        </section>
+
+        <!-- 5 · Checklist: setup left, up to five checked rows right; grid behind the cards -->
+        <section class="slide slide--split grid-right" aria-roledescription="slide" aria-label="5 of 17">
+          <div class="s-col">
+            <p class="s-eyebrow">Sound familiar?</p>
+            <h2 class="s-title">Where most teams are today.</h2>
+            <p>If two or more of these hit home, the sprint was built for you.</p>
+          </div>
+          <div class="s-fill">
+            <ul class="s-checks" role="list" style="margin: 0; padding: 0; list-style: none">
+              <li class="s-check">You know AI could help, but have no idea where to start.</li>
+              <li class="s-check">Your team is buried in data entry, follow-ups and reporting.</li>
+              <li class="s-check">You bought AI tools that nobody on your team actually uses.</li>
+              <li class="s-check">You don’t have time to research every new AI tool.</li>
+              <li class="s-check">You tried AI once, it didn’t stick, and you’re skeptical.</li>
+            </ul>
+          </div>
+          <p class="slide__foot">AI Roadmap Sprint · The problem</p>
+        </section>
+
+        <!-- 6 · Before / after: quiet card left, the answer right (blue outline + offset) -->
+        <section class="slide" aria-roledescription="slide" aria-label="6 of 17">
+          <div class="s-head">
+            <p class="s-eyebrow">Before and after</p>
+            <h2 class="s-title">From guessing to a plan.</h2>
+          </div>
+          <div class="s-cards" style="gap: 48px">
+            <div class="s-card">
+              <p class="s-meta s-meta--plain"><span>Today</span></p>
+              <p>AI ideas come from vendors and headlines.</p>
+              <p>Tools get bought, then abandoned.</p>
+              <p>Nobody knows what’s worth the money.</p>
+            </div>
+            <div class="s-card s-card--answer" style="color: var(--jls-color-text)">
+              <p class="s-meta"><span>After the sprint</span></p>
+              <p>5–7 core workflows mapped, step by step.</p>
+              <p>Every opportunity scored by ROI.</p>
+              <p>A phased plan, quick wins first.</p>
+            </div>
+          </div>
+          <p class="slide__foot">AI Roadmap Sprint · The problem</p>
+        </section>
+
+        <!-- 7 · Section break, grid from the right this time -->
+        <section class="slide slide--ink slide--end grid-right" aria-roledescription="slide" aria-label="7 of 17">
+          <p class="s-num s-num--section">02</p>
+          <h2 class="s-display">The sprint</h2>
+          <p class="s-lead">Map first. Then pick tools.</p>
+          <p class="slide__foot">AI Roadmap Sprint · The sprint</p>
+        </section>
+
+        <!-- 8 · Three cards: mono meta row, 40px title, one or two lines -->
+        <section class="slide" aria-roledescription="slide" aria-label="8 of 17">
+          <div class="s-head">
+            <p class="s-eyebrow">What you get</p>
+            <h2 class="s-title">Three things you keep.</h2>
+          </div>
+          <div class="s-cards">
+            <div class="s-card">
+              <p class="s-meta"><span>01 · Map</span><span>Week 1</span></p>
               <h3>AI Opportunity Map</h3>
               <p>Every point in your workflows where AI can take over the repetitive work.</p>
-            </li>
-            <li>
-              <span class="step" aria-hidden="true">02</span>
+            </div>
+            <div class="s-card">
+              <p class="s-meta"><span>02 · Score</span><span>Week 1–2</span></p>
               <h3>ROI-scored recommendations</h3>
               <p>The dollar value of each fix, and the exact order to tackle them in.</p>
-            </li>
-            <li>
-              <span class="step" aria-hidden="true">03</span>
-              <h3>Phased roadmap + tool stack</h3>
+            </div>
+            <div class="s-card">
+              <p class="s-meta"><span>03 · Plan</span><span>Week 2</span></p>
+              <h3>Phased roadmap and tool stack</h3>
               <p>This week, this month, this quarter. Specific tools with real monthly costs.</p>
-            </li>
-          </ol>
-        </section>
-
-        <section class="slide" aria-roledescription="slide" aria-label="5 of 9">
-          <span class="eyebrow">How it works</span>
-          <h2>Ten business days, start to finish.</h2>
-          <p class="legend">Blue days need your team: about 3–5 hours in total.</p>
-          <ol class="timeline">
-            <li class="is-you"><span class="dot">1</span><span class="label">Kickoff</span></li>
-            <li class="is-you"><span class="dot">2</span><span class="label">Team interviews</span></li>
-            <li><span class="dot">3</span><span class="label">Process mapping</span></li>
-            <li><span class="dot">4</span><span class="label">Gap analysis</span></li>
-            <li><span class="dot">5</span><span class="label">ROI scoring</span></li>
-            <li><span class="dot">6</span><span class="label">Tool matching</span></li>
-            <li><span class="dot">7</span><span class="label">Opportunity map</span></li>
-            <li><span class="dot">8</span><span class="label">Roadmap build</span></li>
-            <li><span class="dot">9</span><span class="label">Internal review</span></li>
-            <li class="is-you"><span class="dot">10</span><span class="label">Final walkthrough</span></li>
-          </ol>
-          <div class="weeks">
-            <div><strong>Week 1</strong> · Discovery and scoring</div>
-            <div><strong>Week 2</strong> · Roadmap and delivery</div>
-          </div>
-        </section>
-
-        <section class="slide" aria-roledescription="slide" aria-label="6 of 9">
-          <span class="eyebrow">Example quick wins</span>
-          <h2>The kind of quick wins we find.</h2>
-          <ul class="wins">
-            <li>
-              <span class="hours">~10 <small>hours a week</small></span>
-              <h3>Invoice generation from job notes</h3>
-            </li>
-            <li>
-              <span class="hours">~8 <small>hours a week</small></span>
-              <h3>Lead import + instant first response</h3>
-            </li>
-            <li>
-              <span class="hours">~8 <small>hours a week</small></span>
-              <h3>Automated client reporting</h3>
-            </li>
-            <li>
-              <span class="hours">~7 <small>hours a week</small></span>
-              <h3>Onboarding sequences that run themselves</h3>
-            </li>
-          </ul>
-          <p class="note">Typical impact. Most quick wins pay for themselves in 1–3 months.</p>
-        </section>
-
-        <section class="slide" aria-roledescription="slide" aria-label="7 of 9">
-          <span class="eyebrow">One flat price. One guarantee.</span>
-          <div class="price">
-            <p class="big-number">$1,500 <small>flat, for the whole sprint</small></p>
-            <div class="guarantee">
-              <h3>Money-back guarantee</h3>
-              <p>If we can't find at least 3 quick wins that save your team a combined 5+ hours a week, you don't pay.</p>
             </div>
           </div>
+          <p class="slide__foot">AI Roadmap Sprint · The sprint</p>
         </section>
 
-        <section class="slide" aria-roledescription="slide" aria-label="8 of 9">
-          <span class="eyebrow">After the sprint</span>
-          <h2>The roadmap is yours.</h2>
-          <ol class="columns">
-            <li>
+        <!-- 9 · Timeline: a row of day cells per week; blue = the client's team joins -->
+        <section class="slide grid-rise" aria-roledescription="slide" aria-label="9 of 17">
+          <div class="s-head">
+            <p class="s-eyebrow">How it works</p>
+            <h2 class="s-title">Ten business days, start to finish.</h2>
+          </div>
+          <div class="s-week">
+            <p>Week 1 · Discovery and scoring</p>
+            <div class="s-days">
+              <div class="s-day s-day--team"><span>Day 1</span>Kickoff</div>
+              <div class="s-day s-day--team"><span>Day 2</span>Team interviews</div>
+              <div class="s-day"><span>Day 3</span>Process mapping</div>
+              <div class="s-day"><span>Day 4</span>Gap analysis</div>
+              <div class="s-day"><span>Day 5</span>ROI scoring</div>
+            </div>
+          </div>
+          <div class="s-week">
+            <p>Week 2 · Roadmap and delivery</p>
+            <div class="s-days">
+              <div class="s-day"><span>Day 6</span>Tool matching</div>
+              <div class="s-day"><span>Day 7</span>Opportunity map</div>
+              <div class="s-day"><span>Day 8</span>Roadmap build</div>
+              <div class="s-day"><span>Day 9</span>Internal review</div>
+              <div class="s-day s-day--team"><span>Day 10</span>Final walkthrough</div>
+            </div>
+          </div>
+          <p><strong style="color: var(--jls-color-accent-text)">Blue days</strong> need your team: about 3–5 hours in total.</p>
+          <p class="slide__foot">AI Roadmap Sprint · The sprint</p>
+        </section>
+
+        <!-- 10 · Section break, grid from the left -->
+        <section class="slide slide--ink slide--end grid-left" aria-roledescription="slide" aria-label="10 of 17">
+          <p class="s-num s-num--section">03</p>
+          <h2 class="s-display">What it finds</h2>
+          <p class="s-lead">Hours back, dollars saved, and the order to go after them.</p>
+          <p class="slide__foot">AI Roadmap Sprint · What it finds</p>
+        </section>
+
+        <!-- 11 · Big number: 320px mono figure, unit in blue, plotted cells on the grid -->
+        <section class="slide slide--center grid-right" aria-roledescription="slide" aria-label="11 of 17">
+          <div class="plot" style="left: 1440px; top: 768px" aria-hidden="true"></div>
+          <div class="plot" style="left: 1536px; top: 672px" aria-hidden="true"></div>
+          <div class="plot" style="left: 1536px; top: 768px" aria-hidden="true"></div>
+          <div class="plot plot--hi" style="left: 1632px; top: 576px" aria-hidden="true"></div>
+          <div class="plot" style="left: 1632px; top: 672px" aria-hidden="true"></div>
+          <div class="plot" style="left: 1632px; top: 768px" aria-hidden="true"></div>
+          <p class="s-eyebrow">The goal of every sprint</p>
+          <div class="s-figure"><p class="s-num">10+</p><p class="s-unit">hrs / week</p></div>
+          <p class="s-lead" style="max-width: 1000px">Hours your team gets back from work AI can take over.</p>
+          <p class="slide__foot">AI Roadmap Sprint · What it finds</p>
+        </section>
+
+        <!-- 12 · Scorecard: explanation left, featured panel right; white, no grid -->
+        <section class="slide slide--white slide--split slide--middle" aria-roledescription="slide" aria-label="12 of 17">
+          <div class="s-col">
+            <p class="s-eyebrow">How we score</p>
+            <h2 class="s-title">Every opportunity, scored by ROI.</h2>
+            <p>Impact against effort: time saved, error reduction, revenue impact, build complexity and cost.</p>
+          </div>
+          <div class="s-panel">
+            <p class="s-meta s-meta--plain"><span>Opportunity scores · example</span><span>Value</span></p>
+            <div class="s-score"><div>Auto-draft email replies<span>$1,000/mo</span></div><div class="s-meter" style="--value: 100" role="img" aria-label="Score 100 of 100"></div></div>
+            <div class="s-score"><div>Report generation<span>$800/mo</span></div><div class="s-meter" style="--value: 80" role="img" aria-label="Score 80 of 100"></div></div>
+            <div class="s-score"><div>CRM data entry<span>$600/mo</span></div><div class="s-meter" style="--value: 60" role="img" aria-label="Score 60 of 100"></div></div>
+            <div class="s-score"><div>Meeting summaries<span>$400/mo</span></div><div class="s-meter" style="--value: 40" role="img" aria-label="Score 40 of 100"></div></div>
+          </div>
+          <p class="slide__foot">AI Roadmap Sprint · What it finds</p>
+        </section>
+
+        <!-- 13 · Card grid 2×2: industry + status tag, the win and its hours on one line -->
+        <section class="slide" aria-roledescription="slide" aria-label="13 of 17">
+          <div class="s-head">
+            <p class="s-eyebrow">Example quick wins</p>
+            <h2 class="s-title">The kind of quick wins we find.</h2>
+          </div>
+          <div class="s-cards s-cards--2x2">
+            <div class="s-card" style="padding: 28px 40px; gap: 16px">
+              <p class="s-meta s-meta--plain" style="border: 0; padding: 0"><span>Field services</span><span class="s-tag s-tag--warn">Medium-term</span></p>
+              <div class="s-meta" style="border: 0; padding: 0; text-transform: none; letter-spacing: 0"><span class="s-card__title">Invoices from job notes</span><span class="s-data">~10 hrs/wk</span></div>
+            </div>
+            <div class="s-card" style="padding: 28px 40px; gap: 16px">
+              <p class="s-meta s-meta--plain" style="border: 0; padding: 0"><span>Real estate</span><span class="s-tag s-tag--ok">Quick win</span></p>
+              <div class="s-meta" style="border: 0; padding: 0; text-transform: none; letter-spacing: 0"><span class="s-card__title">Instant lead follow-up</span><span class="s-data">~8 hrs/wk</span></div>
+            </div>
+            <div class="s-card" style="padding: 28px 40px; gap: 16px">
+              <p class="s-meta s-meta--plain" style="border: 0; padding: 0"><span>Agencies</span><span class="s-tag s-tag--warn">Medium-term</span></p>
+              <div class="s-meta" style="border: 0; padding: 0; text-transform: none; letter-spacing: 0"><span class="s-card__title">Automated client reporting</span><span class="s-data">~8 hrs/wk</span></div>
+            </div>
+            <div class="s-card" style="padding: 28px 40px; gap: 16px">
+              <p class="s-meta s-meta--plain" style="border: 0; padding: 0"><span>Professional services</span><span class="s-tag s-tag--ok">Quick win</span></p>
+              <div class="s-meta" style="border: 0; padding: 0; text-transform: none; letter-spacing: 0"><span class="s-card__title">Self-running onboarding</span><span class="s-data">~7 hrs/wk</span></div>
+            </div>
+          </div>
+          <p>Typical impact. Most quick wins pay for themselves in 1–3 months.</p>
+          <p class="slide__foot">AI Roadmap Sprint · What it finds</p>
+        </section>
+
+        <!-- 14 · Quote: grid from the left, quote indented three cells. Real client words only. -->
+        <section class="slide slide--center grid-left" aria-roledescription="slide" aria-label="14 of 17">
+          <figure class="s-quote" style="margin: 0">
+            <p class="s-quote__mark" aria-hidden="true">“</p>
+            <blockquote>[Client quote: one or two sentences about the hours their team got back.]</blockquote>
+            <figcaption>[Name] · [Role], [Company]</figcaption>
+          </figure>
+          <p class="slide__foot">AI Roadmap Sprint · What it finds</p>
+        </section>
+
+        <!-- 15 · Peak moment: the only brand-blue slide; white negative logo -->
+        <section class="slide slide--blue slide--split slide--middle grid-right" aria-roledescription="slide" aria-label="15 of 17">
+          <div class="s-fill" style="gap: 24px">
+            <p class="s-eyebrow">One flat price. One guarantee.</p>
+            <div class="s-figure"><p class="s-num s-num--price">$1,500</p><p class="s-unit">flat</p></div>
+            <p class="s-lead" style="color: var(--jls-color-inverse-text)">For the whole sprint · 3–5 hours of your team’s time</p>
+          </div>
+          <div class="s-guarantee">
+            <p class="s-eyebrow">Money-back guarantee</p>
+            <p style="margin: 0">If we can’t find at least 3 quick wins that save your team a combined 5+ hours a week, you don’t pay.</p>
+          </div>
+          <p class="slide__foot">AI Roadmap Sprint · Price</p>
+        </section>
+
+        <!-- 16 · Options path: three paper cards on white, joined by ink arrows -->
+        <section class="slide slide--white" aria-roledescription="slide" aria-label="16 of 17">
+          <div class="s-head">
+            <p class="s-eyebrow">After the sprint</p>
+            <h2 class="s-title">The roadmap is yours.</h2>
+          </div>
+          <div class="s-path">
+            <div class="s-card s-card--paper">
+              <p class="s-meta"><span>Option A</span></p>
               <h3>Build it yourself</h3>
               <p>Every recommendation includes the tools, costs and setup steps your team needs.</p>
-            </li>
-            <li>
+            </div>
+            <div class="s-arrow" aria-hidden="true"></div>
+            <div class="s-card s-card--paper">
+              <p class="s-meta"><span>Option B</span></p>
               <h3>Have us build the quick wins</h3>
               <p>Many clients hand us their top quick wins right after the sprint.</p>
-            </li>
-            <li>
+            </div>
+            <div class="s-arrow" aria-hidden="true"></div>
+            <div class="s-card s-card--paper">
+              <p class="s-meta"><span>Option C</span></p>
               <h3>Go further</h3>
               <p>Move into a larger systems engagement. No obligation either way.</p>
-            </li>
-          </ol>
+            </div>
+          </div>
+          <p class="slide__foot">AI Roadmap Sprint · Next steps</p>
         </section>
 
-        <section class="slide slide--dark slide--cta" aria-roledescription="slide" aria-label="9 of 9">
-          <span class="eyebrow">Next step</span>
-          <h2>Book a 2-week AI Roadmap Sprint.</h2>
-          <p class="lede">$1,500 flat · 3–5 hours of your team's time · money-back guarantee</p>
-          <a class="cta" href="https://joshlambsystems.com">Book a call at joshlambsystems.com</a>
+        <!-- 17 · Closing call to action: navy, grid from the left, one highlighter-shadow button -->
+        <section class="slide slide--ink slide--center grid-left" aria-roledescription="slide" aria-label="17 of 17">
+          <div style="display: flex; flex-direction: column; gap: 40px; padding-left: calc(var(--slide-cell) * 3)">
+            <p class="s-eyebrow">Next step</p>
+            <h2 class="s-display" style="max-width: 1300px">Book a 2-week AI Roadmap Sprint.</h2>
+            <p class="s-offer">$1,500 flat · 3–5 hours of your team’s time · money-back guarantee</p>
+            <a class="s-cta" href="https://joshlambsystems.com/">Book a call at joshlambsystems.com</a>
+          </div>
+          <p class="slide__foot">AI Roadmap Sprint · Next step</p>
         </section>
 
         <nav class="controls" aria-label="Slide navigation">
           <button type="button" id="prev" aria-label="Previous slide">&#8249;</button>
-          <output id="counter" aria-live="polite">1 / 9</output>
+          <output id="counter" aria-live="polite">1 / 17</output>
           <button type="button" id="next" aria-label="Next slide">&#8250;</button>
         </nav>
       </div>
@@ -683,7 +973,7 @@
             slide.toggleAttribute('inert', !active)
             slide.setAttribute('aria-hidden', String(!active))
           })
-          deck.classList.toggle('on-dark', slides[current].classList.contains('slide--dark'))
+          deck.classList.toggle('on-dark', slides[current].matches('.slide--ink, .slide--blue'))
           counter.textContent = `${current + 1} / ${slides.length}`
           prev.disabled = current === 0
           next.disabled = current === slides.length - 1

@@ -429,15 +429,64 @@ the Rhythm rule for graph paper down the page.
 
 ### Slides (1920×1080)
 
-- One idea per slide. A headline of at most 8 words, plus one supporting line or a single visual.
-- Titles 72 to 96px Poppins ExtraBold; body 32 to 40px Source Sans 3; nothing under 24px. Big numbers
-  are Plex Mono at 200px and up, with the unit beside them.
-- 96px outer margin. Logo bottom right at 320px wide; slide number and date bottom left in mono.
-- Paper slides by default, with graph paper (96px cells, the 48px web cell at slide scale) fading in
-  from the side away from the text, alternating left and right through the deck. Navy ink slides
-  only for section breaks and the closing call to action.
-- Big numbers carry slides: "10+ hours a week", "$1,500 flat", "2 weeks". Highlight one phrase per
-  slide at most.
+The master deck is `templates/deck.html`: a 17-slide AI Roadmap Sprint pitch that uses every layout
+below once, in a real pitch order. Copy it, delete what a pitch doesn't need, and fill the
+`[placeholders]`. Speaker notes for each layout live in the comment above its slide.
+
+**The frame (every slide):**
+
+- 96px outer margin, 160px at the bottom for the footer band.
+- Footer: a mono label bottom left (`AI Roadmap Sprint · <section>`, or the date on the title slide)
+  and the logo bottom right at 320px wide.
+- The 96px graph-paper cell (2 × `--jls-grid-cell`) is the layout grid: edges, plotted cells and
+  indents snap to it, even on slides where the paper isn't drawn.
+- Type scale, px at 1920 wide: 24 labels · 32 body · 40 lead and card titles · 72 titles ·
+  96 display · 120 statements · 240 section numbers · 320 big numbers. Nothing under 24px.
+  Titles are Poppins ExtraBold; body Source Sans 3; labels, numbers and prices Plex Mono.
+- One idea per slide, a headline of at most 8 words, and one highlighted phrase at most.
+
+**Backgrounds (four, each with a job):**
+
+| Background | Use | Logo |
+| --- | --- | --- |
+| Paper (`bg`) | The default for content slides | `jls-logo.svg` |
+| White (`surface`) | Statements, data panels and the options path: the second tone | `jls-logo.svg` |
+| Navy ink (`inverse-bg`) | Section breaks and the closing call to action only | `jls-logo-reversed.svg` |
+| Brand blue (`accent`) | Once per deck: the peak moment, usually the price | `jls-logo-white.svg` |
+
+**Layouts:**
+
+| Layout | Use it for | Key rules |
+| --- | --- | --- |
+| Title | The first slide | Eyebrow names the client; the outcome is highlighted; grid from the right |
+| Agenda | What the meeting covers | Title left, numbered mono rows right; numbers match the section breaks |
+| Section break | Each part of the story | Navy, 240px mono number, section name, one line of setup |
+| Statement | The question or claim to pause on | One sentence at 120px on white; no grid, nothing else |
+| Checklist | The client's pain | Setup left, up to five checked rows right as ink-outlined cards |
+| Before / after | The change the sprint makes | Two equal cards, parallel lines; the answer gets a blue outline and offset |
+| Three cards | Deliverables, pillars | Mono meta row (number · name ··· timing) over a dashed rule; 3 or 4 cards |
+| Timeline | The two weeks, day by day | A row of day cells per week; blue marks days the client joins, said in words too |
+| Big number | One figure that carries the point | 320px mono, unit beside it in blue, one line of meaning; plotted cells on the grid |
+| Scorecard | Scored opportunities, any ranked data | Explanation left; featured panel right with a mono header and segmented meters |
+| Card grid | Examples by industry | 2 × 2; industry and status tag on top, the win and its hours on one line |
+| Quote | A real client's words | Indented three cells beside a grid fade; never invent one, drop the slide until you have it |
+| Peak moment | The price and guarantee | The only brand-blue slide; guarantee in an outlined box with a highlighter shadow |
+| Options path | Next steps, phases, packages | Three paper cards on white, joined by ink arrows |
+| Call to action | The close; leave it up for questions | Navy, the offer in mono, one button with a highlighter shadow |
+
+**Rhythm (what makes a deck feel varied but consistent):**
+
+- Never the same layout twice in a row. Alternate dense slides (scorecard, timeline) with sparse
+  ones (statement, big number).
+- Backgrounds mark the structure: paper and white for content, navy only at section breaks and the
+  close, blue once.
+- Graph paper fades in from the side away from the text and alternates left and right through the
+  deck. Statements, data panels and white slides have none.
+- Plotted cells: one group per slide, only next to a real number.
+
+**Exporting:** the deck prints one slide per landscape page (save as PDF from the browser). For
+Google Slides, build from the matching Slides artifact and export .pptx: Poppins, Source Sans 3 and
+IBM Plex Mono are all Google Fonts, so the type carries over.
 
 ### Video (HyperFrames compositions, 1920×1080 or 1080×1920)
 
@@ -455,6 +504,9 @@ the Rhythm rule for graph paper down the page.
   values because email clients ignore CSS variables.
 - Webfonts are not reliable in email, so headings fall back to Arial Bold and mono to Courier. Keep
   the hierarchy, not the font. No graph paper in email.
+- The Notebook look in email: ink outlines (`border-strong`), 4px corners, dashed ink rules between
+  rows, mono labels, tags and numbers, and one highlighted phrase (a solid `highlight-mark`
+  background on a span). No offset shadows or gradients: Outlook and Gmail drop them.
 - One primary button per email: solid brand blue.
 
 ### Print and documents
