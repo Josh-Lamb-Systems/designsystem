@@ -1,0 +1,19 @@
+{
+  "name": "@joshlambsystems/design-system",
+  "version": "0.1.0",
+  "description": "Josh Lamb Systems design system: DTCG tokens, tokens.css, DESIGN.md, fonts, logos and templates.",
+  "scripts": {
+    "build": "tz build && node scripts/build.mjs",
+    "check": "tz build && node scripts/build.mjs --check && design.md lint DESIGN.md",
+    "lint": "design.md lint DESIGN.md",
+    "export:tailwind": "design.md export --format css-tailwind DESIGN.md"
+  },
+  "license": "UNLICENSED",
+  "type": "module",
+  "devDependencies": {
+    "@google/design.md": "^0.4.0",
+    "@terrazzo/cli": "^2.9.0",
+    "@terrazzo/plugin-css": "^2.9.0"
+  },
+  "private": true
+}

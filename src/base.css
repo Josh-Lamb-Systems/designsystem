@@ -1,0 +1,284 @@
+/* Josh Lamb Systems: base layer.
+ * Optional element defaults and a handful of brand components, built only from --jls-* tokens.
+ * Everything sits inside :where() so any page's own CSS wins without a specificity fight. */
+
+:where(.jls, .jls *, .jls *::before, .jls *::after) {
+  box-sizing: border-box;
+}
+
+:where(.jls) {
+  margin: 0;
+  background: var(--jls-color-bg);
+  color: var(--jls-color-text-soft);
+  font: var(--jls-typography-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:where(.jls) :where(h1, h2, h3, h4) {
+  margin: 0 0 var(--jls-space-sm);
+  color: var(--jls-color-text);
+  text-wrap: balance;
+}
+:where(.jls) :where(h1) {
+  font: var(--jls-typography-h1);
+  font-size: clamp(var(--jls-font-size-3xl), 5vw, var(--jls-font-size-4xl));
+  letter-spacing: var(--jls-typography-h1-letter-spacing);
+}
+:where(.jls) :where(h2) {
+  font: var(--jls-typography-h2);
+  font-size: clamp(var(--jls-font-size-2xl), 3.6vw, var(--jls-font-size-3xl));
+  letter-spacing: var(--jls-typography-h2-letter-spacing);
+}
+:where(.jls) :where(h3) {
+  font: var(--jls-typography-h3);
+  letter-spacing: var(--jls-typography-h3-letter-spacing);
+}
+:where(.jls) :where(h4) {
+  font: var(--jls-typography-h4);
+}
+:where(.jls) :where(p, ul, ol) {
+  margin: 0 0 var(--jls-space-md);
+  text-wrap: pretty;
+}
+:where(.jls) :where(a) {
+  color: var(--jls-color-accent-text);
+  text-underline-offset: 0.18em;
+}
+:where(.jls) :where(strong, b) {
+  color: var(--jls-color-text);
+  font-weight: var(--jls-font-weight-semibold);
+}
+:where(.jls) :where(img, svg) {
+  display: block;
+  max-width: 100%;
+}
+:where(.jls) :where(:focus-visible) {
+  outline: 2px solid var(--jls-color-focus);
+  outline-offset: 2px;
+}
+
+/* ---- layout ---- */
+
+.jls-container {
+  width: 100%;
+  max-width: calc(var(--jls-layout-content) + 2 * var(--jls-space-lg));
+  margin-inline: auto;
+  padding-inline: var(--jls-space-lg);
+}
+.jls-prose {
+  max-width: var(--jls-layout-prose);
+}
+.jls-section {
+  padding-block: var(--jls-space-4xl);
+}
+.jls-section--alt {
+  background: var(--jls-color-bg-alt);
+}
+
+/* ---- type helpers ---- */
+
+.jls-eyebrow {
+  display: block;
+  margin-bottom: var(--jls-space-sm);
+  color: var(--jls-color-accent-text);
+  font: var(--jls-typography-eyebrow);
+  letter-spacing: var(--jls-typography-eyebrow-letter-spacing);
+  text-transform: uppercase;
+}
+.jls-lead {
+  font: var(--jls-typography-lead);
+  color: var(--jls-color-text-soft);
+}
+.jls-small {
+  font: var(--jls-typography-small);
+  color: var(--jls-color-text-faint);
+}
+.jls-gradient-text {
+  background: var(--jls-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- buttons ---- */
+
+.jls-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--jls-space-xs);
+  padding: 14px 28px;
+  border: var(--jls-border-width-thick) solid transparent;
+  border-radius: var(--jls-radius-md);
+  font: var(--jls-typography-button);
+  line-height: var(--jls-font-line-height-snug);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform var(--jls-duration-fast) var(--jls-easing-standard),
+    background var(--jls-duration-fast) var(--jls-easing-standard),
+    border-color var(--jls-duration-fast) var(--jls-easing-standard);
+}
+.jls-btn:hover {
+  transform: translateY(-1px);
+}
+.jls-btn--primary {
+  background: var(--jls-gradient-brand);
+  color: var(--jls-color-on-accent);
+  box-shadow: var(--jls-shadow-accent);
+}
+.jls-btn--primary:hover {
+  background: var(--jls-color-accent-hover);
+}
+.jls-btn--secondary {
+  background: var(--jls-color-surface);
+  color: var(--jls-color-text);
+  border-color: var(--jls-color-border);
+}
+.jls-btn--secondary:hover {
+  border-color: var(--jls-color-border-strong);
+}
+.jls-btn--sm {
+  padding: 10px 20px;
+  font-size: var(--jls-font-size-xs);
+}
+.jls-btn--lg {
+  padding: 17px 36px;
+  font-size: var(--jls-font-size-md);
+}
+
+/* ---- surfaces ---- */
+
+.jls-card {
+  padding: var(--jls-space-xl);
+  background: var(--jls-color-surface);
+  border: var(--jls-border-width-thin) solid var(--jls-color-border);
+  border-radius: var(--jls-radius-lg);
+  transition:
+    border-color var(--jls-duration-fast) var(--jls-easing-standard),
+    box-shadow var(--jls-duration-fast) var(--jls-easing-standard);
+}
+a.jls-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.jls-card--interactive:hover {
+  border-color: var(--jls-color-accent);
+  box-shadow: var(--jls-shadow-md);
+}
+.jls-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--jls-space-xxs);
+  padding: 4px 10px;
+  border-radius: var(--jls-radius-pill);
+  background: var(--jls-color-accent-soft);
+  color: var(--jls-color-accent-text);
+  font: var(--jls-typography-eyebrow);
+  letter-spacing: var(--jls-typography-eyebrow-letter-spacing);
+  text-transform: uppercase;
+}
+.jls-tag--success {
+  background: var(--jls-color-success-soft);
+  color: var(--jls-color-success);
+}
+.jls-tag--neutral {
+  background: var(--jls-color-surface);
+  color: var(--jls-color-text-soft);
+  box-shadow: inset 0 0 0 var(--jls-border-width-thin) var(--jls-color-border);
+}
+.jls-tag--warning {
+  background: var(--jls-color-warning-soft);
+  color: var(--jls-color-warning);
+}
+
+/* ---- forms ---- */
+
+.jls-field {
+  display: grid;
+  gap: var(--jls-space-xs);
+}
+.jls-label {
+  color: var(--jls-color-text);
+  font-family: var(--jls-font-family-display);
+  font-size: var(--jls-font-size-sm);
+  font-weight: var(--jls-font-weight-semibold);
+}
+.jls-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--jls-color-surface);
+  border: var(--jls-border-width-thin) solid var(--jls-color-border-strong);
+  border-radius: var(--jls-radius-md);
+  color: var(--jls-color-text);
+  font: var(--jls-typography-body);
+}
+.jls-input:focus {
+  outline: none;
+  border-color: var(--jls-color-accent);
+  box-shadow: 0 0 0 3px var(--jls-color-accent-soft);
+}
+textarea.jls-input {
+  min-height: 136px;
+  resize: vertical;
+}
+select.jls-input {
+  appearance: none;
+  padding-right: var(--jls-space-2xl);
+  cursor: pointer;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--jls-color-text-soft) 50%),
+    linear-gradient(135deg, var(--jls-color-text-soft) 50%, transparent 50%);
+  background-position:
+    calc(100% - 21px) 50%,
+    calc(100% - 16px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.jls-input[aria-invalid='true'] {
+  border-color: var(--jls-color-danger);
+}
+.jls-input[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 3px var(--jls-color-danger-soft);
+}
+.jls-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--jls-space-xs);
+  margin: 0;
+  color: var(--jls-color-danger);
+  font: var(--jls-typography-small);
+  font-weight: var(--jls-font-weight-semibold);
+}
+.jls-error::before {
+  content: '!';
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: var(--jls-radius-pill);
+  background: var(--jls-color-danger);
+  color: var(--jls-color-bg);
+  font-family: var(--jls-font-family-display);
+  font-size: var(--jls-font-size-xs);
+  font-weight: var(--jls-font-weight-bold);
+}
+.jls-hint {
+  color: var(--jls-color-text-faint);
+  font: var(--jls-typography-small);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jls-btn,
+  .jls-card {
+    transition: none;
+  }
+  .jls-btn:hover {
+    transform: none;
+  }
+}

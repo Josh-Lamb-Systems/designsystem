@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Josh Lamb Systems: Design System</title>
+    <link rel="icon" href="logos/favicon-32.png" />
+    <link rel="stylesheet" href="jls.css" />
+    <style>
+      .ds-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--jls-space-lg);
+        padding-block: var(--jls-space-lg);
+        border-bottom: var(--jls-border-width-thin) solid var(--jls-color-border);
+      }
+      .ds-header img {
+        width: 220px;
+      }
+      .ds-hero {
+        padding-block: var(--jls-space-3xl) var(--jls-space-2xl);
+      }
+      .ds-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: var(--jls-space-lg);
+      }
+      .ds-swatch {
+        overflow: hidden;
+        border: var(--jls-border-width-thin) solid var(--jls-color-border);
+        border-radius: var(--jls-radius-lg);
+        background: var(--jls-color-surface);
+      }
+      .ds-swatch__chip {
+        height: 96px;
+        border-bottom: var(--jls-border-width-thin) solid var(--jls-color-border);
+      }
+      .ds-swatch__meta {
+        padding: var(--jls-space-sm) var(--jls-space-md);
+      }
+      .ds-swatch__meta code,
+      .ds-code {
+        font-family: var(--jls-font-family-mono);
+        font-size: var(--jls-font-size-xs);
+        color: var(--jls-color-text-faint);
+      }
+      .ds-specimen {
+        display: grid;
+        gap: var(--jls-space-lg);
+      }
+      .ds-specimen > div {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        align-items: baseline;
+        gap: var(--jls-space-lg);
+        padding-bottom: var(--jls-space-lg);
+        border-bottom: var(--jls-border-width-thin) solid var(--jls-color-border);
+      }
+      .ds-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--jls-space-md);
+      }
+      .ds-logo-tile {
+        display: grid;
+        place-items: center;
+        min-height: 160px;
+        padding: var(--jls-space-xl);
+        border: var(--jls-border-width-thin) solid var(--jls-color-border);
+        border-radius: var(--jls-radius-lg);
+      }
+      .ds-logo-tile--light {
+        background: var(--jls-palette-white);
+      }
+      .ds-logo-tile--dark {
+        background: var(--jls-palette-black);
+      }
+      .ds-logo-tile--blue {
+        background: var(--jls-color-accent);
+      }
+      .ds-logo-tile img {
+        max-height: 64px;
+      }
+      .ds-pre {
+        overflow-x: auto;
+        padding: var(--jls-space-lg);
+        background: var(--jls-palette-neutral-900);
+        border-radius: var(--jls-radius-lg);
+        color: var(--jls-palette-neutral-100);
+        font-family: var(--jls-font-family-mono);
+        font-size: var(--jls-font-size-sm);
+        line-height: var(--jls-font-line-height-relaxed);
+      }
+      @media (max-width: 720px) {
+        .ds-specimen > div {
+          grid-template-columns: 1fr;
+          gap: var(--jls-space-xs);
+        }
+        .ds-header img {
+          width: 160px;
+        }
+      }
+    </style>
+  </head>
+  <body class="jls">
+    <div class="jls-container">
+      <header class="ds-header">
+        <img id="header-logo" src="logos/jls-logo.svg" alt="Josh Lamb Systems" />
+        <button class="jls-btn jls-btn--secondary" type="button" id="theme-toggle">Dark mode</button>
+      </header>
+
+      <section class="ds-hero">
+        <span class="jls-eyebrow">Design system</span>
+        <h1>One source for every Josh Lamb Systems design.</h1>
+        <p class="jls-lead jls-prose">
+          Websites, slides, video, email and doop canvases all load the same tokens. Change a value once in
+          <code>tokens/</code> and every output follows.
+        </p>
+        <div class="ds-row">
+          <a class="jls-btn jls-btn--primary" href="DESIGN.md">Read DESIGN.md</a>
+          <a class="jls-btn jls-btn--secondary" href="#templates">See templates</a>
+        </div>
+      </section>
+    </div>
+
+    <section class="jls-section jls-section--alt">
+      <div class="jls-container">
+        <span class="jls-eyebrow">Use it</span>
+        <h2>One line of HTML</h2>
+        <pre class="ds-pre"><code>&lt;link rel="stylesheet" href="BASE_URL/jls.css"&gt;
+&lt;body class="jls"&gt;</code></pre>
+        <p class="jls-small">
+          <code>jls.css</code> bundles fonts, tokens and the base layer. Need only the variables? Use
+          <code>tokens.css</code>. Agents read <code>DESIGN.md</code>. Tools read the DTCG source in
+          <code>tokens/</code>.
+        </p>
+      </div>
+    </section>
+
+    <section class="jls-section">
+      <div class="jls-container">
+        <span class="jls-eyebrow">Colors</span>
+        <h2>Black, white, and one strong blue</h2>
+        <p class="jls-prose">Semantic tokens. Values switch automatically in dark mode.</p>
+        <div class="ds-grid" id="swatches"></div>
+      </div>
+    </section>
+
+    <section class="jls-section jls-section--alt">
+      <div class="jls-container">
+        <span class="jls-eyebrow">Typography</span>
+        <h2>Poppins for display, Source Sans 3 for reading</h2>
+        <div class="ds-specimen">
+          <div>
+            <span class="ds-code">display · Poppins 800</span>
+            <span style="font: var(--jls-typography-display); letter-spacing: var(--jls-typography-display-letter-spacing); color: var(--jls-color-text)">10+ hours</span>
+          </div>
+          <div>
+            <span class="ds-code">h1 · Poppins 700</span>
+            <span style="font: var(--jls-typography-h1); letter-spacing: var(--jls-typography-h1-letter-spacing); color: var(--jls-color-text)">Stop guessing where AI fits.</span>
+          </div>
+          <div>
+            <span class="ds-code">h2 · Poppins 700</span>
+            <span style="font: var(--jls-typography-h2); letter-spacing: var(--jls-typography-h2-letter-spacing); color: var(--jls-color-text)">One flat price. One guarantee.</span>
+          </div>
+          <div>
+            <span class="ds-code">h3 · Poppins 700</span>
+            <span style="font: var(--jls-typography-h3); color: var(--jls-color-text)">An AI Opportunity Map of your business</span>
+          </div>
+          <div>
+            <span class="ds-code">lead · Source Sans 3</span>
+            <span class="jls-lead">In a 2-week AI Roadmap Sprint, we map your actual workflows and find the gaps AI can fill.</span>
+          </div>
+          <div>
+            <span class="ds-code">body · Source Sans 3</span>
+            <span>
+              Every opportunity is scored on impact vs. effort: time saved, error reduction, revenue impact,
+              implementation complexity, and cost. You'll know the dollar value of each fix and the exact order to
+              tackle them in.
+            </span>
+          </div>
+          <div>
+            <span class="ds-code">eyebrow · Poppins 700</span>
+            <span class="jls-eyebrow">Quick wins this week</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jls-section">
+      <div class="jls-container">
+        <span class="jls-eyebrow">Components</span>
+        <h2>The base layer</h2>
+        <div class="ds-row" style="margin-bottom: var(--jls-space-xl)">
+          <a class="jls-btn jls-btn--primary jls-btn--lg" href="#">Book a call</a>
+          <a class="jls-btn jls-btn--primary" href="#">Book your sprint</a>
+          <a class="jls-btn jls-btn--secondary" href="#">See the roadmap</a>
+          <span class="jls-tag">AI Roadmap Sprint</span>
+          <span class="jls-tag jls-tag--success">Quick win</span>
+          <span class="jls-tag jls-tag--warning">Medium-term</span>
+        </div>
+        <div class="ds-grid">
+          <article class="jls-card jls-card--interactive">
+            <span class="jls-tag jls-tag--success">Quick win</span>
+            <h3 style="margin-top: var(--jls-space-md)">Invoice generation from job notes</h3>
+            <p>Turn field notes into ready-to-send invoices without retyping a thing.</p>
+          </article>
+          <article class="jls-card jls-card--interactive">
+            <span class="jls-tag jls-tag--success">Quick win</span>
+            <h3 style="margin-top: var(--jls-space-md)">Lead import + instant first response</h3>
+            <p>New leads land in your CRM and get a reply in minutes, not days.</p>
+          </article>
+          <form class="jls-card" onsubmit="return false">
+            <div class="jls-field">
+              <label class="jls-label" for="demo-email">Work email</label>
+              <input class="jls-input" id="demo-email" type="email" placeholder="you@company.com" />
+              <span class="jls-hint">We reply within one business day.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="jls-section jls-section--alt">
+      <div class="jls-container">
+        <span class="jls-eyebrow">Logo</span>
+        <h2>Logo files</h2>
+        <div class="ds-grid">
+          <div class="ds-logo-tile ds-logo-tile--light"><img src="logos/jls-logo.svg" alt="Full logo on white" /></div>
+          <div class="ds-logo-tile ds-logo-tile--dark"><img src="logos/jls-logo-reversed.svg" alt="Reversed logo on black" /></div>
+          <div class="ds-logo-tile ds-logo-tile--blue"><img src="logos/jls-symbol-white.svg" alt="White symbol on brand blue" /></div>
+          <div class="ds-logo-tile"><img src="logos/jls-symbol.svg" alt="Gradient symbol" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jls-section" id="templates">
+      <div class="jls-container">
+        <span class="jls-eyebrow">Templates</span>
+        <h2>Start from these</h2>
+        <div class="ds-grid">
+          <a class="jls-card jls-card--interactive" href="templates/landing.html"><h3>Landing page</h3><p>The full AI Roadmap Sprint page.</p></a>
+          <a class="jls-card jls-card--interactive" href="templates/deck.html"><h3>Slide deck</h3><p>16:9 sales deck with keyboard navigation.</p></a>
+          <a class="jls-card jls-card--interactive" href="templates/poster.html"><h3>Poster</h3><p>3:4 print poster.</p></a>
+          <a class="jls-card jls-card--interactive" href="templates/form.html"><h3>Booking form</h3><p>Split-screen intake page.</p></a>
+          <a class="jls-card jls-card--interactive" href="templates/email.html"><h3>Email</h3><p>Single-CTA marketing email.</p></a>
+          <a class="jls-card jls-card--interactive" href="templates/newsletter.html"><h3>Newsletter</h3><p>Multi-story digest.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const roles = [
+        ['bg', 'Page background'], ['bg-alt', 'Alternate sections'], ['surface', 'Cards and panels'],
+        ['text', 'Headings'], ['text-soft', 'Body copy'], ['text-faint', 'Captions and meta'],
+        ['border', 'Hairlines'], ['accent', 'Brand blue: actions'], ['accent-text', 'Links'],
+        ['accent-soft', 'Tinted backgrounds'], ['success', 'Quick wins'], ['warning', 'Medium-term'],
+        ['danger', 'Errors'],
+      ]
+      const swatches = document.getElementById('swatches')
+      function renderSwatches() {
+        const style = getComputedStyle(document.body)
+        swatches.replaceChildren(
+          ...roles.map(([name, use]) => {
+            const card = document.createElement('div')
+            card.className = 'ds-swatch'
+            card.innerHTML = `<div class="ds-swatch__chip" style="background: var(--jls-color-${name})"></div>
+              <div class="ds-swatch__meta"><strong>${name}</strong><br><span class="jls-small">${use}</span><br>
+              <code>--jls-color-${name}</code> <code>${style.getPropertyValue(`--jls-color-${name}`).trim()}</code></div>`
+            return card
+          }),
+        )
+      }
+      renderSwatches()
+      document.getElementById('theme-toggle').addEventListener('click', (event) => {
+        const dark = document.body.classList.toggle('jls-dark')
+        event.currentTarget.textContent = dark ? 'Light mode' : 'Dark mode'
+        document.getElementById('header-logo').src = dark ? 'logos/jls-logo-reversed.svg' : 'logos/jls-logo.svg'
+        renderSwatches()
+      })
+    </script>
+  </body>
+</html>

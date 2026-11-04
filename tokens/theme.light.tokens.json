@@ -1,0 +1,228 @@
+{
+  "color": {
+    "$type": "color",
+    "bg": {
+      "$value": "{palette.white}",
+      "$description": "Page background"
+    },
+    "bg-alt": {
+      "$value": "{palette.neutral.50}",
+      "$description": "Alternating section background"
+    },
+    "surface": {
+      "$value": "{palette.white}",
+      "$description": "Cards, panels, inputs"
+    },
+    "text": {
+      "$value": "{palette.black}",
+      "$description": "Headings and primary text"
+    },
+    "text-soft": {
+      "$value": "{palette.neutral.600}",
+      "$description": "Body copy, descriptions"
+    },
+    "text-faint": {
+      "$value": "{palette.neutral.500}",
+      "$description": "Captions, meta, eyebrows (still AA)"
+    },
+    "border": {
+      "$value": "{palette.neutral.200}",
+      "$description": "Hairlines, card borders, dividers"
+    },
+    "border-strong": {
+      "$value": "{palette.neutral.300}",
+      "$description": "Hovered borders, input outlines"
+    },
+    "accent": {
+      "$value": "{palette.blue.500}",
+      "$description": "Brand blue fills: primary buttons, highlights"
+    },
+    "accent-hover": {
+      "$value": "{palette.blue.600}"
+    },
+    "accent-text": {
+      "$value": "{palette.blue.500}",
+      "$description": "Links and accent-colored text"
+    },
+    "accent-soft": {
+      "$value": "{palette.blue.50}",
+      "$description": "Tinted backgrounds behind accent content"
+    },
+    "on-accent": {
+      "$value": "{palette.white}",
+      "$description": "Text and icons on accent fills and the gradient"
+    },
+    "focus": {
+      "$value": "{palette.blue.400}",
+      "$description": "Focus rings"
+    },
+    "success": {
+      "$value": "{palette.green.700}"
+    },
+    "success-soft": {
+      "$value": "{palette.green.50}"
+    },
+    "warning": {
+      "$value": "{palette.amber.700}"
+    },
+    "warning-soft": {
+      "$value": "{palette.amber.50}"
+    },
+    "danger": {
+      "$value": "{palette.red.700}"
+    },
+    "danger-soft": {
+      "$value": "{palette.red.50}"
+    },
+    "inverse-bg": {
+      "$value": "{palette.black}",
+      "$description": "Brand black sections: closing CTAs, section-break slides. Stays black in both themes."
+    },
+    "inverse-text": {
+      "$value": "{palette.white}",
+      "$description": "Headings on inverse-bg"
+    },
+    "inverse-text-soft": {
+      "$value": "{palette.neutral.300}",
+      "$description": "Body copy on inverse-bg"
+    },
+    "inverse-accent-text": {
+      "$value": "{palette.blue.300}",
+      "$description": "Links and accent text on inverse-bg"
+    },
+    "inverse-text-faint": {
+      "$value": "{palette.neutral.400}",
+      "$description": "Captions and meta on inverse-bg"
+    },
+    "inverse-border": {
+      "$value": "{palette.neutral.700}",
+      "$description": "Hairlines on inverse-bg"
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "sm": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0627,
+            0.0941,
+            0.1569
+          ],
+          "hex": "#101828",
+          "alpha": 0.05
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 1,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 2,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
+    },
+    "md": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0627,
+            0.0941,
+            0.1569
+          ],
+          "hex": "#101828",
+          "alpha": 0.06
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 8,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 24,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Card hover (site)"
+    },
+    "lg": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0627,
+            0.0941,
+            0.1569
+          ],
+          "hex": "#101828",
+          "alpha": 0.12
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 20,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 48,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Popovers, modals, floating mockups"
+    },
+    "accent": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0235,
+            0.3059,
+            0.949
+          ],
+          "hex": "#064ef2",
+          "alpha": 0.25
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 2,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 6,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Primary button glow (site)"
+    }
+  }
+}

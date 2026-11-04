@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book your AI Roadmap Sprint | Josh Lamb Systems</title>
+  <meta name="description" content="Tell us about your workflows and book a 20-minute intro call for the AI Roadmap Sprint. $1,500 flat, money-back guarantee.">
+  <link rel="icon" type="image/png" href="../logos/favicon-32.png">
+  <link rel="stylesheet" href="../jls.css">
+  <style>
+    .nowrap { white-space: nowrap; }
+    .split { display: grid; min-height: 100vh; }
+
+    /* ---- brand panel ---- */
+    .brand {
+      display: flex; flex-direction: column; gap: var(--jls-space-2xl);
+      padding: var(--jls-space-2xl) var(--jls-space-lg);
+      background: var(--jls-color-inverse-bg); color: var(--jls-color-inverse-text-soft);
+    }
+    .brand-logo img { width: 150px; height: auto; }
+    .brand .jls-eyebrow { color: var(--jls-color-inverse-accent-text); }
+    .brand h1 { margin-bottom: var(--jls-space-md); color: var(--jls-color-inverse-text); }
+    .brand .jls-lead { margin: 0; color: var(--jls-color-inverse-text-soft); }
+    .brand h2 {
+      margin-bottom: var(--jls-space-lg); color: var(--jls-color-inverse-text-faint);
+      font: var(--jls-typography-eyebrow); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase;
+    }
+    .steps { display: grid; gap: var(--jls-space-lg); margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps li { display: grid; grid-template-columns: 40px 1fr; gap: var(--jls-space-md); counter-increment: step; }
+    .steps li::before {
+      content: counter(step); display: grid; place-items: center; width: 40px; height: 40px;
+      background: var(--jls-gradient-brand); border-radius: var(--jls-radius-pill);
+      color: var(--jls-color-inverse-text); font-family: var(--jls-font-family-display); font-weight: var(--jls-font-weight-bold);
+    }
+    .steps h3 { margin: var(--jls-space-xs) 0 var(--jls-space-xxs); color: var(--jls-color-inverse-text); font: var(--jls-typography-h4); }
+    .steps p { margin: 0; }
+    .offer {
+      margin-top: auto; padding-top: var(--jls-space-lg);
+      border-top: var(--jls-border-width-thin) solid var(--jls-color-inverse-border);
+    }
+    .offer-line { margin: 0 0 var(--jls-space-xs); color: var(--jls-color-inverse-text); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); }
+    .offer .jls-small { margin: 0; color: var(--jls-color-inverse-text-faint); }
+
+    /* ---- form side ---- */
+    .form-side { display: flex; justify-content: center; align-items: center; padding: var(--jls-space-3xl) var(--jls-space-lg); }
+    .form-wrap { width: 100%; max-width: 600px; }
+    .form-wrap > h2 { margin-bottom: var(--jls-space-xs); }
+    .form-wrap > p { margin-bottom: var(--jls-space-xl); }
+    .intake { display: grid; gap: var(--jls-space-lg); }
+    .row { display: grid; gap: var(--jls-space-lg); align-items: start; }
+    .req { color: var(--jls-color-text-faint); font-family: var(--jls-font-family-body); font-weight: var(--jls-font-weight-regular); }
+    .jls-input:focus-visible { outline: 2px solid var(--jls-color-focus); outline-offset: 2px; }
+    .submit { display: grid; gap: var(--jls-space-sm); margin-top: var(--jls-space-xs); }
+    .submit .jls-btn { width: 100%; }
+    .submit .jls-small { margin: 0; text-align: center; }
+
+    @media (min-width: 640px) {
+      .row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 720px) {
+      .brand { padding: var(--jls-space-3xl); }
+      .brand-logo img { width: 250px; }
+    }
+    @media (min-width: 1024px) {
+      .split { grid-template-columns: minmax(420px, 5fr) 7fr; }
+      .form-side { padding: var(--jls-space-4xl) var(--jls-space-3xl); }
+    }
+    @media (min-width: 1024px) and (max-height: 820px) {
+      .brand { gap: var(--jls-space-xl); }
+    }
+  </style>
+</head>
+<body class="jls">
+  <div class="split">
+    <aside class="brand" aria-label="About the AI Roadmap Sprint">
+      <a class="brand-logo" href="landing.html" aria-label="Josh Lamb Systems home">
+        <img src="../logos/jls-logo-reversed.svg" alt="Josh Lamb Systems" width="250" height="46">
+      </a>
+
+      <div>
+        <span class="jls-eyebrow">AI Roadmap Sprint</span>
+        <h1>Book your AI Roadmap Sprint</h1>
+        <p class="jls-lead">Two weeks from now, you'll know exactly where AI can save your business 10+ hours a week, and what to build first.</p>
+      </div>
+
+      <section aria-labelledby="next-title">
+        <h2 id="next-title">What happens next</h2>
+        <ol class="steps">
+          <li>
+            <div>
+              <h3>Tell us about your workflows</h3>
+              <p>A few minutes on the form. The more specific you are about where time goes, the better the call.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Have a 20-minute intro call</h3>
+              <p>We look at your workflows and tell you honestly if the sprint makes sense. No pitch-deck theater.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Get your roadmap in 10 business days</h3>
+              <p>Your AI Opportunity Map, ROI-scored recommendations, and a phased roadmap with the tool stack to run it.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <div class="offer">
+        <p class="offer-line"><span class="nowrap">$1,500 flat</span> · <span class="nowrap">3–5 hours of your team's time</span> · <span class="nowrap">money-back guarantee</span></p>
+        <p class="jls-small">If we can't identify at least 3 quick wins that save your team a combined 5+ hours per week, you don't pay.</p>
+      </div>
+    </aside>
+
+    <main class="form-side">
+      <div class="form-wrap">
+        <h2>Tell us where the time goes</h2>
+        <p>All fields are required unless marked optional.</p>
+
+        <form class="intake" action="#" method="post" novalidate>
+          <div class="row">
+            <div class="jls-field">
+              <label class="jls-label" for="name">Your name</label>
+              <input class="jls-input" id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="jls-field">
+              <label class="jls-label" for="email">Work email</label>
+              <input class="jls-input" id="email" name="email" type="email" autocomplete="email" value="josh@" required aria-invalid="true" aria-describedby="email-error">
+              <p class="jls-error" id="email-error">Enter a full email address, like name@company.com.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="jls-field">
+              <label class="jls-label" for="company">Company</label>
+              <input class="jls-input" id="company" name="company" type="text" autocomplete="organization" required>
+            </div>
+            <div class="jls-field">
+              <label class="jls-label" for="team-size">Team size</label>
+              <select class="jls-input" id="team-size" name="team_size" required>
+                <option value="" selected disabled>Choose one</option>
+                <option>Just me</option>
+                <option>2–10 people</option>
+                <option>11–25 people</option>
+                <option>26–50 people</option>
+                <option>51+ people</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="jls-field">
+            <label class="jls-label" for="workflows">Which workflows eat the most time?</label>
+            <textarea class="jls-input" id="workflows" name="workflows" rows="5" required aria-describedby="workflows-hint"></textarea>
+            <p class="jls-hint" id="workflows-hint">Name two or three, with rough hours if you know them. For example: invoicing from job notes, lead follow-up, monthly client reports.</p>
+          </div>
+
+          <div class="jls-field">
+            <label class="jls-label" for="source">How did you hear about us? <span class="req">(optional)</span></label>
+            <select class="jls-input" id="source" name="source">
+              <option value="" selected>Choose one</option>
+              <option>LinkedIn</option>
+              <option>Referral from a client or friend</option>
+              <option>Google search</option>
+              <option>Event or podcast</option>
+              <option>Somewhere else</option>
+            </select>
+          </div>
+
+          <div class="submit">
+            <button class="jls-btn jls-btn--primary jls-btn--lg" type="submit">Book your intro call</button>
+            <p class="jls-small">Nothing is charged today. We use your details only to reply to you. <a href="#">Privacy Policy</a></p>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

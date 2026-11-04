@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Roadmap Sprint poster · Josh Lamb Systems</title>
+    <link rel="icon" type="image/png" href="../logos/favicon-32.png" />
+    <link rel="stylesheet" href="../jls.css" />
+    <style>
+      /* A 3:4 poster authored at 1200×1600 CSS px, scaled to fit the window and printed on one page.
+       * Margins sit well inside the 48px print safe area (--jls-layout-print-margin). */
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        overflow: hidden;
+        background: var(--jls-color-bg-alt);
+      }
+
+      .poster {
+        --margin: calc(var(--jls-layout-print-margin) * 2); /* 96px */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        width: 1200px;
+        height: 1600px;
+        padding: var(--margin);
+        background: var(--jls-color-bg);
+        box-shadow: var(--jls-shadow-lg);
+        transform: translate(-50%, -50%) scale(var(--scale, 0.5));
+      }
+
+      .poster__logo {
+        width: 360px;
+        height: auto;
+        margin-bottom: var(--jls-space-3xl);
+      }
+
+      .poster .jls-eyebrow {
+        margin-bottom: var(--jls-space-lg);
+        font-size: var(--jls-font-size-xl);
+      }
+      .poster h1 {
+        margin: 0 0 var(--jls-space-2xl);
+        color: var(--jls-color-text);
+        font: var(--jls-typography-display);
+        font-size: calc(var(--jls-font-size-4xl) * 2.5); /* 120px */
+        letter-spacing: calc(var(--jls-typography-display-letter-spacing) * 1.6);
+      }
+      .poster h1 em {
+        color: var(--jls-color-accent-text);
+        font-style: normal;
+      }
+
+      .benefits {
+        display: grid;
+        gap: var(--jls-space-lg);
+        margin: 0 0 var(--jls-space-2xl);
+        padding: 0;
+        list-style: none;
+        color: var(--jls-color-text);
+        font-size: var(--jls-font-size-3xl);
+        line-height: var(--jls-font-line-height-snug);
+      }
+      .benefits li {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        align-items: baseline;
+      }
+      .benefits b {
+        color: var(--jls-color-accent-text);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--jls-font-size-2xl);
+        font-weight: var(--jls-font-weight-extrabold);
+      }
+
+      /* The one bold use of the brand gradient. White text here is large (24px+ bold) for AA. */
+      .offer {
+        display: grid;
+        gap: var(--jls-space-xl);
+        padding: var(--jls-space-3xl);
+        border-radius: var(--jls-radius-lg);
+        background: var(--jls-gradient-brand);
+        color: var(--jls-color-on-accent);
+        font-family: var(--jls-font-family-display);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .offer__price {
+        margin: 0;
+        font-size: calc(var(--jls-font-size-4xl) * 3.5); /* 168px */
+        font-weight: var(--jls-font-weight-extrabold);
+        line-height: 1;
+        letter-spacing: calc(var(--jls-typography-display-letter-spacing) * 2);
+      }
+      .offer__price small {
+        display: block;
+        margin-top: var(--jls-space-md);
+        font-size: var(--jls-font-size-3xl);
+        font-weight: var(--jls-font-weight-bold);
+        letter-spacing: 0;
+      }
+      .offer__guarantee {
+        margin: 0;
+        padding-top: var(--jls-space-xl);
+        border-top: 2px solid currentColor;
+        font-size: var(--jls-font-size-2xl);
+        font-weight: var(--jls-font-weight-semibold);
+        line-height: var(--jls-font-line-height-snug);
+      }
+      .offer__guarantee strong {
+        display: block;
+        margin-bottom: var(--jls-space-xs);
+        color: inherit;
+        font-size: var(--jls-font-size-3xl);
+        font-weight: var(--jls-font-weight-extrabold);
+      }
+
+      .cta {
+        margin: auto 0 0;
+        padding-top: var(--jls-space-2xl);
+        color: var(--jls-color-text);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--jls-font-size-4xl);
+        font-weight: var(--jls-font-weight-bold);
+        line-height: var(--jls-font-line-height-snug);
+        letter-spacing: var(--jls-typography-h1-letter-spacing);
+      }
+      .cta a {
+        color: var(--jls-color-accent-text);
+        text-decoration: none;
+      }
+      .cta a:hover {
+        text-decoration: underline;
+      }
+      .cta a:focus-visible {
+        outline: 3px solid var(--jls-color-focus);
+        outline-offset: 4px;
+        border-radius: var(--jls-radius-sm);
+      }
+      .cta span {
+        display: block;
+        margin-top: var(--jls-space-xs);
+        color: var(--jls-color-text-faint);
+        font-family: var(--jls-font-family-body);
+        font-size: var(--jls-font-size-xl);
+        font-weight: var(--jls-font-weight-regular);
+        letter-spacing: 0;
+      }
+
+      @page {
+        size: 1200px 1600px;
+        margin: 0;
+      }
+      @media print {
+        html,
+        body {
+          height: auto;
+          overflow: visible;
+          background: none;
+        }
+        .poster {
+          position: static;
+          box-shadow: none;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="jls">
+    <main class="poster" id="poster">
+      <img class="poster__logo" src="../logos/jls-logo.svg" alt="Josh Lamb Systems" width="360" height="66" />
+
+      <span class="jls-eyebrow">The AI Roadmap Sprint</span>
+      <h1>Find <em>10+ hours a week</em> with AI.</h1>
+
+      <ul class="benefits">
+        <li><b aria-hidden="true">01</b>Map 5–7 of your core workflows, step by step.</li>
+        <li><b aria-hidden="true">02</b>Score every AI opportunity by ROI.</li>
+        <li><b aria-hidden="true">03</b>Get a phased roadmap and tool stack.</li>
+      </ul>
+
+      <section class="offer" aria-label="Price and guarantee">
+        <p class="offer__price">$1,500 <small>flat · 2 weeks · 3–5 hours of your team's time</small></p>
+        <p class="offer__guarantee">
+          <strong>Money-back guarantee</strong>
+          At least 3 quick wins saving your team 5+ hours a week, or you don't pay.
+        </p>
+      </section>
+
+      <p class="cta">
+        Book a call at <a href="https://joshlambsystems.com">joshlambsystems.com</a>
+        <span>Fixed scope, fixed price. No vague strategy, no jargon.</span>
+      </p>
+    </main>
+
+    <script>
+      // Scale the 1200×1600 poster to fit the window with a little breathing room.
+      ;(() => {
+        const poster = document.getElementById('poster')
+        const fit = () => {
+          const scale = Math.min((window.innerWidth - 48) / 1200, (window.innerHeight - 48) / 1600)
+          poster.style.setProperty('--scale', String(Math.max(scale, 0.1)))
+        }
+        window.addEventListener('resize', fit)
+        fit()
+      })()
+    </script>
+  </body>
+</html>

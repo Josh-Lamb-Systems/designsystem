@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Roadmap Sprint · Josh Lamb Systems</title>
+    <link rel="icon" type="image/png" href="../logos/favicon-32.png" />
+    <link rel="stylesheet" href="../jls.css" />
+    <style>
+      /* Slides are authored at 1920×1080 and scaled to fit the window (see the script below).
+       * Slide type is the web scale doubled, per DESIGN.md "Slides": titles 72–96px, body 32–40px,
+       * nothing under 24px. */
+      .deck-root {
+        --slide-w: 1920px;
+        --slide-h: 1080px;
+        --slide-margin: var(--jls-space-4xl);
+        --slide-display: calc(var(--jls-font-size-4xl) * 2); /* 96px */
+        --slide-title: calc(var(--jls-font-size-6xl) * 1.125); /* 81px */
+        --slide-body: calc(var(--jls-font-size-md) * 2); /* 34px */
+        --slide-small: calc(var(--jls-font-size-xs) * 2); /* 26px */
+        --slide-number: calc(var(--jls-font-size-6xl) * 3); /* 216px */
+        --slide-tracking: calc(var(--jls-typography-display-letter-spacing) * 1.25);
+        --logo-w: 240px;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        overflow: hidden;
+        background: var(--jls-palette-neutral-900);
+      }
+
+      .deck {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: var(--slide-w);
+        height: var(--slide-h);
+        transform: translate(-50%, -50%) scale(var(--scale, 0.5));
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--slide-margin);
+        padding-bottom: calc(var(--slide-margin) + var(--jls-space-3xl));
+        background: var(--jls-color-bg);
+        color: var(--jls-color-text-soft);
+        font-size: var(--slide-body);
+        line-height: var(--jls-font-line-height-normal);
+        visibility: hidden;
+      }
+      .slide.is-active {
+        visibility: visible;
+      }
+      .slide::after {
+        content: '';
+        position: absolute;
+        right: var(--slide-margin);
+        bottom: var(--slide-margin);
+        width: var(--logo-w);
+        aspect-ratio: 658 / 120;
+        background: url('../logos/jls-logo.svg') center / contain no-repeat;
+      }
+      .slide--dark {
+        background: var(--jls-color-inverse-bg);
+        color: var(--jls-color-inverse-text-soft);
+      }
+      .slide--dark::after {
+        background-image: url('../logos/jls-logo-reversed.svg');
+      }
+
+      /* ---- type ---- */
+
+      .slide h1,
+      .slide h2 {
+        max-width: 1440px;
+        margin: 0 0 var(--jls-space-xl);
+        color: var(--jls-color-text);
+        font-family: var(--jls-font-family-display);
+        font-weight: var(--jls-font-weight-extrabold);
+        line-height: var(--jls-font-line-height-tight);
+        letter-spacing: var(--slide-tracking);
+      }
+      .slide h1 {
+        font-size: var(--slide-display);
+      }
+      .slide h2 {
+        font-size: var(--slide-title);
+      }
+      .slide--dark h2 {
+        color: var(--jls-color-inverse-text);
+      }
+      .slide h3 {
+        margin: 0 0 var(--jls-space-sm);
+        color: var(--jls-color-text);
+        font-family: var(--jls-font-family-display);
+        font-size: calc(var(--jls-font-size-xl) * 1.5); /* 36px */
+        font-weight: var(--jls-font-weight-bold);
+        line-height: var(--jls-font-line-height-snug);
+      }
+      .slide p {
+        max-width: 1280px;
+        margin: 0;
+      }
+      .slide .eyebrow {
+        margin-bottom: var(--jls-space-lg);
+        color: var(--jls-color-accent-text);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--slide-small);
+        font-weight: var(--jls-font-weight-bold);
+        letter-spacing: calc(var(--jls-typography-eyebrow-letter-spacing) * 2);
+        text-transform: uppercase;
+      }
+      .slide--dark .eyebrow {
+        color: var(--jls-color-inverse-accent-text);
+      }
+      .lede {
+        font-size: calc(var(--jls-font-size-lg) * 2); /* 40px */
+        line-height: var(--jls-font-line-height-snug);
+      }
+      .big-number {
+        display: block;
+        color: var(--jls-color-accent-text);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--slide-number);
+        font-weight: var(--jls-font-weight-extrabold);
+        line-height: 1;
+        letter-spacing: calc(var(--jls-typography-display-letter-spacing) * 3);
+      }
+
+      /* ---- 1: title ---- */
+
+      .slide--title h1 {
+        font-size: calc(var(--jls-font-size-6xl) * 1.75); /* 126px: the cover can go past 96 */
+        margin-bottom: var(--jls-space-2xl);
+      }
+
+      /* ---- 2: problem ---- */
+
+      .checklist {
+        display: grid;
+        gap: var(--jls-space-lg);
+        margin: var(--jls-space-lg) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .checklist li {
+        display: flex;
+        gap: var(--jls-space-lg);
+        align-items: baseline;
+      }
+      .checklist li::before {
+        content: '';
+        flex: none;
+        width: 32px;
+        height: 32px;
+        border: 3px solid var(--jls-color-accent);
+        border-radius: var(--jls-radius-sm);
+        transform: translateY(4px);
+      }
+
+      /* ---- 3: what the sprint is ---- */
+
+      .split {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--jls-space-4xl);
+        align-items: center;
+      }
+      .split .big-number {
+        white-space: nowrap;
+      }
+      .big-number small {
+        display: block;
+        margin-top: var(--jls-space-md);
+        color: var(--jls-color-text);
+        font-size: calc(var(--jls-font-size-xl) * 2);
+        letter-spacing: 0;
+      }
+
+      /* ---- 4: deliverables ---- */
+
+      .columns {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--jls-space-2xl);
+        margin: var(--jls-space-2xl) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .columns li {
+        padding-top: var(--jls-space-xl);
+        border-top: 3px solid var(--jls-color-text);
+      }
+      .columns .step {
+        display: block;
+        margin-bottom: var(--jls-space-lg);
+        color: var(--jls-color-accent-text);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--jls-font-size-4xl);
+        font-weight: var(--jls-font-weight-extrabold);
+        line-height: 1;
+      }
+      .columns p {
+        font-size: var(--slide-small);
+        line-height: var(--jls-font-line-height-normal);
+      }
+
+      /* ---- 5: timeline ---- */
+
+      .timeline {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        margin: var(--jls-space-3xl) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .timeline::before {
+        content: '';
+        position: absolute;
+        top: 23px;
+        left: 5%;
+        right: 5%;
+        height: 3px;
+        background: var(--jls-color-border-strong);
+      }
+      .timeline li {
+        position: relative;
+        display: grid;
+        justify-items: center;
+        gap: var(--jls-space-md);
+        text-align: center;
+        font-size: var(--slide-small);
+      }
+      .timeline .dot {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border: 3px solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-pill);
+        background: var(--jls-color-bg);
+        color: var(--jls-color-text-faint);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--jls-font-size-xl);
+        font-weight: var(--jls-font-weight-bold);
+      }
+      .timeline .is-you .dot {
+        border-color: var(--jls-color-accent);
+        background: var(--jls-color-accent);
+        color: var(--jls-color-on-accent);
+      }
+      .timeline .label {
+        color: var(--jls-color-text);
+        font-family: var(--jls-font-family-display);
+        font-weight: var(--jls-font-weight-semibold);
+        line-height: var(--jls-font-line-height-snug);
+      }
+      .weeks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--jls-space-xl);
+        margin-top: var(--jls-space-2xl);
+        font-size: var(--slide-small);
+      }
+      .weeks div {
+        padding-top: var(--jls-space-md);
+        border-top: 1px solid var(--jls-color-border);
+      }
+      .weeks strong {
+        font-family: var(--jls-font-family-display);
+      }
+      .slide .legend {
+        display: flex;
+        gap: var(--jls-space-md);
+        align-items: center;
+      }
+      .legend::before {
+        content: '';
+        flex: none;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--jls-radius-pill);
+        background: var(--jls-color-accent);
+      }
+
+      /* ---- 6: quick wins ---- */
+
+      .wins {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--jls-space-xl) var(--jls-space-2xl);
+        margin: var(--jls-space-xl) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .wins li {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        align-items: center;
+        gap: var(--jls-space-xl);
+        padding: var(--jls-space-xl);
+        border: 1px solid var(--jls-color-border);
+        border-radius: var(--jls-radius-lg);
+      }
+      .wins .hours {
+        color: var(--jls-color-accent-text);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--jls-font-size-6xl);
+        font-weight: var(--jls-font-weight-extrabold);
+        line-height: 1;
+        letter-spacing: var(--jls-typography-display-letter-spacing);
+      }
+      .wins .hours small {
+        display: block;
+        margin-top: var(--jls-space-xs);
+        color: var(--jls-color-text-faint);
+        font-size: var(--slide-small);
+        font-weight: var(--jls-font-weight-semibold);
+        letter-spacing: 0;
+      }
+      .wins h3 {
+        margin: 0;
+      }
+      .slide .note {
+        margin-top: var(--jls-space-xl);
+        color: var(--jls-color-text-faint);
+        font-size: var(--slide-small);
+      }
+
+      /* ---- 7: price ---- */
+
+      .price {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--jls-space-4xl);
+        align-items: center;
+      }
+      .price .big-number {
+        font-size: calc(var(--jls-font-size-6xl) * 4);
+      }
+      .price .big-number small {
+        margin-top: var(--jls-space-lg);
+        color: var(--jls-color-text);
+      }
+      .guarantee {
+        padding: var(--jls-space-2xl);
+        border: 3px solid var(--jls-color-accent);
+        border-radius: var(--jls-radius-lg);
+        background: var(--jls-color-accent-soft);
+      }
+      .guarantee h3 {
+        margin-bottom: var(--jls-space-md);
+        font-size: calc(var(--jls-font-size-xl) * 2);
+      }
+      .guarantee p {
+        color: var(--jls-color-text);
+      }
+
+      /* ---- 9: closing CTA (section-break style, black) ---- */
+
+      .slide--cta h2 {
+        font-size: var(--slide-display);
+        margin-bottom: var(--jls-space-2xl);
+      }
+      .slide--cta .cta {
+        display: inline-flex;
+        align-self: flex-start;
+        margin-top: var(--jls-space-3xl);
+        padding: var(--jls-space-lg) var(--jls-space-2xl);
+        border-radius: var(--jls-radius-md);
+        background: var(--jls-gradient-brand);
+        box-shadow: var(--jls-shadow-accent);
+        color: var(--jls-color-on-accent);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--slide-body);
+        font-weight: var(--jls-font-weight-semibold);
+        text-decoration: none;
+      }
+      .slide--cta .cta:focus-visible {
+        outline: 4px solid var(--jls-palette-white);
+        outline-offset: 6px;
+      }
+      .slide--dark p {
+        color: var(--jls-color-inverse-text-soft);
+      }
+
+      /* ---- controls: counter and prev/next, inside the 1920×1080 frame ---- */
+
+      .controls {
+        position: absolute;
+        left: var(--slide-margin);
+        bottom: calc(var(--slide-margin) - var(--jls-space-xs));
+        display: flex;
+        align-items: center;
+        gap: var(--jls-space-md);
+        color: var(--jls-color-text-faint);
+        font-family: var(--jls-font-family-display);
+        font-size: var(--slide-small);
+        font-weight: var(--jls-font-weight-semibold);
+      }
+      .controls button {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: var(--jls-border-width-thick) solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+      .controls button:hover:not(:disabled) {
+        border-color: var(--jls-color-accent);
+        color: var(--jls-color-accent-text);
+      }
+      .controls button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      .controls button:focus-visible {
+        outline: 3px solid var(--jls-color-focus);
+        outline-offset: 3px;
+      }
+      .controls output {
+        min-width: 4.5em;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+      .deck.on-dark .controls {
+        color: var(--jls-palette-neutral-400);
+      }
+      .deck.on-dark .controls button {
+        border-color: var(--jls-palette-neutral-600);
+      }
+
+      /* ---- print: one slide per landscape page ---- */
+
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+      @media print {
+        html,
+        body {
+          height: auto;
+          overflow: visible;
+          background: none;
+        }
+        .deck {
+          position: static;
+          width: auto;
+          height: auto;
+          transform: none;
+        }
+        .slide {
+          position: relative;
+          width: var(--slide-w);
+          height: var(--slide-h);
+          visibility: visible;
+          break-after: page;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        .slide:last-of-type {
+          break-after: auto;
+        }
+        .controls {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="jls">
+    <main class="deck-root">
+      <div class="deck" id="deck" aria-roledescription="slide deck" aria-label="AI Roadmap Sprint">
+        <section class="slide slide--title" aria-roledescription="slide" aria-label="1 of 9">
+          <span class="eyebrow">AI Roadmap Sprint · Josh Lamb Systems</span>
+          <h1>Find <span class="jls-gradient-text">10+ hours a week</span> with AI.</h1>
+          <p class="lede">
+            A 2-week sprint that maps your workflows, scores every AI opportunity by ROI, and hands you the order to
+            tackle them.
+          </p>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="2 of 9">
+          <span class="eyebrow">The problem</span>
+          <h2>Do you have an AI adoption problem?</h2>
+          <ul class="checklist">
+            <li>You know AI could help, but you have no idea where to start.</li>
+            <li>Your team is buried in data entry, follow-ups and reporting.</li>
+            <li>You bought AI tools that nobody on your team actually uses.</li>
+          </ul>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="3 of 9">
+          <div class="split">
+            <p class="big-number">2 weeks <small>3–5 hours of your time</small></p>
+            <div>
+              <span class="eyebrow">What the sprint is</span>
+              <h2>Map first. Then pick tools.</h2>
+              <p>
+                We map 5–7 of your core workflows, find the repetitive, rule-based tasks, and score every one by impact
+                against effort. No vague strategy, no jargon.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="4 of 9">
+          <span class="eyebrow">What you get</span>
+          <h2>Three things you keep.</h2>
+          <ol class="columns">
+            <li>
+              <span class="step" aria-hidden="true">01</span>
+              <h3>AI Opportunity Map</h3>
+              <p>Every point in your workflows where AI can take over the repetitive work.</p>
+            </li>
+            <li>
+              <span class="step" aria-hidden="true">02</span>
+              <h3>ROI-scored recommendations</h3>
+              <p>The dollar value of each fix, and the exact order to tackle them in.</p>
+            </li>
+            <li>
+              <span class="step" aria-hidden="true">03</span>
+              <h3>Phased roadmap + tool stack</h3>
+              <p>This week, this month, this quarter. Specific tools with real monthly costs.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="5 of 9">
+          <span class="eyebrow">How it works</span>
+          <h2>Ten business days, start to finish.</h2>
+          <p class="legend">Blue days need your team: about 3–5 hours in total.</p>
+          <ol class="timeline">
+            <li class="is-you"><span class="dot">1</span><span class="label">Kickoff</span></li>
+            <li class="is-you"><span class="dot">2</span><span class="label">Team interviews</span></li>
+            <li><span class="dot">3</span><span class="label">Process mapping</span></li>
+            <li><span class="dot">4</span><span class="label">Gap analysis</span></li>
+            <li><span class="dot">5</span><span class="label">ROI scoring</span></li>
+            <li><span class="dot">6</span><span class="label">Tool matching</span></li>
+            <li><span class="dot">7</span><span class="label">Opportunity map</span></li>
+            <li><span class="dot">8</span><span class="label">Roadmap build</span></li>
+            <li><span class="dot">9</span><span class="label">Internal review</span></li>
+            <li class="is-you"><span class="dot">10</span><span class="label">Final walkthrough</span></li>
+          </ol>
+          <div class="weeks">
+            <div><strong>Week 1</strong> · Discovery and scoring</div>
+            <div><strong>Week 2</strong> · Roadmap and delivery</div>
+          </div>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="6 of 9">
+          <span class="eyebrow">Example quick wins</span>
+          <h2>The kind of quick wins we find.</h2>
+          <ul class="wins">
+            <li>
+              <span class="hours">~10 <small>hours a week</small></span>
+              <h3>Invoice generation from job notes</h3>
+            </li>
+            <li>
+              <span class="hours">~8 <small>hours a week</small></span>
+              <h3>Lead import + instant first response</h3>
+            </li>
+            <li>
+              <span class="hours">~8 <small>hours a week</small></span>
+              <h3>Automated client reporting</h3>
+            </li>
+            <li>
+              <span class="hours">~7 <small>hours a week</small></span>
+              <h3>Onboarding sequences that run themselves</h3>
+            </li>
+          </ul>
+          <p class="note">Typical impact. Most quick wins pay for themselves in 1–3 months.</p>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="7 of 9">
+          <span class="eyebrow">One flat price. One guarantee.</span>
+          <div class="price">
+            <p class="big-number">$1,500 <small>flat, for the whole sprint</small></p>
+            <div class="guarantee">
+              <h3>Money-back guarantee</h3>
+              <p>If we can't find at least 3 quick wins that save your team a combined 5+ hours a week, you don't pay.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" aria-roledescription="slide" aria-label="8 of 9">
+          <span class="eyebrow">After the sprint</span>
+          <h2>The roadmap is yours.</h2>
+          <ol class="columns">
+            <li>
+              <h3>Build it yourself</h3>
+              <p>Every recommendation includes the tools, costs and setup steps your team needs.</p>
+            </li>
+            <li>
+              <h3>Have us build the quick wins</h3>
+              <p>Many clients hand us their top quick wins right after the sprint.</p>
+            </li>
+            <li>
+              <h3>Go further</h3>
+              <p>Move into a larger systems engagement. No obligation either way.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="slide slide--dark slide--cta" aria-roledescription="slide" aria-label="9 of 9">
+          <span class="eyebrow">Next step</span>
+          <h2>Book a 2-week AI Roadmap Sprint.</h2>
+          <p class="lede">$1,500 flat · 3–5 hours of your team's time · money-back guarantee</p>
+          <a class="cta" href="https://joshlambsystems.com">Book a call at joshlambsystems.com</a>
+        </section>
+
+        <nav class="controls" aria-label="Slide navigation">
+          <button type="button" id="prev" aria-label="Previous slide">&#8249;</button>
+          <output id="counter" aria-live="polite">1 / 9</output>
+          <button type="button" id="next" aria-label="Next slide">&#8250;</button>
+        </nav>
+      </div>
+    </main>
+
+    <script>
+      // Fit the 1920×1080 deck to the window, letterboxed, and navigate with the keyboard.
+      // Deep-link with #slide=N (1-based).
+      ;(() => {
+        const deck = document.getElementById('deck')
+        const slides = [...deck.querySelectorAll('.slide')]
+        const counter = document.getElementById('counter')
+        const prev = document.getElementById('prev')
+        const next = document.getElementById('next')
+        let current = 0
+
+        const fit = () => {
+          const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080)
+          deck.style.setProperty('--scale', String(scale))
+        }
+
+        const fromHash = () => {
+          const match = location.hash.match(/slide=(\d+)/)
+          return match ? Number(match[1]) - 1 : 0
+        }
+
+        const show = (index) => {
+          current = Math.max(0, Math.min(slides.length - 1, index))
+          slides.forEach((slide, i) => {
+            const active = i === current
+            slide.classList.toggle('is-active', active)
+            slide.toggleAttribute('inert', !active)
+            slide.setAttribute('aria-hidden', String(!active))
+          })
+          deck.classList.toggle('on-dark', slides[current].classList.contains('slide--dark'))
+          counter.textContent = `${current + 1} / ${slides.length}`
+          prev.disabled = current === 0
+          next.disabled = current === slides.length - 1
+          history.replaceState(null, '', `#slide=${current + 1}`)
+        }
+
+        document.addEventListener('keydown', (event) => {
+          if (event.altKey || event.ctrlKey || event.metaKey) return
+          const moves = {
+            ArrowRight: current + 1,
+            ArrowDown: current + 1,
+            PageDown: current + 1,
+            ' ': event.shiftKey ? current - 1 : current + 1,
+            ArrowLeft: current - 1,
+            ArrowUp: current - 1,
+            PageUp: current - 1,
+            Home: 0,
+            End: slides.length - 1,
+          }
+          if (!(event.key in moves)) return
+          if (event.key === ' ' && event.target.closest('button, a')) return
+          event.preventDefault()
+          show(moves[event.key])
+        })
+        prev.addEventListener('click', () => show(current - 1))
+        next.addEventListener('click', () => show(current + 1))
+        window.addEventListener('hashchange', () => show(fromHash()))
+        window.addEventListener('resize', fit)
+        // Print shows every slide; restore the single-slide view afterwards.
+        window.addEventListener('beforeprint', () => slides.forEach((s) => s.removeAttribute('inert')))
+        window.addEventListener('afterprint', () => show(current))
+
+        fit()
+        show(fromHash())
+      })()
+    </script>
+  </body>
+</html>

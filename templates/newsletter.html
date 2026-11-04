@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" data-jls-inline-tokens>
+<!--
+  Newsletter: multi-story digest.
+
+  Name (suggestion):      "Systems Notes". Alternatives: "The Roadmap", "Hours Back".
+  Subject (suggestion):   Systems Notes: the quick wins we find most often
+  Preheader (suggestion): Four workflows that hand back 7 to 10 hours a week, and where to start.
+
+  Authoring notes:
+  - Every style is inline and written with --jls-* tokens. `npm run build` swaps each var() for its
+    light-theme literal in dist/templates/newsletter.html. Send the dist version, never this source.
+  - Webfonts are not reliable in email; Poppins and Source Sans 3 fall back to system sans / Arial.
+  - One primary button per email: it lives in the services strip. Everything else is a text link.
+  - Replace bracketed [placeholders] before sending.
+-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>Systems Notes: the quick wins we find most often</title>
+  <style>
+    a { text-decoration: underline; }
+    a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+    .btn:hover { background-color: var(--jls-color-accent-hover) !important; }
+    @media screen and (max-width: 620px) {
+      .container { width: 100% !important; }
+      .px { padding-left: var(--jls-space-lg) !important; padding-right: var(--jls-space-lg) !important; }
+      .h1 { font-size: var(--jls-font-size-xl) !important; }
+      .stack { display: block !important; width: 100% !important; padding-left: 0 !important; padding-right: 0 !important; }
+      .meta { display: block !important; text-align: left !important; padding-top: var(--jls-space-sm) !important; }
+      .stack-gap { padding-bottom: var(--jls-space-md) !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; width: 100%; background-color: var(--jls-color-bg-alt);">
+  <!-- Preheader: shown in the inbox preview, hidden in the message -->
+  <div style="display: none; max-height: 0; max-width: 0; overflow: hidden; opacity: 0; mso-hide: all; font-size: 1px; line-height: 1px;">
+    Four workflows that hand back 7 to 10 hours a week, and where to start.
+    &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: var(--jls-color-bg-alt);">
+    <tr>
+      <td align="center" style="padding: var(--jls-space-xl) var(--jls-space-xs);">
+
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 600px; background-color: var(--jls-color-surface); border: 1px solid var(--jls-color-border); border-radius: var(--jls-radius-lg);">
+
+          <!-- Masthead -->
+          <tr>
+            <td class="px" style="padding: var(--jls-space-2xl) var(--jls-space-2xl) var(--jls-space-lg); border-bottom: 1px solid var(--jls-color-border);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td valign="middle" class="stack">
+                    <a href="https://joshlambsystems.com/" style="text-decoration: none;">
+                      <!-- Production: make this the absolute URL of the published PNG (BASE_URL/logos/jls-logo@2x.png). -->
+                      <img src="../logos/jls-logo@2x.png" width="160" height="29" alt="Josh Lamb Systems" style="display: block; width: 160px; height: auto; border: 0;">
+                    </a>
+                  </td>
+                  <td valign="middle" align="right" class="meta" style="white-space: nowrap; font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-semibold); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text-faint);">
+                    Issue [No.] &middot; [Month YYYY]
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Title and intro note from Josh -->
+          <tr>
+            <td class="px" style="padding: var(--jls-space-2xl) var(--jls-space-2xl) 0;">
+              <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-accent-text);">Systems Notes</p>
+              <h1 class="h1" style="margin: 0 0 var(--jls-space-lg); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-2xl); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); letter-spacing: var(--jls-typography-h3-letter-spacing); color: var(--jls-color-text);">
+                Practical notes on getting hours back from your workflows.
+              </h1>
+              <p style="margin: 0 0 var(--jls-space-md); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">
+                Hi [First name],
+              </p>
+              <p style="margin: 0 0 var(--jls-space-md); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">
+                [Intro note from Josh, 2&ndash;3 sentences. Example: This month I want to skip the AI headlines and talk about the boring stuff that actually pays. The same handful of quick wins shows up in almost every sprint we run, and most of them take a week to set up.]
+              </p>
+              <p style="margin: 0; font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">
+                &mdash; Josh
+              </p>
+            </td>
+          </tr>
+
+          <!-- Featured story -->
+          <tr>
+            <td class="px" style="padding: var(--jls-space-2xl) var(--jls-space-2xl) 0;">
+              <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">Featured</p>
+              <h2 style="margin: 0 0 var(--jls-space-sm); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xl); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">The quick wins we find most often</h2>
+              <p style="margin: 0 0 var(--jls-space-lg); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">
+                Contractors, real estate teams, agencies and professional services firms tend to lose time in the same places. These four come up again and again.
+              </p>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top: 1px solid var(--jls-color-border);">
+                <tr>
+                  <td style="padding: var(--jls-space-lg) 0; border-bottom: 1px solid var(--jls-color-border);">
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">
+                      <span style="display: inline-block; padding: var(--jls-space-xxs) var(--jls-space-xs); margin-right: var(--jls-space-xs); border-radius: var(--jls-radius-pill); background-color: var(--jls-color-success-soft); color: var(--jls-color-success);">Quick win</span>Field services
+                    </p>
+                    <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Invoice generation from job notes</h3>
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">A contractor spending 2 hours a day on manual invoicing gets invoices drafted straight from technician job notes.</p>
+                    <p style="margin: 0; font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text);">Typical impact: <span style="color: var(--jls-color-accent-text); font-weight: var(--jls-font-weight-extrabold);">~10 hours/week</span> recovered</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: var(--jls-space-lg) 0; border-bottom: 1px solid var(--jls-color-border);">
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">
+                      <span style="display: inline-block; padding: var(--jls-space-xxs) var(--jls-space-xs); margin-right: var(--jls-space-xs); border-radius: var(--jls-radius-pill); background-color: var(--jls-color-success-soft); color: var(--jls-color-success);">Quick win</span>Real estate
+                    </p>
+                    <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Lead import + instant first response</h3>
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">Portal leads land in the CRM automatically, and a personalized first reply goes out in minutes instead of hours.</p>
+                    <p style="margin: 0; font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text);">Typical impact: <span style="color: var(--jls-color-accent-text); font-weight: var(--jls-font-weight-extrabold);">~8 hours/week</span> and faster speed-to-lead</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: var(--jls-space-lg) 0; border-bottom: 1px solid var(--jls-color-border);">
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">
+                      <span style="display: inline-block; padding: var(--jls-space-xxs) var(--jls-space-xs); margin-right: var(--jls-space-xs); border-radius: var(--jls-radius-pill); background-color: var(--jls-color-success-soft); color: var(--jls-color-success);">Quick win</span>Agencies
+                    </p>
+                    <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Automated client reporting</h3>
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">Monthly performance reports assembled and drafted from the dashboards you already have.</p>
+                    <p style="margin: 0; font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text);">Typical impact: <span style="color: var(--jls-color-accent-text); font-weight: var(--jls-font-weight-extrabold);">~8 hours/week</span> back in the calendar</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: var(--jls-space-lg) 0; border-bottom: 1px solid var(--jls-color-border);">
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">
+                      <span style="display: inline-block; padding: var(--jls-space-xxs) var(--jls-space-xs); margin-right: var(--jls-space-xs); border-radius: var(--jls-radius-pill); background-color: var(--jls-color-success-soft); color: var(--jls-color-success);">Quick win</span>Professional services
+                    </p>
+                    <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Onboarding sequences that run themselves</h3>
+                    <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">Welcome emails, intake forms, task assignments and kickoff scheduling, triggered the moment a deal closes.</p>
+                    <p style="margin: 0; font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text);">Typical impact: <span style="color: var(--jls-color-accent-text); font-weight: var(--jls-font-weight-extrabold);">~7 hours/week</span> and zero dropped handoffs</p>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: var(--jls-space-md) 0 0; font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-sm); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text-faint);">
+                Most quick wins pay for themselves in 1&ndash;3 months. <a href="https://joshlambsystems.com/" style="color: var(--jls-color-accent-text); font-weight: var(--jls-font-weight-semibold);">See how the sprint finds them</a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Shorter stories: two cards, stacked on small screens -->
+          <tr>
+            <td class="px" style="padding: var(--jls-space-2xl) var(--jls-space-2xl) 0;">
+              <h2 style="margin: 0 0 var(--jls-space-md); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">Also this month</h2>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="stack stack-gap" width="50%" valign="top" style="width: 50%; padding-right: var(--jls-space-xs);">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid var(--jls-color-border); border-radius: var(--jls-radius-lg);">
+                      <tr>
+                        <td style="padding: var(--jls-space-lg);">
+                          <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">[Category, e.g. Email]</p>
+                          <h3 style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">[Story headline, under 8 words]</h3>
+                          <p style="margin: 0 0 var(--jls-space-md); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">[Two sentences: the problem, then the practical fix. Example topic: why your emails land in spam.]</p>
+                          <a href="[Story link]" style="font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); color: var(--jls-color-accent-text);">Read more</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="stack" width="50%" valign="top" style="width: 50%; padding-left: var(--jls-space-xs);">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid var(--jls-color-border); border-radius: var(--jls-radius-lg);">
+                      <tr>
+                        <td style="padding: var(--jls-space-lg);">
+                          <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-xs); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-normal); letter-spacing: var(--jls-typography-eyebrow-letter-spacing); text-transform: uppercase; color: var(--jls-color-text-faint);">[Category, e.g. Tools]</p>
+                          <h3 style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">[Story headline, under 8 words]</h3>
+                          <p style="margin: 0 0 var(--jls-space-md); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">[Two sentences: the problem, then the practical fix. Example topic: picking the workflow before the tool.]</p>
+                          <a href="[Story link]" style="font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); color: var(--jls-color-accent-text);">Read more</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Services strip -->
+          <tr>
+            <td class="px" style="padding: var(--jls-space-2xl) var(--jls-space-2xl);">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: var(--jls-color-bg-alt); border-radius: var(--jls-radius-lg);">
+                <tr>
+                  <td style="padding: var(--jls-space-xl) var(--jls-space-lg);">
+                    <h2 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-lg); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Fixed scope. Flat price. On a schedule.</h2>
+                    <p style="margin: 0 0 var(--jls-space-lg); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-md); line-height: var(--jls-font-line-height-relaxed); color: var(--jls-color-text-soft);">Three ways to work with us. No open-ended consulting.</p>
+
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="padding: 0 0 var(--jls-space-md); border-bottom: 1px solid var(--jls-color-border);">
+                          <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-md); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">AI Roadmap Sprint <span style="display: block; margin-top: var(--jls-space-xxs); font-size: var(--jls-font-size-sm); color: var(--jls-color-accent-text);">$1,500 flat</span></h3>
+                          <p style="margin: 0; font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-sm); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text-soft);">2 weeks to a prioritized AI roadmap with ROI estimates. Money-back guarantee.</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: var(--jls-space-md) 0; border-bottom: 1px solid var(--jls-color-border);">
+                          <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-md); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Email Deliverability Audit <span style="display: block; margin-top: var(--jls-space-xxs); font-size: var(--jls-font-size-sm); color: var(--jls-color-text-soft); font-weight: var(--jls-font-weight-semibold);">$497</span></h3>
+                          <p style="margin: 0; font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-sm); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text-soft);">Find out why your emails land in spam. Graded scorecard and fix plan in 3&ndash;5 business days.</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: var(--jls-space-md) 0 0;">
+                          <h3 style="margin: 0 0 var(--jls-space-xxs); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-md); font-weight: var(--jls-font-weight-bold); line-height: var(--jls-font-line-height-snug); color: var(--jls-color-text);">Email Outreach Launch System <span style="display: block; margin-top: var(--jls-space-xxs); font-size: var(--jls-font-size-sm); color: var(--jls-color-text-soft); font-weight: var(--jls-font-weight-semibold);">$3,500</span></h3>
+                          <p style="margin: 0; font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-sm); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text-soft);">Start booking meetings from cold email in 30 days. Domains, warmup, sequences and a 500-contact list.</p>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- CTA: bulletproof solid button (the td carries the color, so Outlook renders it too) -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top: var(--jls-space-lg);">
+                      <tr>
+                        <td class="btn" bgcolor="var(--jls-color-accent)" style="background-color: var(--jls-color-accent); border-radius: var(--jls-radius-md);">
+                          <a href="[Booking link]" style="display: inline-block; padding: var(--jls-space-md) var(--jls-space-xl); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-md); font-weight: var(--jls-font-weight-semibold); line-height: 1; color: var(--jls-color-on-accent); text-decoration: none; border-radius: var(--jls-radius-md);">Book a call</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Footer -->
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 600px;">
+          <tr>
+            <td class="px" align="center" style="padding: var(--jls-space-xl) var(--jls-space-2xl); font-family: var(--jls-font-family-body); font-size: var(--jls-font-size-sm); line-height: var(--jls-font-line-height-normal); color: var(--jls-color-text-faint);">
+              <p style="margin: 0 0 var(--jls-space-xs); font-family: var(--jls-font-family-display); font-weight: var(--jls-font-weight-semibold); color: var(--jls-color-text-soft);">Josh Lamb Systems</p>
+              <p style="margin: 0 0 var(--jls-space-md);">[Postal address: street, city, state ZIP]</p>
+              <p style="margin: 0 0 var(--jls-space-md);">You're getting Systems Notes because you subscribed at joshlambsystems.com. [Adjust to the real opt-in source.]</p>
+              <p style="margin: 0;">
+                <a href="[Unsubscribe link]" style="color: var(--jls-color-text-soft);">Unsubscribe</a>
+                &nbsp;&middot;&nbsp;
+                <a href="[Preferences link]" style="color: var(--jls-color-text-soft);">Email preferences</a>
+                &nbsp;&middot;&nbsp;
+                <a href="[View in browser link]" style="color: var(--jls-color-text-soft);">View in browser</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
