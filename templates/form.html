@@ -17,7 +17,7 @@
       padding: var(--jls-space-2xl) var(--jls-space-lg);
       background: var(--jls-color-inverse-bg); color: var(--jls-color-inverse-text-soft);
     }
-    .brand-logo img { width: 150px; height: auto; }
+
     .brand .jls-eyebrow { color: var(--jls-color-inverse-accent-text); }
     .brand h1 { margin-bottom: var(--jls-space-md); color: var(--jls-color-inverse-text); }
     .brand .jls-lead { margin: 0; color: var(--jls-color-inverse-text-soft); }
@@ -28,17 +28,17 @@
     .steps { display: grid; gap: var(--jls-space-lg); margin: 0; padding: 0; list-style: none; counter-reset: step; }
     .steps li { display: grid; grid-template-columns: 40px 1fr; gap: var(--jls-space-md); counter-increment: step; }
     .steps li::before {
-      content: counter(step); display: grid; place-items: center; width: 40px; height: 40px;
-      background: var(--jls-gradient-brand); border-radius: var(--jls-radius-pill);
-      color: var(--jls-color-inverse-text); font-family: var(--jls-font-family-display); font-weight: var(--jls-font-weight-bold);
+      content: counter(step, decimal-leading-zero); display: grid; place-items: center; width: 40px; height: 40px;
+      border: var(--jls-border-width-thin) solid var(--jls-color-inverse-accent-text); border-radius: var(--jls-radius-sm);
+      color: var(--jls-color-inverse-accent-text); font-family: var(--jls-font-family-mono); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold);
     }
     .steps h3 { margin: var(--jls-space-xs) 0 var(--jls-space-xxs); color: var(--jls-color-inverse-text); font: var(--jls-typography-h4); }
     .steps p { margin: 0; }
     .offer {
       margin-top: auto; padding-top: var(--jls-space-lg);
-      border-top: var(--jls-border-width-thin) solid var(--jls-color-inverse-border);
+      border-top: var(--jls-border-width-thin) dashed var(--jls-color-inverse-border);
     }
-    .offer-line { margin: 0 0 var(--jls-space-xs); color: var(--jls-color-inverse-text); font-family: var(--jls-font-family-display); font-size: var(--jls-font-size-sm); font-weight: var(--jls-font-weight-semibold); }
+    .offer-line { margin: 0 0 var(--jls-space-xs); color: var(--jls-color-inverse-text); font: var(--jls-typography-data); letter-spacing: var(--jls-typography-data-letter-spacing); font-size: var(--jls-font-size-sm); }
     .offer .jls-small { margin: 0; color: var(--jls-color-inverse-text-faint); }
 
     /* ---- form side ---- */
@@ -59,7 +59,7 @@
     }
     @media (min-width: 720px) {
       .brand { padding: var(--jls-space-3xl); }
-      .brand-logo img { width: 250px; }
+
     }
     @media (min-width: 1024px) {
       .split { grid-template-columns: minmax(420px, 5fr) 7fr; }
@@ -72,9 +72,9 @@
 </head>
 <body class="jls">
   <div class="split">
-    <aside class="brand" aria-label="About the AI Roadmap Sprint">
+    <aside class="brand jls-grid jls-grid--bottom-left" style="--jls-grid-line-color: var(--jls-color-inverse-grid)" aria-label="About the AI Roadmap Sprint">
       <a class="brand-logo" href="landing.html" aria-label="Josh Lamb Systems home">
-        <img src="../logos/jls-logo-reversed.svg" alt="Josh Lamb Systems" width="250" height="46">
+        <img class="jls-logo" src="../logos/jls-logo-reversed.svg" alt="Josh Lamb Systems" width="350" height="64">
       </a>
 
       <div>
@@ -113,7 +113,7 @@
       </div>
     </aside>
 
-    <main class="form-side">
+    <main class="form-side jls-grid jls-grid--top-right">
       <div class="form-wrap">
         <h2>Tell us where the time goes</h2>
         <p>All fields are required unless marked optional.</p>

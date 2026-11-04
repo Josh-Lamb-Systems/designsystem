@@ -31,6 +31,26 @@
         background: var(--jls-color-bg);
         box-shadow: var(--jls-shadow-lg);
         transform: translate(-50%, -50%) scale(var(--scale, 0.5));
+        isolation: isolate;
+        overflow: hidden;
+      }
+      /* graph paper fading in from the top right corner, at print scale (96px cells) */
+      .poster::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        opacity: var(--jls-grid-strength);
+        background-image:
+          linear-gradient(var(--jls-color-grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--jls-color-grid) 1px, transparent 1px);
+        background-size: calc(var(--jls-grid-cell) * 2) calc(var(--jls-grid-cell) * 2);
+        background-position: -1px -1px;
+        -webkit-mask-image: radial-gradient(ellipse 70% 45% at 100% 0%, #000 15%, transparent 75%);
+        mask-image: radial-gradient(ellipse 70% 45% at 100% 0%, #000 15%, transparent 75%);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
       }
 
       .poster__logo {
@@ -50,9 +70,14 @@
         font-size: calc(var(--jls-font-size-4xl) * 2.5); /* 120px */
         letter-spacing: calc(var(--jls-typography-display-letter-spacing) * 1.6);
       }
-      .poster h1 em {
-        color: var(--jls-color-accent-text);
-        font-style: normal;
+      .poster h1 mark {
+        padding: 0 0.08em;
+        color: inherit;
+        background: linear-gradient(transparent 52%, var(--jls-color-highlight-mark) 52%, var(--jls-color-highlight-mark) 92%, transparent 92%);
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
       }
 
       .benefits {
@@ -72,18 +97,20 @@
       }
       .benefits b {
         color: var(--jls-color-accent-text);
-        font-family: var(--jls-font-family-display);
+        font-family: var(--jls-font-family-mono);
         font-size: var(--jls-font-size-2xl);
-        font-weight: var(--jls-font-weight-extrabold);
+        font-weight: var(--jls-font-weight-semibold);
       }
 
-      /* The one bold use of the brand gradient. White text here is large (24px+ bold) for AA. */
+      /* The peak moment: solid brand blue with a hard ink offset. White text is 6.2:1 on it. */
       .offer {
         display: grid;
         gap: var(--jls-space-xl);
         padding: var(--jls-space-3xl);
-        border-radius: var(--jls-radius-lg);
-        background: var(--jls-gradient-brand);
+        border: 2px solid var(--jls-color-border-strong);
+        border-radius: var(--jls-radius-md);
+        background: var(--jls-color-accent);
+        box-shadow: 16px 16px 0 var(--jls-color-border-strong);
         color: var(--jls-color-on-accent);
         font-family: var(--jls-font-family-display);
         print-color-adjust: exact;
@@ -91,22 +118,26 @@
       }
       .offer__price {
         margin: 0;
+        font-family: var(--jls-font-family-mono);
         font-size: calc(var(--jls-font-size-4xl) * 3.5); /* 168px */
-        font-weight: var(--jls-font-weight-extrabold);
+        font-weight: var(--jls-font-weight-semibold);
         line-height: 1;
-        letter-spacing: calc(var(--jls-typography-display-letter-spacing) * 2);
+        letter-spacing: -0.04em;
+        font-variant-numeric: tabular-nums;
       }
       .offer__price small {
         display: block;
         margin-top: var(--jls-space-md);
-        font-size: var(--jls-font-size-3xl);
-        font-weight: var(--jls-font-weight-bold);
+        font-family: var(--jls-font-family-mono);
+        font-size: var(--jls-font-size-2xl);
+        font-weight: var(--jls-font-weight-medium);
         letter-spacing: 0;
+        color: var(--jls-palette-blue-100);
       }
       .offer__guarantee {
         margin: 0;
         padding-top: var(--jls-space-xl);
-        border-top: 2px solid currentColor;
+        border-top: 2px dashed currentColor;
         font-size: var(--jls-font-size-2xl);
         font-weight: var(--jls-font-weight-semibold);
         line-height: var(--jls-font-line-height-snug);
@@ -175,7 +206,7 @@
       <img class="poster__logo" src="../logos/jls-logo.svg" alt="Josh Lamb Systems" width="360" height="66" />
 
       <span class="jls-eyebrow">The AI Roadmap Sprint</span>
-      <h1>Find <em>10+ hours a week</em> with AI.</h1>
+      <h1>Find <mark>10+ hours a week</mark> with AI.</h1>
 
       <ul class="benefits">
         <li><b aria-hidden="true">01</b>Map 5–7 of your core workflows, step by step.</li>
