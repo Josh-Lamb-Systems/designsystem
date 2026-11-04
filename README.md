@@ -52,7 +52,7 @@ Any HTML (websites, doop frames, slides, HyperFrames compositions):
 | `src/base.css` | Optional base layer: element defaults and `.jls-*` components |
 | `src/index.html` | Gallery page |
 | `templates/` | Template sources (emails get tokens inlined at build) |
-| `fonts/` | Poppins (display) and Source Sans 3 (body), self-hosted, SIL OFL 1.1 |
+| `fonts/` | Poppins (display), Source Sans 3 (body) and IBM Plex Mono (labels, numbers), self-hosted, SIL OFL 1.1 |
 | `logos/` | Full logo, reversed logo, symbol (gradient, black, white), favicons |
 | `docs/brandbook.pdf` | Original brandbook |
 | `scripts/build.mjs` | Assembles `dist/` and regenerates DESIGN.md front matter |

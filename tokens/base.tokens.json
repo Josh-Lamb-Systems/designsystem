@@ -433,6 +433,172 @@
           "hex": "#2d0f0d"
         }
       }
+    },
+    "navy": {
+      "50": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9608,
+            0.9686,
+            0.9843
+          ],
+          "hex": "#f5f7fb"
+        },
+        "$description": "Paper: the page ground in light mode."
+      },
+      "100": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9294,
+            0.9451,
+            0.9725
+          ],
+          "hex": "#edf1f8"
+        }
+      },
+      "200": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8353,
+            0.8627,
+            0.9176
+          ],
+          "hex": "#d5dcea"
+        },
+        "$description": "Hairline rules on paper."
+      },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7373,
+            0.7843,
+            0.902
+          ],
+          "hex": "#bcc8e6"
+        }
+      },
+      "400": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5765,
+            0.6353,
+            0.7843
+          ],
+          "hex": "#93a2c8"
+        }
+      },
+      "500": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3373,
+            0.3843,
+            0.4941
+          ],
+          "hex": "#56627e"
+        }
+      },
+      "600": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2196,
+            0.2667,
+            0.3686
+          ],
+          "hex": "#38445e"
+        }
+      },
+      "700": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.2157,
+            0.4118
+          ],
+          "hex": "#243769"
+        },
+        "$description": "Blueprint rules in dark mode."
+      },
+      "800": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1059,
+            0.1647,
+            0.2902
+          ],
+          "hex": "#1b2a4a"
+        },
+        "$description": "Ink rules: card and input outlines."
+      },
+      "850": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0588,
+            0.1137,
+            0.2667
+          ],
+          "hex": "#0f1d44"
+        },
+        "$description": "Blueprint surface."
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0431,
+            0.0824,
+            0.1882
+          ],
+          "hex": "#0b1530"
+        },
+        "$description": "Brand ink (navy). Headings and text; replaces pure black."
+      },
+      "925": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0392,
+            0.0824,
+            0.1961
+          ],
+          "hex": "#0a1532"
+        },
+        "$description": "Blueprint: the page ground in dark mode."
+      },
+      "950": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0196,
+            0.0431,
+            0.1216
+          ],
+          "hex": "#050b1f"
+        }
+      }
+    },
+    "yellow": {
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.8902,
+            0.4314
+          ],
+          "hex": "#ffe36e"
+        },
+        "$description": "Highlighter. One phrase or one plotted cell per view, always under ink text."
+      }
     }
   },
   "gradient": {
@@ -480,12 +646,14 @@
       },
       "mono": {
         "$value": [
+          "IBM Plex Mono",
           "ui-monospace",
           "SFMono-Regular",
           "Menlo",
           "Consolas",
           "monospace"
-        ]
+        ],
+        "$description": "Utility face: eyebrows, labels, tags, scores and big numbers."
       }
     },
     "weight": {
@@ -577,6 +745,13 @@
           "unit": "rem"
         },
         "$description": "72px"
+      },
+      "7xl": {
+        "$value": {
+          "value": 6,
+          "unit": "rem"
+        },
+        "$description": "96px: slide numbers"
       }
     },
     "line-height": {
@@ -694,14 +869,14 @@
       }
     },
     "eyebrow": {
-      "$description": "Small uppercase label above headings. Set text-transform: uppercase.",
+      "$description": "Small uppercase mono label above headings, on tags and card meta. Set text-transform: uppercase.",
       "$value": {
-        "fontFamily": "{font.family.display}",
-        "fontWeight": "{font.weight.bold}",
+        "fontFamily": "{font.family.mono}",
+        "fontWeight": "{font.weight.semibold}",
         "fontSize": "{font.size.xs}",
         "lineHeight": "{font.line-height.normal}",
         "letterSpacing": {
-          "value": 0.065,
+          "value": 0.05,
           "unit": "rem"
         }
       }
@@ -714,6 +889,32 @@
         "lineHeight": 1,
         "letterSpacing": {
           "value": 0,
+          "unit": "rem"
+        }
+      }
+    },
+    "number": {
+      "$description": "Big numbers: prices, hours saved, ROI scores. Mono so digits line up.",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontWeight": "{font.weight.semibold}",
+        "fontSize": "{font.size.4xl}",
+        "lineHeight": 1,
+        "letterSpacing": {
+          "value": -0.09,
+          "unit": "rem"
+        }
+      }
+    },
+    "data": {
+      "$description": "Inline data: values in tables, scorecards, the meta line under CTAs.",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontWeight": "{font.weight.medium}",
+        "fontSize": "{font.size.xs}",
+        "lineHeight": "{font.line-height.normal}",
+        "letterSpacing": {
+          "value": 0.0125,
           "unit": "rem"
         }
       }
@@ -787,30 +988,31 @@
     "$type": "dimension",
     "sm": {
       "$value": {
-        "value": 6,
+        "value": 2,
         "unit": "px"
       },
-      "$description": "Tags, small inputs"
+      "$description": "Tags, plotted cells"
     },
     "md": {
       "$value": {
-        "value": 10,
+        "value": 4,
         "unit": "px"
       },
-      "$description": "Buttons, inputs"
+      "$description": "Buttons, inputs, cards (notebook corners)"
     },
     "lg": {
       "$value": {
-        "value": 14,
+        "value": 8,
         "unit": "px"
       },
-      "$description": "Cards, panels (site default)"
+      "$description": "Large panels, slide frames, modals"
     },
     "pill": {
       "$value": {
         "value": 9999,
         "unit": "px"
-      }
+      },
+      "$description": "Avatars only"
     }
   },
   "border": {
@@ -893,6 +1095,29 @@
         0.3,
         1
       ]
+    }
+  },
+  "grid": {
+    "$description": "Graph paper. The grid appears where the eye lands, then fades into plain paper (Rhythm): one fade per section, from alternating corners.",
+    "cell": {
+      "$type": "dimension",
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "Grid cell: 6 × the 8px baseline."
+    },
+    "line": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "strength": {
+      "$type": "number",
+      "$value": 0.8,
+      "$description": "Opacity of the grid layer."
     }
   }
 }

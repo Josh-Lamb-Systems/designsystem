@@ -20,7 +20,7 @@
         --slide-small: calc(var(--jls-font-size-xs) * 2); /* 26px */
         --slide-number: calc(var(--jls-font-size-6xl) * 3); /* 216px */
         --slide-tracking: calc(var(--jls-typography-display-letter-spacing) * 1.25);
-        --logo-w: 240px;
+        --logo-w: 320px;
       }
 
       html,
@@ -54,6 +54,29 @@
         font-size: var(--slide-body);
         line-height: var(--jls-font-line-height-normal);
         visibility: hidden;
+        isolation: isolate;
+      }
+      /* graph paper (Rhythm): 96px cells at slide scale, fading in from alternating sides */
+      .slide::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        opacity: var(--jls-grid-strength);
+        background-image:
+          linear-gradient(var(--slide-grid, var(--jls-color-grid)) 1px, transparent 1px),
+          linear-gradient(90deg, var(--slide-grid, var(--jls-color-grid)) 1px, transparent 1px);
+        background-size: calc(var(--jls-grid-cell) * 2) calc(var(--jls-grid-cell) * 2);
+        -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 90%);
+        mask-image: linear-gradient(100deg, transparent 40%, #000 90%);
+      }
+      .slide:nth-of-type(even)::before {
+        -webkit-mask-image: linear-gradient(260deg, transparent 40%, #000 90%);
+        mask-image: linear-gradient(260deg, transparent 40%, #000 90%);
+      }
+      .slide--dark {
+        --slide-grid: var(--jls-color-inverse-grid);
       }
       .slide.is-active {
         visibility: visible;
@@ -127,11 +150,13 @@
       .big-number {
         display: block;
         color: var(--jls-color-accent-text);
-        font-family: var(--jls-font-family-display);
+        font-family: var(--jls-font-family-mono);
         font-size: var(--slide-number);
-        font-weight: var(--jls-font-weight-extrabold);
+        font-weight: var(--jls-font-weight-semibold);
+        font-variant-numeric: tabular-nums;
         line-height: 1;
-        letter-spacing: calc(var(--jls-typography-display-letter-spacing) * 3);
+        letter-spacing: -0.04em;
+        word-spacing: -0.3em;
       }
 
       /* ---- 1: title ---- */
@@ -376,8 +401,8 @@
         margin-top: var(--jls-space-3xl);
         padding: var(--jls-space-lg) var(--jls-space-2xl);
         border-radius: var(--jls-radius-md);
-        background: var(--jls-gradient-brand);
-        box-shadow: var(--jls-shadow-accent);
+        background: var(--jls-color-accent);
+        box-shadow: 6px 6px 0 var(--jls-color-highlight);
         color: var(--jls-color-on-accent);
         font-family: var(--jls-font-family-display);
         font-size: var(--slide-body);
@@ -485,7 +510,7 @@
       <div class="deck" id="deck" aria-roledescription="slide deck" aria-label="AI Roadmap Sprint">
         <section class="slide slide--title" aria-roledescription="slide" aria-label="1 of 9">
           <span class="eyebrow">AI Roadmap Sprint · Josh Lamb Systems</span>
-          <h1>Find <span class="jls-gradient-text">10+ hours a week</span> with AI.</h1>
+          <h1>Find <span class="jls-mark">10+ hours a week</span> with AI.</h1>
           <p class="lede">
             A 2-week sprint that maps your workflows, scores every AI opportunity by ROI, and hands you the order to
             tackle them.

@@ -7,32 +7,33 @@ description: >-
 colors:
   primary: "#064ef2"
   secondary: "#2c6dff"
-  bg: "#fff"
-  bg-alt: "#f7f9fc"
+  bg: "#f5f7fb"
+  bg-alt: "#edf1f8"
   surface: "#fff"
-  text: "#000"
-  text-soft: "#3d4451"
-  text-faint: "#667085"
-  border: "#eaecf0"
-  border-strong: "#d0d5dd"
+  text: "#0b1530"
+  text-soft: "#38445e"
+  text-faint: "#56627e"
+  border: "#d5dcea"
+  border-strong: "#1b2a4a"
   accent: "#064ef2"
   accent-hover: "#0540c4"
   accent-text: "#064ef2"
   accent-soft: "#eef3ff"
   on-accent: "#fff"
   focus: "#2c6dff"
-  inverse-bg: "#000"
+  inverse-bg: "#0b1530"
   inverse-text: "#fff"
-  inverse-text-soft: "#d0d5dd"
-  inverse-text-faint: "#8a92a3"
+  inverse-text-soft: "#bcc8e6"
+  inverse-text-faint: "#93a2c8"
   inverse-accent-text: "#85abff"
-  inverse-border: "#2a2f3a"
+  inverse-border: "#243769"
   success: "#067647"
   success-soft: "#ecfdf3"
   warning: "#b54708"
   warning-soft: "#fffaeb"
   danger: "#b42318"
   danger-soft: "#fef3f2"
+  highlight: "#ffe36e"
 typography:
   display:
     fontFamily: Poppins
@@ -83,21 +84,33 @@ typography:
     lineHeight: 1.45
     letterSpacing: 0rem
   eyebrow:
-    fontFamily: Poppins
+    fontFamily: IBM Plex Mono
     fontSize: 0.8125rem
-    fontWeight: 700
+    fontWeight: 600
     lineHeight: 1.45
-    letterSpacing: 0.065rem
+    letterSpacing: 0.05rem
   button:
     fontFamily: Poppins
     fontSize: 0.9375rem
     fontWeight: 600
     lineHeight: 1
     letterSpacing: 0rem
+  number:
+    fontFamily: IBM Plex Mono
+    fontSize: 3rem
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: -0.09rem
+  data:
+    fontFamily: IBM Plex Mono
+    fontSize: 0.8125rem
+    fontWeight: 500
+    lineHeight: 1.45
+    letterSpacing: 0.0125rem
 rounded:
-  sm: 6px
-  md: 10px
-  lg: 14px
+  sm: 2px
+  md: 4px
+  lg: 8px
   pill: 9999px
 spacing:
   xxs: 4px
@@ -159,24 +172,34 @@ components:
   card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text-soft}"
-    rounded: "{rounded.lg}"
-    padding: 32px
+    rounded: "{rounded.md}"
+    padding: 24px
+  card-outline:
+    backgroundColor: "{colors.border-strong}"
+    width: 1px
+  highlight-mark:
+    backgroundColor: "{colors.highlight}"
+    textColor: "{colors.text}"
+  stat-number:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    typography: "{typography.number}"
   tag:
     backgroundColor: "{colors.accent-soft}"
     textColor: "{colors.accent-text}"
     typography: "{typography.eyebrow}"
-    rounded: "{rounded.pill}"
-    padding: 4px 10px
+    rounded: "{rounded.sm}"
+    padding: 4px 6px
   tag-quick-win:
     backgroundColor: "{colors.success-soft}"
     textColor: "{colors.success}"
     typography: "{typography.eyebrow}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.sm}"
   tag-medium-term:
     backgroundColor: "{colors.warning-soft}"
     textColor: "{colors.warning}"
     typography: "{typography.eyebrow}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.sm}"
   alert-danger:
     backgroundColor: "{colors.danger-soft}"
     textColor: "{colors.danger}"
@@ -201,9 +224,10 @@ Josh Lamb Systems is an AI-native systems partner for small businesses. The flag
 **AI Roadmap Sprint**: a two-week, $1,500 flat engagement that maps a business's workflows, scores
 every AI opportunity by ROI, and hands over a prioritized implementation roadmap.
 
-The look is clean, confident and bright: lots of white, black type, and one strong blue that carries
-every action. It should feel like a sharp operator's notebook, not a futuristic AI brand. No neon, no
-robots, no glowing brains.
+The look is a **field notebook**: a sharp operator's working notes, not a futuristic AI brand. Paper
+grounds with graph paper that appears where the eye lands, navy ink, one strong blue for every action,
+a highlighter for the one phrase that matters, and a mono face for labels and numbers so every claim
+reads as measured. Dark mode is the same notebook as a blueprint. No neon, no robots, no glowing brains.
 
 **Load it with one line** (any HTML: websites, doop frames, slides, HyperFrames compositions):
 
@@ -241,39 +265,48 @@ Reference lines from the live site:
 
 ## Colors
 
-Black, white and the brand blue do almost all of the work. Blue means *action or emphasis*. Keep it
-scarce so it stays loud.
+Paper, navy ink and the brand blue do almost all of the work. Blue means *action or emphasis*; the
+highlighter means *this is the point*. Keep both scarce so they stay loud.
 
-- **Brand blue (`primary`, `--jls-color-accent`):** primary buttons, links, highlights, key
-  numbers. 6.2:1 on white, safe for text.
-- **Brand light blue (`secondary`):** only inside the brand gradient and for large decorative
-  fills. 4.4:1 on white, so never small text on white.
-- **Brand gradient (`--jls-gradient-brand`, light blue to blue at 135deg):** primary buttons, the
-  logo symbol, one hero accent per page. Never as a full-page background.
-- **Text:** headings in `text` (pure black), body in `text-soft`, captions and meta in `text-faint`.
-  All three pass WCAG AA on `bg` and `bg-alt`.
-- **Surfaces:** `bg` white, `bg-alt` for alternating sections, `surface` for cards, `border` for
-  hairlines.
-- **Inverse:** `inverse-bg` (brand black) with `inverse-text`, `inverse-text-soft`,
-  `inverse-text-faint`, `inverse-accent-text` and `inverse-border`, for closing CTA bands and section-break slides. These stay black in both
-  themes. Use the reversed logo on them.
+- **Paper (`bg`, `--jls-palette-navy-50`):** the page ground. `surface` (white) for cards, panels,
+  inputs and the stats band; `bg-alt` for alternating sections.
+- **Navy ink (`text`, `--jls-palette-navy-900` #0b1530):** headings and primary text. It replaces
+  pure black everywhere, including the inverse sections. Body in `text-soft`, captions and meta in
+  `text-faint`; all pass AA on `bg`, `bg-alt` and `surface`.
+- **Rules:** `border` for hairlines and dashed separators, `border-strong` (ink) for the outline of
+  every card, panel, input and secondary button. The ink outline is what makes things look drawn.
+- **Brand blue (`primary`, `--jls-color-accent`):** primary buttons, links, meters, key numbers.
+  6.2:1 on white. Primary buttons stay brand blue in both themes.
+- **Brand light blue (`secondary`):** only inside the brand gradient (the logo symbol) and the focus
+  ring. 4.4:1 on white, so never small text on white.
+- **Highlighter (`highlight`, #ffe36e):** one phrase per view (`.jls-mark`), one plotted grid cell,
+  and the button shadow on inverse bands. Always under ink text, never as a fill for UI.
+- **Graph paper (`grid`, `plot`, `inverse-grid`):** translucent blue lines and filled cells. Only
+  through `.jls-grid` (see Layout).
+- **Inverse:** `inverse-bg` (navy ink) with `inverse-text`, `inverse-text-soft`,
+  `inverse-text-faint`, `inverse-accent-text` and `inverse-border`, for closing CTA bands and
+  section-break slides. Use the reversed logo on them.
 - **Status:** `success` / `warning` / `danger` with their `-soft` backgrounds, for status only and
-  never as decoration. Quick wins can be tagged with success green.
+  never as decoration. Quick wins are tagged with success green, medium-term with warning amber.
+  Every status also carries a word.
 
-Dark mode swaps every semantic color. Primary buttons stay brand blue in both themes.
+Dark mode is a **blueprint**: deep navy paper (`--jls-palette-navy-925`), blueprint surfaces, light
+blue ink outlines and a stronger grid. It swaps every semantic color.
 
 ## Typography
 
-Two families: **Poppins** for display (headings, buttons, labels, numbers) and **Source Sans 3** for
-reading (paragraphs, lists, forms). Poppins is the brandbook face and carries the brand. Source Sans 3
-is a warm, humanist sans that stays comfortable at paragraph length where Poppins tires the eye.
+Three families with fixed jobs: **Poppins** for display (headings, buttons, form labels),
+**Source Sans 3** for reading (paragraphs, lists, form text), and **IBM Plex Mono** as the utility
+face (eyebrows, tags, card meta, scores, prices and every big number).
 
-- Headings are Poppins Bold (700) with slightly tight tracking. `display` is Poppins ExtraBold (800)
-  for hero lines and slide titles.
-- Body is Source Sans 3 Regular at 17px (`--jls-font-size-md`), line height 1.6. Source Sans runs
-  smaller than Poppins, so do not drop body text below 15px.
-- Eyebrows are Poppins Bold, 13px, uppercase, tracked out, in `accent-text` or `text-faint`.
-- Big numbers (prices, hours saved, ROI) are Poppins ExtraBold.
+- Headings are Poppins Bold (700) with tight tracking. `display` is Poppins ExtraBold (800) for hero
+  lines and slide titles.
+- Body is Source Sans 3 Regular at 17px (`--jls-font-size-md`), line height 1.6. Do not drop
+  reading text below 15px.
+- Eyebrows are Plex Mono SemiBold 13px, uppercase, tracked out, in `accent-text` or `text-faint`.
+- Big numbers (prices, hours saved, ROI) are `number`: Plex Mono SemiBold, tabular figures, tight
+  tracking. Units sit beside them smaller, in `accent-text` ("4.5 hrs / week").
+- `data` (Plex Mono Medium 13px) for inline values and the meta line under CTAs.
 - Measure: running text max 720px (`--jls-layout-prose`).
 
 ## Layout
@@ -286,39 +319,62 @@ inline gaps).
 - Generous white space beats extra content. One message per section.
 - Cards sit in 2 to 4 column grids with 24px gaps and collapse to one column under 720px.
 
+### Graph paper: the Rhythm rule
+
+The graph paper is the brand's signature. It appears where the eye lands, then fades into plain paper.
+
+- Cells are 48px (`--jls-grid-cell`, 6 × the 8px baseline), 1px lines, at 80% strength
+  (`--jls-grid-strength`).
+- **One fade per section, from alternating corners**: hero `.jls-grid--top-right`, the next major
+  section `.jls-grid--bottom-left`, closing band `.jls-grid--right`, and so on down the page.
+- Never two fades in one section, never a full-page grid, and never grid behind running text: the
+  fade must leave the headline and paragraphs on clean paper.
+- `.jls-grid--full` is only for small framed objects (a chart plate, a diagram).
+- Plotted cells (filled `plot` squares, one in `highlight`) may sit on the grid as a tiny bar chart
+  next to real data. One plotted group per view.
+
 ## Elevation & Depth
 
-Mostly flat. Depth comes from borders and white space, not shadows.
+Flat and drawn. Depth comes from ink outlines and **hard offset shadows** (no blur), like cards laid
+on a desk.
 
-- Cards rest with a 1px `border` and no shadow. On hover they get `--jls-shadow-md` and an accent
-  border.
-- `--jls-shadow-lg` is for floating things only: popovers, modals, product mockups.
-- Primary buttons carry a soft blue glow (`--jls-shadow-accent`).
+- Cards rest with a 1px `border-strong` outline and no shadow. Interactive cards lift 2px on hover
+  and get `--jls-shadow-offset-accent` (a 4px blue offset).
+- Featured panels (the hero scorecard, a key chart) carry `--jls-shadow-offset-md`.
+- Primary buttons carry `--jls-shadow-offset-sm` (3px ink). On hover they lift 1px; when pressed they
+  sink into the shadow. On inverse bands the offset is the highlighter.
+- `--jls-shadow-lg` (soft) is only for floating things: popovers, modals.
 
 ## Shapes
 
-Soft, friendly corners, never fully sharp and never bubbly.
+Notebook corners: small and crisp, never bubbly.
 
-- `rounded.sm` 6px: tags, small inputs. `rounded.md` 10px: buttons, inputs. `rounded.lg` 14px: cards
-  and panels. `rounded.pill`: status tags and avatars.
-- Borders are 1px; secondary buttons and focused inputs use 1.5px.
+- `rounded.sm` 2px: tags, plotted cells. `rounded.md` 4px: buttons, inputs, cards. `rounded.lg`
+  8px: large panels, slide frames, modals. `rounded.pill`: avatars and the error badge only.
+- Borders are 1px. Dashed 1px `border-strong` lines separate a card's mono meta row from its body.
 
 ## Components
 
 The base layer in `jls.css` ships these classes:
 
-- **Buttons:** `.jls-btn.jls-btn--primary` (gradient, white text, blue glow; one per view),
-  `.jls-btn.jls-btn--secondary` (white, bordered), `.jls-btn--lg` for hero CTAs, `.jls-btn--sm` for
-  dense spots. Labels are verbs:
-  "Book a call", "Book your sprint", "See the roadmap".
-- **Cards:** `.jls-card`, plus `.jls-card--interactive` for clickable cards.
-- **Tags:** `.jls-tag`, `.jls-tag--success` (quick win), `.jls-tag--warning` (medium-term),
-  `.jls-tag--neutral`.
-- **Type helpers:** `.jls-eyebrow`, `.jls-lead`, `.jls-small`, `.jls-gradient-text` (one phrase per
-  page at most).
+- **Buttons:** `.jls-btn.jls-btn--primary` (brand blue, ink offset shadow; one per view),
+  `.jls-btn.jls-btn--secondary` (white, ink outline), `.jls-btn--lg` for hero CTAs, `.jls-btn--sm`
+  for dense spots. Hover, pressed and disabled states are built in. Labels are verbs: "Book a call",
+  "Book your sprint", "See the roadmap".
+- **Cards:** `.jls-card`, `.jls-card--interactive` for clickable cards, `.jls-card--featured` for the
+  hero visual, and `.jls-card__meta` for the mono header row ("01 · Map ··· Week 1").
+- **Tags:** `.jls-tag` (boxed mono label), `.jls-tag--success` (quick win), `.jls-tag--warning`
+  (medium-term), `.jls-tag--neutral`.
+- **Data:** `.jls-stats` + `.jls-stat` + `.jls-number` for big-number rows; `.jls-meter` (set
+  `--value: 0–100`) for segmented score bars.
+- **Graph paper:** `.jls-grid` plus one of `--top-right`, `--bottom-left`, `--right`, `--left`,
+  `--full`.
+- **Type helpers:** `.jls-eyebrow`, `.jls-lead`, `.jls-small`, `.jls-data`, `.jls-mark` (the
+  highlighter; one phrase per view).
 - **Forms:** `.jls-field`, `.jls-label`, `.jls-input` (inputs, textareas and selects), `.jls-hint`,
-  and `.jls-error` under an input marked `aria-invalid="true"`.
-- **Layout:** `.jls-container`, `.jls-section`, `.jls-section--alt`, `.jls-prose`.
+  and `.jls-error` under an input marked `aria-invalid="true"`. Focus draws a blue offset shadow.
+- **Layout:** `.jls-container`, `.jls-section`, `.jls-section--alt`, `.jls-section--inverse`,
+  `.jls-prose`, `.jls-logo`.
 
 ## Logo
 
@@ -326,8 +382,8 @@ Files live in `BASE_URL/logos/`:
 
 | File | Use |
 | --- | --- |
-| `jls-logo.svg` | Full logo: gradient symbol and black wordmark. Default on light backgrounds. |
-| `jls-logo-reversed.svg` | Full logo with a white wordmark, for dark or blue backgrounds. |
+| `jls-logo.svg` | Full logo: gradient symbol and navy-black wordmark. Default on light backgrounds. |
+| `jls-logo-reversed.svg` | Full logo with a white wordmark, for dark, blueprint or brand blue backgrounds. |
 | `jls-logo@2x.png` | 360px-wide PNG of the full logo (at 2x) for email, where SVG is often blocked. |
 | `jls-symbol.svg` | Gradient symbol alone: favicons, avatars, small spaces. |
 | `jls-symbol-black.svg`, `jls-symbol-white.svg` | One-color symbol for monochrome uses (engraving, embroidery, single-color print). |
@@ -337,19 +393,20 @@ Rules from the brandbook:
 - **Clear space:** keep a margin equal to the width of the "b" in the wordmark on all four sides. For
   the symbol alone, use half the symbol's width.
 - **Minimum size (web):** full logo at least 150px wide on phones, 250px on tablets, 350px on
-  desktop pages. Fixed-format media set their own size: 240px on 1920×1080 slides, 180px in email
-  (use the PNG). Below that, use the symbol.
+  desktop pages. `.jls-logo` applies exactly these widths in site headers. Fixed-format media set
+  their own size: 320px on 1920×1080 slides, 180px in email (use the PNG). Below that, use the symbol.
 - **Position:** top left, top center, bottom right, or center.
-- **Backgrounds:** white, black, or brand blue only. Never on busy photos or mid-tone colors.
+- **Backgrounds:** paper, white, navy ink, blueprint or brand blue only. Never on busy photos or
+  mid-tone colors. Graph paper behind the logo is fine.
 - **Never:** stretch, rotate, recolor the gradient, add effects or shadows, outline it, or rebuild
   the wordmark in another font.
 
 ## Imagery
 
 Real work over abstract AI art. Use photos of people at work, desks, whiteboards and real tools, or
-clean diagrams and UI mockups that show workflows, scores and roadmaps. Keep color calm so the brand
-blue stays the loudest thing on the page. Avoid robots, glowing brains, circuit boards, sci-fi
-gradients and stock handshakes.
+clean diagrams and UI mockups that show workflows, scores and roadmaps, drawn in the notebook style:
+ink outlines, mono labels, plotted cells. Keep color calm so the brand blue stays the loudest thing on
+the page. Avoid robots, glowing brains, circuit boards, sci-fi gradients and stock handshakes.
 
 ## Media
 
@@ -358,16 +415,20 @@ The same tokens drive every medium. Only scale and density change.
 ### Web and doop frames
 
 Load `jls.css`, put `class="jls"` on the body or the frame root, and build from the components
-above. Responsive by default: headings scale with `clamp()`, and grids collapse under 720px.
+above. Responsive by default: headings scale with `clamp()`, and grids collapse under 720px. Follow
+the Rhythm rule for graph paper down the page.
 
 ### Slides (1920×1080)
 
 - One idea per slide. A headline of at most 8 words, plus one supporting line or a single visual.
-- Titles 72 to 96px Poppins ExtraBold; body 32 to 40px Source Sans 3; nothing under 24px.
-- 96px outer margin. Logo bottom right at 240px wide.
-- Mostly white slides. Use a full brand-blue or black slide only for section breaks and the closing
-  call to action.
-- Big numbers carry slides: "10+ hours a week", "$1,500 flat", "2 weeks".
+- Titles 72 to 96px Poppins ExtraBold; body 32 to 40px Source Sans 3; nothing under 24px. Big numbers
+  are Plex Mono at 200px and up, with the unit beside them.
+- 96px outer margin. Logo bottom right at 320px wide; slide number and date bottom left in mono.
+- Paper slides by default, with graph paper (96px cells, the 48px web cell at slide scale) fading in
+  from the side away from the text, alternating left and right through the deck. Navy ink slides
+  only for section breaks and the closing call to action.
+- Big numbers carry slides: "10+ hours a week", "$1,500 flat", "2 weeks". Highlight one phrase per
+  slide at most.
 
 ### Video (HyperFrames compositions, 1920×1080 or 1080×1920)
 
@@ -375,37 +436,38 @@ above. Responsive by default: headings scale with `clamp()`, and grids collapse 
 - Minimum text 48px (landscape) or 56px (portrait). Headlines 120px and up.
 - Keep 120px safe margins (more on vertical video, where platform UI covers the edges).
 - No web chrome: no nav bars, cookie banners or tiny links.
-- Motion is calm and confident: 300 to 600ms eases out (`--jls-easing-out`), no bounces or spins. Let
-  the brand gradient sweep in for emphasis at most once per video.
+- Motion is calm and confident: 300 to 600ms eases out (`--jls-easing-out`), no bounces or spins. The
+  graph paper may draw in once per video; the highlighter may sweep across its phrase.
 - End on the logo plus one call to action ("Book a 2-week AI Roadmap Sprint").
 
 ### Email and newsletter
 
 - Single 600px column, table layout, all styles inline. The email templates are built with literal
   values because email clients ignore CSS variables.
-- Webfonts are not reliable in email, so headings fall back to Arial Bold. Keep the hierarchy, not the
-  font.
-- One primary button per email. Use a solid brand-blue button: many clients drop gradients.
+- Webfonts are not reliable in email, so headings fall back to Arial Bold and mono to Courier. Keep
+  the hierarchy, not the font. No graph paper in email.
+- One primary button per email: solid brand blue.
 
 ### Print and documents
 
 - At least 48px safe margins on letterheads and print (`--jls-layout-print-margin`).
-- Logo top left or top center. Black text on white, with brand blue for headings or key numbers only.
+- Logo top left or top center. Navy ink on white, with brand blue for headings or key numbers only.
+  A single graph-paper fade in one corner is allowed on covers.
 
 ## Do's and Don'ts
 
 **Do**
 
 - Use brand blue for one main action per view.
-- Lead with specific outcomes and numbers: hours saved, price, timeline.
-- Keep layouts airy, on the 8px grid.
-- Use Poppins for headings and Source Sans 3 for reading.
+- Lead with specific outcomes and numbers, set in mono.
+- Keep layouts airy, on the 8px grid; one graph-paper fade per section.
+- Use Poppins for headings, Source Sans 3 for reading and Plex Mono for labels and numbers.
 - Check contrast: small text needs 4.5:1 or better.
 
 **Don't**
 
 - Don't use light blue (`#2c6dff`) for small text on white.
-- Don't introduce new colors, gradients or fonts.
-- Don't fill space with generic AI imagery or hype words.
+- Don't introduce colors, gradients or fonts beyond these tokens.
+- Don't run graph paper behind paragraphs, or use more than one highlighter phrase per view.
 - Don't put more than one primary button in a view.
 - Don't place the logo on busy backgrounds or squeeze it below its minimum size.

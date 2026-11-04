@@ -2,35 +2,35 @@
   "color": {
     "$type": "color",
     "bg": {
-      "$value": "{palette.neutral.950}",
-      "$description": "Page background"
+      "$value": "{palette.navy.925}",
+      "$description": "Blueprint: the page background"
     },
     "bg-alt": {
-      "$value": "{palette.neutral.900}",
+      "$value": "{palette.navy.950}",
       "$description": "Alternating section background"
     },
     "surface": {
-      "$value": "{palette.neutral.800}",
+      "$value": "{palette.navy.850}",
       "$description": "Cards, panels, inputs"
     },
     "text": {
-      "$value": "{palette.white}",
+      "$value": "{palette.blue.50}",
       "$description": "Headings and primary text"
     },
     "text-soft": {
-      "$value": "{palette.neutral.300}",
+      "$value": "{palette.navy.300}",
       "$description": "Body copy, descriptions"
     },
     "text-faint": {
-      "$value": "{palette.neutral.400}",
+      "$value": "{palette.navy.400}",
       "$description": "Captions, meta, eyebrows (still AA)"
     },
     "border": {
-      "$value": "{palette.neutral.700}",
+      "$value": "{palette.navy.700}",
       "$description": "Hairlines, card borders, dividers"
     },
     "border-strong": {
-      "$value": "{palette.neutral.600}",
+      "$value": "{palette.blue.300}",
       "$description": "Hovered borders, input outlines"
     },
     "accent": {
@@ -38,10 +38,10 @@
       "$description": "Brand blue fills: primary buttons, highlights"
     },
     "accent-hover": {
-      "$value": "{palette.blue.400}"
+      "$value": "{palette.blue.600}"
     },
     "accent-text": {
-      "$value": "{palette.blue.300}",
+      "$value": "{palette.blue.200}",
       "$description": "Links and accent-colored text"
     },
     "accent-soft": {
@@ -75,7 +75,7 @@
       "$value": "{palette.red.950}"
     },
     "inverse-bg": {
-      "$value": "{palette.black}",
+      "$value": "{palette.navy.950}",
       "$description": "Brand black sections: closing CTAs, section-break slides. Stays black in both themes."
     },
     "inverse-text": {
@@ -83,7 +83,7 @@
       "$description": "Headings on inverse-bg"
     },
     "inverse-text-soft": {
-      "$value": "{palette.neutral.300}",
+      "$value": "{palette.navy.300}",
       "$description": "Body copy on inverse-bg"
     },
     "inverse-accent-text": {
@@ -91,12 +91,63 @@
       "$description": "Links and accent text on inverse-bg"
     },
     "inverse-text-faint": {
-      "$value": "{palette.neutral.400}",
+      "$value": "{palette.navy.400}",
       "$description": "Captions and meta on inverse-bg"
     },
     "inverse-border": {
-      "$value": "{palette.neutral.700}",
+      "$value": "{palette.navy.700}",
       "$description": "Hairlines on inverse-bg"
+    },
+    "highlight": {
+      "$value": "{palette.yellow.300}"
+    },
+    "highlight-mark": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.8902,
+          0.4314
+        ],
+        "hex": "#ffe36e",
+        "alpha": 0.38
+      }
+    },
+    "grid": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5216,
+          0.6706,
+          1
+        ],
+        "hex": "#85abff",
+        "alpha": 0.18
+      }
+    },
+    "plot": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5216,
+          0.6706,
+          1
+        ],
+        "hex": "#85abff",
+        "alpha": 0.18
+      }
+    },
+    "inverse-grid": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5216,
+          0.6706,
+          1
+        ],
+        "hex": "#85abff",
+        "alpha": 0.14
+      }
     }
   },
   "shadow": {
@@ -223,6 +274,93 @@
         }
       },
       "$description": "Primary button glow (site)"
+    },
+    "offset-sm": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5216,
+            0.6706,
+            1.0
+          ],
+          "hex": "#85abff"
+        },
+        "offsetX": {
+          "value": 3,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 3,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
+    },
+    "offset-md": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.2157,
+            0.4118
+          ],
+          "hex": "#243769"
+        },
+        "offsetX": {
+          "value": 6,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 6,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
+    },
+    "offset-accent": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1725,
+            0.4275,
+            1.0
+          ],
+          "hex": "#2c6dff"
+        },
+        "offsetX": {
+          "value": 4,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 4,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
     }
   }
 }

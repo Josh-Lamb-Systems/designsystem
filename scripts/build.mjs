@@ -64,7 +64,7 @@ function frontMatter() {
     'bg', 'bg-alt', 'surface', 'text', 'text-soft', 'text-faint', 'border', 'border-strong',
     'accent', 'accent-hover', 'accent-text', 'accent-soft', 'on-accent', 'focus',
     'inverse-bg', 'inverse-text', 'inverse-text-soft', 'inverse-text-faint', 'inverse-accent-text', 'inverse-border',
-    'success', 'success-soft', 'warning', 'warning-soft', 'danger', 'danger-soft',
+    'success', 'success-soft', 'warning', 'warning-soft', 'danger', 'danger-soft', 'highlight',
   ]
   const lines = [
     '---',
@@ -79,7 +79,7 @@ function frontMatter() {
     ...colorNames.map((n) => `  ${n}: "${v(`color-${n}`)}"`),
     'typography:',
   ]
-  for (const id of ['display', 'h1', 'h2', 'h3', 'h4', 'lead', 'body', 'small', 'eyebrow', 'button']) {
+  for (const id of ['display', 'h1', 'h2', 'h3', 'h4', 'lead', 'body', 'small', 'eyebrow', 'button', 'number', 'data']) {
     const t = typography(id)
     lines.push(`  ${id}:`)
     lines.push(`    fontFamily: ${t.fontFamily}`)
@@ -142,24 +142,34 @@ function frontMatter() {
     '  card:',
     '    backgroundColor: "{colors.surface}"',
     '    textColor: "{colors.text-soft}"',
-    '    rounded: "{rounded.lg}"',
-    '    padding: 32px',
+    '    rounded: "{rounded.md}"',
+    '    padding: 24px',
+    '  card-outline:',
+    '    backgroundColor: "{colors.border-strong}"',
+    '    width: 1px',
+    '  highlight-mark:',
+    '    backgroundColor: "{colors.highlight}"',
+    '    textColor: "{colors.text}"',
+    '  stat-number:',
+    '    backgroundColor: "{colors.surface}"',
+    '    textColor: "{colors.text}"',
+    '    typography: "{typography.number}"',
     '  tag:',
     '    backgroundColor: "{colors.accent-soft}"',
     '    textColor: "{colors.accent-text}"',
     '    typography: "{typography.eyebrow}"',
-    '    rounded: "{rounded.pill}"',
-    '    padding: 4px 10px',
+    '    rounded: "{rounded.sm}"',
+    '    padding: 4px 6px',
     '  tag-quick-win:',
     '    backgroundColor: "{colors.success-soft}"',
     '    textColor: "{colors.success}"',
     '    typography: "{typography.eyebrow}"',
-    '    rounded: "{rounded.pill}"',
+    '    rounded: "{rounded.sm}"',
     '  tag-medium-term:',
     '    backgroundColor: "{colors.warning-soft}"',
     '    textColor: "{colors.warning}"',
     '    typography: "{typography.eyebrow}"',
-    '    rounded: "{rounded.pill}"',
+    '    rounded: "{rounded.sm}"',
     '  alert-danger:',
     '    backgroundColor: "{colors.danger-soft}"',
     '    textColor: "{colors.danger}"',
