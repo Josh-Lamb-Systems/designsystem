@@ -385,8 +385,15 @@ Files live in `BASE_URL/logos/`:
 | `jls-logo.svg` | Full logo: gradient symbol and navy-black wordmark. Default on light backgrounds. |
 | `jls-logo-reversed.svg` | Full logo with a white wordmark, for dark, blueprint or brand blue backgrounds. |
 | `jls-logo@2x.png` | 360px-wide PNG of the full logo (at 2x) for email, where SVG is often blocked. |
+| `jls-logo-white.svg` | All-white negative, symbol included. **Required on brand blue**, where the gradient symbol disappears; also for photos and single-color print on dark. |
+| `jls-logo-black.svg` | All-black, symbol included. Single-color print, fax, stamps. |
 | `jls-symbol.svg` | Gradient symbol alone: favicons, avatars, small spaces. |
 | `jls-symbol-black.svg`, `jls-symbol-white.svg` | One-color symbol for monochrome uses (engraving, embroidery, single-color print). |
+
+The full designer export lives in `logos/originals/`: every variant above as SVG and as PNG at
+1x–4x (`png/jls-logo-white@2x.png` and so on), plus five 1920×1080 artboards in SVG, PDF and JPEG
+(`artboards/`: color on light, color on dark, black on light, white on dark, white on blue) for title
+cards and video end frames.
 
 Rules from the brandbook:
 
@@ -398,6 +405,8 @@ Rules from the brandbook:
 - **Position:** top left, top center, bottom right, or center.
 - **Backgrounds:** paper, white, navy ink, blueprint or brand blue only. Never on busy photos or
   mid-tone colors. Graph paper behind the logo is fine.
+- **Which file on which ground:** paper and white take `jls-logo.svg`; navy ink and blueprint take
+  `jls-logo-reversed.svg`; brand blue always takes `jls-logo-white.svg`.
 - **Never:** stretch, rotate, recolor the gradient, add effects or shadows, outline it, or rebuild
   the wordmark in another font.
 

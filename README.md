@@ -53,7 +53,8 @@ Any HTML (websites, doop frames, slides, HyperFrames compositions):
 | `src/index.html` | Gallery page |
 | `templates/` | Template sources (emails get tokens inlined at build) |
 | `fonts/` | Poppins (display), Source Sans 3 (body) and IBM Plex Mono (labels, numbers), self-hosted, SIL OFL 1.1 |
-| `logos/` | Full logo, reversed logo, symbol (gradient, black, white), favicons |
+| `logos/` | Web-ready logos: full, reversed, white negative, black, symbol (gradient, black, white), favicons |
+| `logos/originals/` | The complete designer export: every logo variant as SVG and PNG 1x–4x, plus 1920×1080 artboards (SVG, PDF, JPEG) |
 | `docs/brandbook.pdf` | Original brandbook |
 | `scripts/build.mjs` | Assembles `dist/` and regenerates DESIGN.md front matter |
 
